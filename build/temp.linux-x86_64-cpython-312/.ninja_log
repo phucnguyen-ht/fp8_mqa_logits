@@ -1,0 +1,8 @@
+# ninja log v7
+1	24445	1775982598688286657	/remote/vast0/phuc-nguyen/workspace/tickets/mv-4077/optests/fp8_paged_mqa_logits/build/temp.linux-x86_64-cpython-312/csrc/binding.o	fc1457cb5c1e7276
+12	24613	1775982803789774096	/remote/vast0/phuc-nguyen/workspace/tickets/mv-4077/optests/fp8_paged_mqa_logits/build/temp.linux-x86_64-cpython-312/csrc/fp8_paged_mqa_logits_hip.o	131aab07176a484
+13	24552	1775982859986077558	/remote/vast0/phuc-nguyen/workspace/tickets/mv-4077/optests/fp8_paged_mqa_logits/build/temp.linux-x86_64-cpython-312/csrc/binding.o	fc1457cb5c1e7276
+13	24769	1775983439276591462	/remote/vast0/phuc-nguyen/workspace/tickets/mv-4077/optests/fp8_paged_mqa_logits/build/temp.linux-x86_64-cpython-312/csrc/binding.o	fc1457cb5c1e7276
+16	24799	1775983439278564069	/remote/vast0/phuc-nguyen/workspace/tickets/mv-4077/optests/fp8_paged_mqa_logits/build/temp.linux-x86_64-cpython-312/csrc/fp8_paged_mqa_logits_hip.o	131aab07176a484
+14	24560	1775988550525761707	/remote/vast0/phuc-nguyen/workspace/tickets/mv-4077/optests/fp8_paged_mqa_logits/build/temp.linux-x86_64-cpython-312/csrc/binding.o	fc1457cb5c1e7276
+16	24755	1775988550527674621	/remote/vast0/phuc-nguyen/workspace/tickets/mv-4077/optests/fp8_paged_mqa_logits/build/temp.linux-x86_64-cpython-312/csrc/fp8_paged_mqa_logits_hip.o	131aab07176a484

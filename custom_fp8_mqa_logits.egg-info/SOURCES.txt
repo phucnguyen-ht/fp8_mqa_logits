@@ -1,0 +1,7 @@
+setup.py
+csrc/binding.cpp
+csrc/fp8_paged_mqa_logits_hip.cpp
+custom_fp8_mqa_logits.egg-info/PKG-INFO
+custom_fp8_mqa_logits.egg-info/SOURCES.txt
+custom_fp8_mqa_logits.egg-info/dependency_links.txt
+custom_fp8_mqa_logits.egg-info/top_level.txt
