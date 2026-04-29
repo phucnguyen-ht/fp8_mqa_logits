@@ -1,4 +1,4 @@
 export HIP_VISIBLE_DEVICES=7
 
 python3 setup.py develop
-python3 test_fp8_paged_mqa_logits.py --tune
+python3 test_fp8_paged_mqa_logits.py --tune --batch 1-20 -kv_length 65536
