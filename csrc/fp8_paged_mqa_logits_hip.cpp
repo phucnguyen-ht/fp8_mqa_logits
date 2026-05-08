@@ -413,7 +413,6 @@ namespace v2 {
                         total_score += fmaxf(vC[h][j], 0.0f) * kv_scale * w_reg[h][j];
                     }
                 }
-
                 total_score += __shfl_down(total_score, 32);
                 total_score += __shfl_down(total_score, 16);
 
@@ -462,6 +461,32 @@ namespace v2 {
 
             __syncthreads();  // SMEM ready for next iteration
         }
+
+        // double-buffering: 2*smem
+        // load-smem chunk-i
+        // for chunk tiếp theo:
+        //     -> load vào smem chunk-i+1
+        //     -> tính toán trên chunk-i
+        //     -> syncthreads()
+
+        // double-buffering: smem+reg
+        // load-reg chunk-i
+        // for chunk:
+        //.    -> load chunk-i+1 vào smem (-> reg, reg->smem)
+        //         -> global->reg
+        //         -> wait_cnt()
+        //         -> reg->smem
+        //     -> tính toán trên chunk-i/reg
+        //     -> flush: đưa từ smem-i+1 -> reg-i
+
+        // double-buffering: smem+reg
+        // load-smem chunk-i
+        // for chunk:
+        //     -> load chunk-i+1 -> reg
+        //     -> tính toán dựa trên chunk-i/smem (smem->reg)
+        //      -> wait_cnt()
+        //     -> flush: đưa từ reg/i+1 -> smem/chunk-i
+        //     -> syncthreads()
     }
 }
 

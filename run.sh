@@ -1,7 +1,5 @@
-export HIP_VISIBLE_DEVICES=7
+export HIP_VISIBLE_DEVICES=1
 
 python3 setup.py develop
 
-# for BATCH in $(seq 1 20); do
-python3 test_fp8_paged_mqa_logits.py --batch 8 -kv_length 70000 -mtp 0
-# done
+python3 test_fp8_paged_mqa_logits.py --batch 3-8 --use_tuned -kv_length 65536 -mtp 0 --tuned_csv oldtune/paged_fp8_mqa_logits_tuned.csv 

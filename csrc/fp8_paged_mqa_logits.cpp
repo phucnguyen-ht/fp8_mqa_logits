@@ -411,7 +411,6 @@ namespace v2 {
                         total_score += fmaxf(vC[h][j], 0.0f) * kv_scale * w_reg[h][j];
                     }
                 }
-
                 total_score += __shfl_down(total_score, 32);
                 total_score += __shfl_down(total_score, 16);
 
@@ -476,7 +475,7 @@ namespace v2 {
         //         -> wait_cnt()
         //         -> reg->smem
         //     -> tính toán trên chunk-i/reg
-        //     -> đưa từ smem-i+1 -> reg-i
+        //     -> flush: đưa từ smem-i+1 -> reg-i
 
         // double-buffering: smem+reg
         // load-smem chunk-i

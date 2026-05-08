@@ -47,6 +47,7 @@ if is_rocm():
                               f"--offload-arch=gfx942",
                               "-D__HIP_PLATFORM_AMD__=1",
                               "-DUSE_ROCM",
+                              "-Rpass-analysis=kernel-resource-usage"
                               # "-D_GLIBCXX_USE_CXX11_ABI=0",
                           ],),
         ],

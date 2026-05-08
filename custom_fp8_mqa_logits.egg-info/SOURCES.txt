@@ -1,6 +1,15 @@
+.gitignore
+run.sh
 setup.py
+test_fp8_paged_mqa_logits.py
+tune.sh
 csrc/binding.cpp
+csrc/fp8_mqa_logits.cpp
+csrc/fp8_paged_mqa_logits.cpp
 csrc/fp8_paged_mqa_logits_hip.cpp
+csrc/utils/macros.h
+csrc/utils/registration.h
+csrc/utils/utils.h
 custom_fp8_mqa_logits.egg-info/PKG-INFO
 custom_fp8_mqa_logits.egg-info/SOURCES.txt
 custom_fp8_mqa_logits.egg-info/dependency_links.txt
