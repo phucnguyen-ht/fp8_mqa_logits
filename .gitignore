@@ -1,4 +1,6 @@
 *.so
+*.o
+
 build/
 profile/
 tune_results/
