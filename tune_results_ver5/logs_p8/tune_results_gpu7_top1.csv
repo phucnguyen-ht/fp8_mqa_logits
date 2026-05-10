@@ -1,0 +1,2 @@
+batch_size,next_n,heads,index_dim,avg_kv_length,var_ratio,deepgemm_us,moreh_us,speedup,num_warp,chunkK,splitK
+8,1,32,128,65536,0.00390625,57.9,36.2,1.601,8,128,60

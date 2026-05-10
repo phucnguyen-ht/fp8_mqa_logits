@@ -1,4 +1,4 @@
-WORKING_DIR=/home/phuc-nguyen/workspaces/mv-4261/fp8_mqa_logits
+WORKING_DIR=/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits
 CONTAINER_NAME=phucnguyen-dev-tune-paged-fp8
 
 docker run -d \

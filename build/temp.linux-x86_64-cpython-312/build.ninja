@@ -18,8 +18,8 @@ rule compile
 
 
 
-build /remote/vast0/phuc-nguyen/workspace/tickets/mv-4077/optests/fp8_paged_mqa_logits/build/temp.linux-x86_64-cpython-312/csrc/binding.o: compile /remote/vast0/phuc-nguyen/workspace/tickets/mv-4077/optests/fp8_paged_mqa_logits/csrc/binding.cpp
-build /remote/vast0/phuc-nguyen/workspace/tickets/mv-4077/optests/fp8_paged_mqa_logits/build/temp.linux-x86_64-cpython-312/csrc/fp8_paged_mqa_logits_hip.o: compile /remote/vast0/phuc-nguyen/workspace/tickets/mv-4077/optests/fp8_paged_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp
+build /home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/build/temp.linux-x86_64-cpython-312/csrc/binding.o: compile /home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/binding.cpp
+build /home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/build/temp.linux-x86_64-cpython-312/csrc/fp8_paged_mqa_logits_hip.o: compile /home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp
 
 
 

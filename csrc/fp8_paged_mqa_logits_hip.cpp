@@ -490,6 +490,848 @@ namespace v2 {
     }
 }
 
+namespace v3 {
+    template <int NUM_WARPS, int CHUNK_K>
+    __global__ __launch_bounds__(NUM_WARPS * WARP_SIZE)
+    void fp8_paged_mqa_logits_kernel(
+        const fp8*   __restrict__ Q_ptr,           // [batch, next_n, 32, 128]     fp8
+        const fp8*   __restrict__ kv_cache_ptr,    // [num_phys_blocks, index_dim] raw
+        const float* __restrict__ weights_ptr,     // [batch*next_n, 32]           fp32
+        const int*   __restrict__ context_lens,    // [batch]                      int32
+        const int*   __restrict__ block_tables,    // [batch, max_blocks_per_seq]  int32
+        float*       __restrict__ logits_ptr,      // [batch*next_n, max_model_len] fp32
+        int batch_size, int next_n,
+        int max_blocks_per_seq, int max_model_len, int index_dim,
+        int SplitKV                                // runtime tunable
+    ){
+        // ---- MFMA 16×16×32 constants ----
+        constexpr int MFMA_MN = 16;
+        constexpr int MFMA_K  = 32;
+        constexpr int GPRs_AB = 2;
+        constexpr int GPRs_C  = 4;
+        constexpr int numInputElementMFMA  = GPRs_AB * sizeof(float) / sizeof(fp8);  // 8
+        constexpr int numOutputElementMFMA = GPRs_C;                                  // 4
+
+        using VecInMFMA  = __attribute__((__vector_size__(GPRs_AB * sizeof(float)))) fp8;
+        using VecOutMFMA = __attribute__((__vector_size__(GPRs_C  * sizeof(float)))) float;
+
+        // ---- derived constants ----
+        constexpr int BLOCK_THREADS   = NUM_WARPS * WARP_SIZE;
+        constexpr int H_LOOPS         = NUM_HEADS / MFMA_MN;                          // 2
+        constexpr int D_LOOPS         = HEAD_SIZE / MFMA_K;                           // 4
+        constexpr int TILES_PER_CHUNK = CHUNK_K / MFMA_MN;
+        constexpr int PAD             = 8;
+        constexpr int KV_ROW          = HEAD_SIZE + PAD;                              // 136
+        constexpr int VEC_LEN         = sizeof(float4) / sizeof(fp8);                 // 16
+        constexpr int NB_LOAD_KV      = CHUNK_K * HEAD_SIZE / (BLOCK_THREADS * VEC_LEN);
+        constexpr int NB_LOAD_SCALE   = CDIV(CHUNK_K, BLOCK_THREADS);
+        constexpr int NB_LOAD_BT      = CDIV(CHUNK_K, BLOCK_THREADS);
+
+        static_assert(CHUNK_K * HEAD_SIZE % (BLOCK_THREADS * VEC_LEN) == 0, "CHUNK_K * HEAD_SIZE must be divisible by BLOCK_THREADS * VEC_LEN");
+        static_assert(CHUNK_K % MFMA_MN == 0, "CHUNK_K must be multiple of MFMA_MN=16");
+
+        // ---- block → (batch, next_n, split_kv) ----
+        const int pid_batch    = blockIdx.x;
+        const int pid_next_n   = blockIdx.y;
+        const int pid_split_kv = blockIdx.z;
+        if (pid_batch >= batch_size) return;
+
+        // ---- context range for this split ----
+        const int ctx_len      = context_lens[pid_batch];
+        const int ctx_chunks   = CDIV(ctx_len, CHUNK_K);
+        const int split_chunks = CDIV(ctx_chunks, SplitKV);
+        const int split_start  = pid_split_kv * split_chunks * CHUNK_K;
+        const int split_end    = min(ctx_len, split_start + split_chunks * CHUNK_K);
+        if (split_start >= ctx_len) return;
+
+        // ---- thread IDs ----
+        const int tid        = threadIdx.x;
+        const int warpId     = tid / WARP_SIZE;
+        const int laneId     = tid % WARP_SIZE;
+        const int mfmaInRow  = laneId % MFMA_MN;                            // [0...15]
+        const int mfmaInCol  = numInputElementMFMA * (laneId / MFMA_MN);    // [0, 8, 16, 24]
+        const int mfmaOutRow = numOutputElementMFMA * (laneId / MFMA_MN);   // [0, 4, 8, 12]
+        const int mfmaOutCol = laneId % MFMA_MN;                            // [0...15]
+
+        // ---- shared memory ----
+        __shared__ fp8   smem_Q    [NUM_HEADS * HEAD_SIZE + NUM_HEADS * 8];     // 4 KB
+        __shared__ float smem_W    [NUM_HEADS];                 // 128 B
+        __shared__ fp8   smem_KV   [CHUNK_K][KV_ROW];           // CHUNK_K × 136 B
+        __shared__ float smem_scale[CHUNK_K];                   // CHUNK_K × 4 B
+        __shared__ int   smem_bt   [CHUNK_K];                   // CHUNK_K × 4 B
+
+        // ---- persistent register arrays (loaded once) ----
+        VecInMFMA q_reg[D_LOOPS][H_LOOPS];
+        float     w_reg[H_LOOPS][numOutputElementMFMA];
+
+        // ---- prefetch register buffers (double-buffer) ----
+        float4 pf_kv[NB_LOAD_KV];
+        float  pf_scale[NB_LOAD_SCALE];
+        int    pf_bt[NB_LOAD_BT];
+
+        // ---- derived pointers ----
+        const int  q_row        = pid_batch * next_n + pid_next_n;
+        const int* bt           = block_tables + (int64_t)pid_batch * max_blocks_per_seq;
+        float*     out_base     = logits_ptr + (int64_t)q_row * max_model_len;
+        const int  causal_limit = ctx_len - next_n + pid_next_n;
+
+        // ================================================================
+        //  Lambdas
+        // ================================================================
+
+        // ---- cooperative load Q[32,128] + W[32] → SMEM ----
+        auto load_qw_global = [&]() {
+            const int q_base = q_row * NUM_HEADS * HEAD_SIZE;
+            for (int i = tid * VEC_LEN; i < NUM_HEADS * HEAD_SIZE; i += BLOCK_THREADS * VEC_LEN) {
+                *reinterpret_cast<float4*>(&smem_Q[i]) =
+                    *reinterpret_cast<const float4*>(&Q_ptr[q_base + i]);
+            }
+            const int w_base = q_row * NUM_HEADS;
+            if (tid < 8) {
+                *reinterpret_cast<float4*>(&smem_W[tid * 4]) =
+                    *reinterpret_cast<const float4*>(&weights_ptr[w_base + tid * 4]);
+            }
+        };
+
+        // ---- Q / W from SMEM → register arrays (called once) ----
+        auto load_qw_to_regs = [&]() {
+            #pragma unroll
+            for (int d = 0; d < D_LOOPS; ++d) {
+                #pragma unroll
+                for (int h = 0; h < H_LOOPS; ++h) {
+                    q_reg[d][h] = *reinterpret_cast<const VecInMFMA*>(
+                        &smem_Q[(h * MFMA_MN + mfmaInRow) * HEAD_SIZE + d * MFMA_K + mfmaInCol]);
+                }
+            }
+            #pragma unroll
+            for (int h = 0; h < H_LOOPS; ++h) {
+                #pragma unroll
+                for (int j = 0; j < numOutputElementMFMA; ++j) {
+                    w_reg[h][j] = smem_W[h * MFMA_MN + mfmaOutRow + j];
+                }
+            }
+        };
+
+        // ---- cooperative paged K + scale → SMEM (initial tile, reads bt directly) ----
+        auto load_kv_to_smem = [&](int kv_start, int kv_valid) {
+            for (int i = tid * VEC_LEN; i < CHUNK_K * HEAD_SIZE; i += BLOCK_THREADS * VEC_LEN) {
+                int k = i / HEAD_SIZE;
+                int d = i % HEAD_SIZE;
+                if (k < kv_valid) {
+                    int phys = bt[kv_start + k];
+                    *reinterpret_cast<float4*>(&smem_KV[k][d]) =
+                        *reinterpret_cast<const float4*>(kv_cache_ptr + (int64_t)phys * index_dim + d);
+                } else {
+                    *reinterpret_cast<float4*>(&smem_KV[k][d]) = make_float4(0, 0, 0, 0);
+                }
+            }
+            for (int i = tid; i < CHUNK_K; i += BLOCK_THREADS) {
+                if (i < kv_valid) {
+                    int phys = bt[kv_start + i];
+                    smem_scale[i] = *reinterpret_cast<const float*>(
+                        kv_cache_ptr + (int64_t)phys * index_dim + HEAD_SIZE);
+                } else {
+                    smem_scale[i] = 0.0f;
+                }
+            }
+        };
+
+        // ---- bt → SMEM (bootstrap: stages bt[chunk 1] so iter 0's prefetch_kv can use smem_bt) ----
+        auto load_bt_to_smem = [&](int kv_start, int kv_valid) {
+            for (int i = tid; i < CHUNK_K; i += BLOCK_THREADS) {
+                smem_bt[i] = (i < kv_valid) ? bt[kv_start + i] : 0;
+            }
+        };
+
+        // ---- paged K + scale → register buffers (phys read from smem_bt — no chained HBM dep) ----
+        auto prefetch_kv = [&](int kv_valid) {
+            #pragma unroll
+            for (int i = 0; i < NB_LOAD_KV; ++i) {
+                int idx = tid * VEC_LEN + i * BLOCK_THREADS * VEC_LEN;
+                int k = idx / HEAD_SIZE;
+                int d = idx % HEAD_SIZE;
+                if (k < kv_valid) {
+                    int phys = smem_bt[k];
+                    pf_kv[i] = *reinterpret_cast<const float4*>(
+                        kv_cache_ptr + (int64_t)phys * index_dim + d);
+                } else {
+                    pf_kv[i] = make_float4(0, 0, 0, 0);
+                }
+            }
+            #pragma unroll
+            for (int i = 0; i < NB_LOAD_SCALE; ++i) {
+                int idx = tid + i * BLOCK_THREADS;
+                if (idx < kv_valid) {
+                    int phys = smem_bt[idx];
+                    pf_scale[i] = *reinterpret_cast<const float*>(
+                        kv_cache_ptr + (int64_t)phys * index_dim + HEAD_SIZE);
+                } else {
+                    pf_scale[i] = 0.0f;
+                }
+            }
+        };
+
+        // ---- bt → register buffer (issued early to overlap HBM load with compute) ----
+        auto prefetch_bt = [&](int kv_start, int kv_valid) {
+            #pragma unroll
+            for (int i = 0; i < NB_LOAD_BT; ++i) {
+                int idx = tid + i * BLOCK_THREADS;
+                pf_bt[i] = (idx < kv_valid) ? bt[kv_start + idx] : 0;
+            }
+        };
+
+        // ---- register buffers → SMEM (flush after compute) ----
+        auto flush_kv_prefetch = [&]() {
+            #pragma unroll
+            for (int i = 0; i < NB_LOAD_KV; ++i) {
+                int idx = tid * VEC_LEN + i * BLOCK_THREADS * VEC_LEN;
+                int k = idx / HEAD_SIZE;
+                int d = idx % HEAD_SIZE;
+                *reinterpret_cast<float4*>(&smem_KV[k][d]) = pf_kv[i];
+            }
+            #pragma unroll
+            for (int i = 0; i < NB_LOAD_SCALE; ++i) {
+                int idx = tid + i * BLOCK_THREADS;
+                if (idx < CHUNK_K) smem_scale[idx] = pf_scale[i];
+            }
+        };
+
+        auto flush_bt_prefetch = [&]() {
+            #pragma unroll
+            for (int i = 0; i < NB_LOAD_BT; ++i) {
+                int idx = tid + i * BLOCK_THREADS;
+                if (idx < CHUNK_K) smem_bt[idx] = pf_bt[i];
+            }
+        };
+
+        // ---- MFMA compute + post-process + store ----
+        auto compute_and_store = [&](int kv_start, int kv_valid) {
+            for (int bk = warpId; bk < TILES_PER_CHUNK; bk += NUM_WARPS) {
+                const int k = bk * MFMA_MN;
+                const float kv_scale = (k + mfmaOutCol < kv_valid) ? smem_scale[k + mfmaOutCol] : 0.0f;
+
+                VecOutMFMA vC[H_LOOPS] = {};
+
+                #pragma unroll
+                for (int d = 0; d < D_LOOPS; ++d) {
+                    VecInMFMA vB = *reinterpret_cast<const VecInMFMA*>(
+                        &smem_KV[k + mfmaInRow][d * MFMA_K + mfmaInCol]);
+                    #pragma unroll
+                    for (int h = 0; h < H_LOOPS; ++h) {
+                        vC[h] = __builtin_amdgcn_mfma_f32_16x16x32_fp8_fp8(
+                            (long)q_reg[d][h], (long)vB, vC[h], 0, 0, 0);
+                    }
+                }
+
+                float total_score = 0.0f;
+                #pragma unroll
+                for (int h = 0; h < H_LOOPS; ++h) {
+                    #pragma unroll
+                    for (int j = 0; j < numOutputElementMFMA; ++j) {
+                        total_score += fmaxf(vC[h][j], 0.0f) * kv_scale * w_reg[h][j];
+                    }
+                }
+                total_score += __shfl_down(total_score, 32);
+                total_score += __shfl_down(total_score, 16);
+
+                if (laneId < 16) {
+                    const int abs_pos = kv_start + k + laneId;
+                    if (abs_pos < ctx_len && abs_pos <= causal_limit && abs_pos < max_model_len) {
+                        out_base[abs_pos] = total_score;
+                    }
+                }
+            }
+        };
+
+        // ================================================================
+        //  Execution
+        // ================================================================
+        // Phase 1: Q, W → SMEM → registers
+        load_qw_global();
+        __syncthreads();
+        load_qw_to_regs();
+
+        // Phase 2: first KV tile → SMEM; pre-stage bt[chunk 1] → smem_bt for iter 0
+        const int first_valid = min(CHUNK_K, split_end - split_start);
+        load_kv_to_smem(split_start, first_valid);
+        if (split_start + CHUNK_K < split_end) {
+            const int next_valid = min(CHUNK_K, split_end - split_start - CHUNK_K);
+            load_bt_to_smem(split_start + CHUNK_K, next_valid);
+        }
+        __syncthreads();
+
+        // Phase 3: main loop — double-buffered KV + bt
+        //   smem_bt invariant: at iter i, smem_bt holds bt[chunk i+1]
+        //   prefetch_kv(i+1) reads phys from smem_bt  → no chained HBM dep
+        //   prefetch_bt(i+2) issues HBM bt load early  → hidden by compute
+        for (int kv_start = split_start; kv_start < split_end; kv_start += CHUNK_K) {
+            const int  kv_valid      = min(CHUNK_K, split_end - kv_start);
+            const bool has_next      = (kv_start +     CHUNK_K < split_end);
+            const bool has_next_next = (kv_start + 2 * CHUNK_K < split_end);
+
+            // Issue KV prefetch for chunk i+1 (phys from smem_bt — fast LDS, no chained HBM)
+            if (has_next) {
+                const int next_valid = min(CHUNK_K, split_end - kv_start - CHUNK_K);
+                prefetch_kv(next_valid);
+            }
+            // Issue bt prefetch for chunk i+2 (overlaps with compute below)
+            if (has_next_next) {
+                const int next_next_valid = min(CHUNK_K, split_end - kv_start - 2 * CHUNK_K);
+                prefetch_bt(kv_start + 2 * CHUNK_K, next_next_valid);
+            }
+
+            // MFMA compute on current tile (reads from SMEM + Q/W registers)
+            compute_and_store(kv_start, kv_valid);
+
+            __syncthreads();  // all warps done reading SMEM
+
+            // Flush register buffers → SMEM for next iteration
+            if (has_next) {
+                flush_kv_prefetch();
+            }
+            if (has_next_next) {
+                flush_bt_prefetch();  // smem_bt now holds bt[chunk i+2], ready for iter i+1
+            }
+
+            __syncthreads();  // SMEM ready for next iteration
+        }
+    }
+}
+
+namespace v4 {
+    // Swizzle mapping for fp8 smem_KV[CHUNK_K * HEAD_SIZE] (flat, no padding).
+    // Identical to the prefill kernel's swizzle_func but constrained to KPack=16.
+    // Maps logical (k-row, d-col) → swizzled (si, sj) so that concurrent warp
+    // accesses to different k-rows land in different LDS banks.
+    //   MPerBlock  = CHUNK_K
+    //   KPerBlock  = HEAD_SIZE = 128
+    //   MLdsLayer  = NUM_WARPS
+    //   KPack      = 16  (16 fp8 elements = 128 bits = one float4 load/store)
+    template<int MPerBlock, int KPerBlock, int MLdsLayer, int KPack = 16>
+    __device__ __forceinline__ void kv_swizzle(int i, int j, int& si, int& sj) {
+        static_assert(MPerBlock % MLdsLayer == 0, "MPerBlock must be divisible by MLdsLayer");
+        static_assert(KPerBlock % KPack == 0,     "KPerBlock must be divisible by KPack");
+        const int K1 = j % KPack;
+        const int M  = i % (MPerBlock / MLdsLayer);
+        int K0 = (j / KPack) + (i / (MPerBlock / MLdsLayer)) * (KPerBlock / KPack);
+        K0 ^= M % (KPerBlock / KPack * MLdsLayer);
+        const int L = K0 / (KPerBlock / KPack);
+        K0 %= (KPerBlock / KPack);
+        si = M * MLdsLayer + L;
+        sj = K0 * KPack + K1;
+    }
+
+    template <int NUM_WARPS, int CHUNK_K>
+    __global__ __launch_bounds__(NUM_WARPS * WARP_SIZE)
+    void fp8_paged_mqa_logits_kernel(
+        const fp8*   __restrict__ Q_ptr,
+        const fp8*   __restrict__ kv_cache_ptr,
+        const float* __restrict__ weights_ptr,
+        const int*   __restrict__ context_lens,
+        const int*   __restrict__ block_tables,
+        float*       __restrict__ logits_ptr,
+        int batch_size, int next_n,
+        int max_blocks_per_seq, int max_model_len, int index_dim,
+        int SplitKV
+    ){
+        constexpr int MFMA_MN = 16;
+        constexpr int MFMA_K  = 32;
+        constexpr int GPRs_AB = 2;
+        constexpr int GPRs_C  = 4;
+        constexpr int numInputElementMFMA  = GPRs_AB * sizeof(float) / sizeof(fp8);  // 8
+        constexpr int numOutputElementMFMA = GPRs_C;                                  // 4
+
+        using VecInMFMA  = __attribute__((__vector_size__(GPRs_AB * sizeof(float)))) fp8;
+        using VecOutMFMA = __attribute__((__vector_size__(GPRs_C  * sizeof(float)))) float;
+
+        constexpr int BLOCK_THREADS   = NUM_WARPS * WARP_SIZE;
+        constexpr int H_LOOPS         = NUM_HEADS / MFMA_MN;                          // 2
+        constexpr int D_LOOPS         = HEAD_SIZE / MFMA_K;                           // 4
+        constexpr int TILES_PER_CHUNK = CHUNK_K / MFMA_MN;
+        constexpr int VEC_LEN         = sizeof(float4) / sizeof(fp8);                 // 16
+        constexpr int NB_LOAD_KV      = CHUNK_K * HEAD_SIZE / (BLOCK_THREADS * VEC_LEN);
+        constexpr int NB_LOAD_SCALE   = CDIV(CHUNK_K, BLOCK_THREADS);
+
+        static_assert(CHUNK_K * HEAD_SIZE % (BLOCK_THREADS * VEC_LEN) == 0,
+                      "CHUNK_K * HEAD_SIZE must be divisible by BLOCK_THREADS * VEC_LEN");
+        static_assert(CHUNK_K % MFMA_MN == 0,   "CHUNK_K must be multiple of MFMA_MN=16");
+        static_assert(CHUNK_K % NUM_WARPS == 0,  "CHUNK_K must be divisible by NUM_WARPS for swizzle");
+
+        const int pid_batch    = blockIdx.x;
+        const int pid_next_n   = blockIdx.y;
+        const int pid_split_kv = blockIdx.z;
+        if (pid_batch >= batch_size) return;
+
+        const int ctx_len      = context_lens[pid_batch];
+        const int ctx_chunks   = CDIV(ctx_len, CHUNK_K);
+        const int split_chunks = CDIV(ctx_chunks, SplitKV);
+        const int split_start  = pid_split_kv * split_chunks * CHUNK_K;
+        const int split_end    = min(ctx_len, split_start + split_chunks * CHUNK_K);
+        if (split_start >= ctx_len) return;
+
+        const int tid        = threadIdx.x;
+        const int warpId     = tid / WARP_SIZE;
+        const int laneId     = tid % WARP_SIZE;
+        const int mfmaInRow  = laneId % MFMA_MN;
+        const int mfmaInCol  = numInputElementMFMA * (laneId / MFMA_MN);
+        const int mfmaOutRow = numOutputElementMFMA * (laneId / MFMA_MN);
+        const int mfmaOutCol = laneId % MFMA_MN;
+
+        // Swizzled flat layout — no PAD column needed.
+        // smem_KV is indexed as smem_KV[si * HEAD_SIZE + sj] where (si, sj) = swizzle(k, d).
+        __shared__ fp8   smem_Q    [NUM_HEADS * HEAD_SIZE];     // 4 KB
+        __shared__ float smem_W    [NUM_HEADS];                 // 128 B
+        __shared__ fp8   smem_KV   [CHUNK_K * HEAD_SIZE];       // CHUNK_K×128 B (swizzled)
+        __shared__ float smem_scale[CHUNK_K];                   // CHUNK_K×4 B
+
+        VecInMFMA q_reg[D_LOOPS][H_LOOPS];
+        float     w_reg[H_LOOPS][numOutputElementMFMA];
+        float4    pf_kv[NB_LOAD_KV];
+        float     pf_scale[NB_LOAD_SCALE];
+
+        const int  q_row        = pid_batch * next_n + pid_next_n;
+        const int* bt           = block_tables + (int64_t)pid_batch * max_blocks_per_seq;
+        float*     out_base     = logits_ptr + (int64_t)q_row * max_model_len;
+        const int  causal_limit = ctx_len - next_n + pid_next_n;
+
+        auto load_qw_global = [&]() {
+            const int q_base = q_row * NUM_HEADS * HEAD_SIZE;
+            for (int i = tid * VEC_LEN; i < NUM_HEADS * HEAD_SIZE; i += BLOCK_THREADS * VEC_LEN) {
+                *reinterpret_cast<float4*>(&smem_Q[i]) =
+                    *reinterpret_cast<const float4*>(&Q_ptr[q_base + i]);
+            }
+            const int w_base = q_row * NUM_HEADS;
+            if (tid < 8) {
+                *reinterpret_cast<float4*>(&smem_W[tid * 4]) =
+                    *reinterpret_cast<const float4*>(&weights_ptr[w_base + tid * 4]);
+            }
+        };
+
+        auto load_qw_to_regs = [&]() {
+            #pragma unroll
+            for (int d = 0; d < D_LOOPS; ++d)
+                #pragma unroll
+                for (int h = 0; h < H_LOOPS; ++h)
+                    q_reg[d][h] = *reinterpret_cast<const VecInMFMA*>(
+                        &smem_Q[(h * MFMA_MN + mfmaInRow) * HEAD_SIZE + d * MFMA_K + mfmaInCol]);
+            #pragma unroll
+            for (int h = 0; h < H_LOOPS; ++h)
+                #pragma unroll
+                for (int j = 0; j < numOutputElementMFMA; ++j)
+                    w_reg[h][j] = smem_W[h * MFMA_MN + mfmaOutRow + j];
+        };
+
+        // Write KV tile to SMEM using swizzled indices to eliminate bank conflicts.
+        // Since d = i % HEAD_SIZE is always a multiple of VEC_LEN=16, K1 = d % 16 = 0
+        // and the float4 write lands at sj = K0 * 16, which is 16-byte aligned.
+        auto load_kv_to_smem = [&](int kv_start, int kv_valid) {
+            for (int i = tid * VEC_LEN; i < CHUNK_K * HEAD_SIZE; i += BLOCK_THREADS * VEC_LEN) {
+                int k = i / HEAD_SIZE;
+                int d = i % HEAD_SIZE;
+                int si, sj;
+                kv_swizzle<CHUNK_K, HEAD_SIZE, NUM_WARPS>(k, d, si, sj);
+                if (k < kv_valid) {
+                    int phys = bt[kv_start + k];
+                    *reinterpret_cast<float4*>(&smem_KV[si * HEAD_SIZE + sj]) =
+                        *reinterpret_cast<const float4*>(kv_cache_ptr + (int64_t)phys * index_dim + d);
+                } else {
+                    *reinterpret_cast<float4*>(&smem_KV[si * HEAD_SIZE + sj]) = make_float4(0, 0, 0, 0);
+                }
+            }
+            for (int i = tid; i < CHUNK_K; i += BLOCK_THREADS) {
+                if (i < kv_valid) {
+                    int phys = bt[kv_start + i];
+                    smem_scale[i] = *reinterpret_cast<const float*>(
+                        kv_cache_ptr + (int64_t)phys * index_dim + HEAD_SIZE);
+                } else {
+                    smem_scale[i] = 0.0f;
+                }
+            }
+        };
+
+        auto prefetch_kv = [&](int kv_start, int kv_valid) {
+            #pragma unroll
+            for (int i = 0; i < NB_LOAD_KV; ++i) {
+                int idx = tid * VEC_LEN + i * BLOCK_THREADS * VEC_LEN;
+                int k = idx / HEAD_SIZE;
+                int d = idx % HEAD_SIZE;
+                if (k < kv_valid) {
+                    int phys = bt[kv_start + k];
+                    pf_kv[i] = *reinterpret_cast<const float4*>(
+                        kv_cache_ptr + (int64_t)phys * index_dim + d);
+                } else {
+                    pf_kv[i] = make_float4(0, 0, 0, 0);
+                }
+            }
+            #pragma unroll
+            for (int i = 0; i < NB_LOAD_SCALE; ++i) {
+                int idx = tid + i * BLOCK_THREADS;
+                if (idx < kv_valid) {
+                    int phys = bt[kv_start + idx];
+                    pf_scale[i] = *reinterpret_cast<const float*>(
+                        kv_cache_ptr + (int64_t)phys * index_dim + HEAD_SIZE);
+                } else {
+                    pf_scale[i] = 0.0f;
+                }
+            }
+        };
+
+        // Flush register prefetch buffer → swizzled smem_KV.
+        auto flush_kv_prefetch = [&]() {
+            #pragma unroll
+            for (int i = 0; i < NB_LOAD_KV; ++i) {
+                int idx = tid * VEC_LEN + i * BLOCK_THREADS * VEC_LEN;
+                int k = idx / HEAD_SIZE;
+                int d = idx % HEAD_SIZE;
+                int si, sj;
+                kv_swizzle<CHUNK_K, HEAD_SIZE, NUM_WARPS>(k, d, si, sj);
+                *reinterpret_cast<float4*>(&smem_KV[si * HEAD_SIZE + sj]) = pf_kv[i];
+            }
+            #pragma unroll
+            for (int i = 0; i < NB_LOAD_SCALE; ++i) {
+                int idx = tid + i * BLOCK_THREADS;
+                if (idx < CHUNK_K) smem_scale[idx] = pf_scale[i];
+            }
+        };
+
+        // Read vB from swizzled smem_KV.
+        // mfmaInCol ∈ {0,8,16,24} → col % 16 ∈ {0,8} → sj is always 8-byte aligned.
+        auto compute_and_store = [&](int kv_start, int kv_valid) {
+            for (int bk = warpId; bk < TILES_PER_CHUNK; bk += NUM_WARPS) {
+                const int k = bk * MFMA_MN;
+                const float kv_scale = (k + mfmaOutCol < kv_valid) ? smem_scale[k + mfmaOutCol] : 0.0f;
+
+                VecOutMFMA vC[H_LOOPS] = {};
+
+                #pragma unroll
+                for (int d = 0; d < D_LOOPS; ++d) {
+                    int si, sj;
+                    kv_swizzle<CHUNK_K, HEAD_SIZE, NUM_WARPS>(
+                        k + mfmaInRow, d * MFMA_K + mfmaInCol, si, sj);
+                    VecInMFMA vB = *reinterpret_cast<const VecInMFMA*>(&smem_KV[si * HEAD_SIZE + sj]);
+                    #pragma unroll
+                    for (int h = 0; h < H_LOOPS; ++h) {
+                        vC[h] = __builtin_amdgcn_mfma_f32_16x16x32_fp8_fp8(
+                            (long)q_reg[d][h], (long)vB, vC[h], 0, 0, 0);
+                    }
+                }
+
+                float total_score = 0.0f;
+                #pragma unroll
+                for (int h = 0; h < H_LOOPS; ++h)
+                    #pragma unroll
+                    for (int j = 0; j < numOutputElementMFMA; ++j)
+                        total_score += fmaxf(vC[h][j], 0.0f) * kv_scale * w_reg[h][j];
+                total_score += __shfl_down(total_score, 32);
+                total_score += __shfl_down(total_score, 16);
+
+                if (laneId < 16) {
+                    const int abs_pos = kv_start + k + laneId;
+                    if (abs_pos < ctx_len && abs_pos <= causal_limit && abs_pos < max_model_len)
+                        out_base[abs_pos] = total_score;
+                }
+            }
+        };
+
+        load_qw_global();
+        __syncthreads();
+        load_qw_to_regs();
+
+        const int first_valid = min(CHUNK_K, split_end - split_start);
+        load_kv_to_smem(split_start, first_valid);
+        __syncthreads();
+
+        for (int kv_start = split_start; kv_start < split_end; kv_start += CHUNK_K) {
+            const int kv_valid = min(CHUNK_K, split_end - kv_start);
+            const bool has_next = (kv_start + CHUNK_K < split_end);
+
+            if (has_next) {
+                const int next_valid = min(CHUNK_K, split_end - kv_start - CHUNK_K);
+                prefetch_kv(kv_start + CHUNK_K, next_valid);
+            }
+
+            compute_and_store(kv_start, kv_valid);
+
+            __syncthreads();
+
+            if (has_next) {
+                flush_kv_prefetch();
+            }
+
+            __syncthreads();
+        }
+    }
+}
+
+namespace v5 {
+    // v5 = v3 (bt double-buffer) + HBM→reg direct Q/W load (no smem_Q / smem_W).
+    //
+    // Motivation: smem_Q (4 KB) + smem_W (128 B) are written once then read once
+    // per block.  Skipping that round-trip saves ~4 KB of LDS per block (better
+    // occupancy) and eliminates one __syncthreads().
+    //
+    // Trade-off: each thread fetches its own slice of Q/W directly from HBM with
+    // non-coalesced, strided accesses.  Q is only 4 KB, so the first wave fills
+    // the L1 vector cache and subsequent warps within the same block (or CU) get
+    // L1 hits — net cache-line traffic is identical to cooperative loading.
+    template <int NUM_WARPS, int CHUNK_K>
+    __global__ __launch_bounds__(NUM_WARPS * WARP_SIZE)
+    void fp8_paged_mqa_logits_kernel(
+        const fp8*   __restrict__ Q_ptr,
+        const fp8*   __restrict__ kv_cache_ptr,
+        const float* __restrict__ weights_ptr,
+        const int*   __restrict__ context_lens,
+        const int*   __restrict__ block_tables,
+        float*       __restrict__ logits_ptr,
+        int batch_size, int next_n,
+        int max_blocks_per_seq, int max_model_len, int index_dim,
+        int SplitKV
+    ){
+        constexpr int MFMA_MN = 16;
+        constexpr int MFMA_K  = 32;
+        constexpr int GPRs_AB = 2;
+        constexpr int GPRs_C  = 4;
+        constexpr int numInputElementMFMA  = GPRs_AB * sizeof(float) / sizeof(fp8);  // 8
+        constexpr int numOutputElementMFMA = GPRs_C;                                  // 4
+
+        using VecInMFMA  = __attribute__((__vector_size__(GPRs_AB * sizeof(float)))) fp8;
+        using VecOutMFMA = __attribute__((__vector_size__(GPRs_C  * sizeof(float)))) float;
+
+        constexpr int BLOCK_THREADS   = NUM_WARPS * WARP_SIZE;
+        constexpr int H_LOOPS         = NUM_HEADS / MFMA_MN;
+        constexpr int D_LOOPS         = HEAD_SIZE / MFMA_K;
+        constexpr int TILES_PER_CHUNK = CHUNK_K / MFMA_MN;
+        constexpr int PAD             = 8;
+        constexpr int KV_ROW          = HEAD_SIZE + PAD;
+        constexpr int VEC_LEN         = sizeof(float4) / sizeof(fp8);
+        constexpr int NB_LOAD_KV      = CHUNK_K * HEAD_SIZE / (BLOCK_THREADS * VEC_LEN);
+        constexpr int NB_LOAD_SCALE   = CDIV(CHUNK_K, BLOCK_THREADS);
+        constexpr int NB_LOAD_BT      = CDIV(CHUNK_K, BLOCK_THREADS);
+
+        static_assert(CHUNK_K * HEAD_SIZE % (BLOCK_THREADS * VEC_LEN) == 0,
+                      "CHUNK_K * HEAD_SIZE must be divisible by BLOCK_THREADS * VEC_LEN");
+        static_assert(CHUNK_K % MFMA_MN == 0, "CHUNK_K must be multiple of MFMA_MN=16");
+
+        const int pid_batch    = blockIdx.x;
+        const int pid_next_n   = blockIdx.y;
+        const int pid_split_kv = blockIdx.z;
+        if (pid_batch >= batch_size) return;
+
+        const int ctx_len      = context_lens[pid_batch];
+        const int ctx_chunks   = CDIV(ctx_len, CHUNK_K);
+        const int split_chunks = CDIV(ctx_chunks, SplitKV);
+        const int split_start  = pid_split_kv * split_chunks * CHUNK_K;
+        const int split_end    = min(ctx_len, split_start + split_chunks * CHUNK_K);
+        if (split_start >= ctx_len) return;
+
+        const int tid        = threadIdx.x;
+        const int warpId     = tid / WARP_SIZE;
+        const int laneId     = tid % WARP_SIZE;
+        const int mfmaInRow  = laneId % MFMA_MN;
+        const int mfmaInCol  = numInputElementMFMA * (laneId / MFMA_MN);
+        const int mfmaOutRow = numOutputElementMFMA * (laneId / MFMA_MN);
+        const int mfmaOutCol = laneId % MFMA_MN;
+
+        // No smem_Q / smem_W — Q and W go straight into registers.
+        __shared__ fp8   smem_KV   [CHUNK_K][KV_ROW];
+        __shared__ float smem_scale[CHUNK_K];
+        __shared__ int   smem_bt   [CHUNK_K];
+
+        VecInMFMA q_reg[D_LOOPS][H_LOOPS];
+        float     w_reg[H_LOOPS][numOutputElementMFMA];
+        float4    pf_kv[NB_LOAD_KV];
+        float     pf_scale[NB_LOAD_SCALE];
+        int       pf_bt[NB_LOAD_BT];
+
+        const int  q_row        = pid_batch * next_n + pid_next_n;
+        const int* bt           = block_tables + (int64_t)pid_batch * max_blocks_per_seq;
+        float*     out_base     = logits_ptr + (int64_t)q_row * max_model_len;
+        const int  causal_limit = ctx_len - next_n + pid_next_n;
+
+        // ---- Direct HBM → register load for Q and W ----
+        // Each thread fetches only the 8-byte Q slices it will feed to MFMA.
+        // Q is 4 KB — fits in L1 vector cache after first warp's access, so
+        // subsequent warps within the block pay L1-hit latency, not HBM latency.
+        {
+            const int q_base = q_row * NUM_HEADS * HEAD_SIZE;
+            #pragma unroll
+            for (int d = 0; d < D_LOOPS; ++d)
+                #pragma unroll
+                for (int h = 0; h < H_LOOPS; ++h)
+                    q_reg[d][h] = *reinterpret_cast<const VecInMFMA*>(
+                        &Q_ptr[q_base + (h * MFMA_MN + mfmaInRow) * HEAD_SIZE
+                                      + d * MFMA_K + mfmaInCol]);
+
+            const int w_base = q_row * NUM_HEADS;
+            #pragma unroll
+            for (int h = 0; h < H_LOOPS; ++h)
+                #pragma unroll
+                for (int j = 0; j < numOutputElementMFMA; ++j)
+                    w_reg[h][j] = weights_ptr[w_base + h * MFMA_MN + mfmaOutRow + j];
+        }
+
+        // ---- Lambdas (identical to v3 except no smem_Q/W references) ----
+
+        auto load_kv_to_smem = [&](int kv_start, int kv_valid) {
+            for (int i = tid * VEC_LEN; i < CHUNK_K * HEAD_SIZE; i += BLOCK_THREADS * VEC_LEN) {
+                int k = i / HEAD_SIZE;
+                int d = i % HEAD_SIZE;
+                if (k < kv_valid) {
+                    int phys = bt[kv_start + k];
+                    *reinterpret_cast<float4*>(&smem_KV[k][d]) =
+                        *reinterpret_cast<const float4*>(kv_cache_ptr + (int64_t)phys * index_dim + d);
+                } else {
+                    *reinterpret_cast<float4*>(&smem_KV[k][d]) = make_float4(0, 0, 0, 0);
+                }
+            }
+            for (int i = tid; i < CHUNK_K; i += BLOCK_THREADS) {
+                if (i < kv_valid) {
+                    int phys = bt[kv_start + i];
+                    smem_scale[i] = *reinterpret_cast<const float*>(
+                        kv_cache_ptr + (int64_t)phys * index_dim + HEAD_SIZE);
+                } else {
+                    smem_scale[i] = 0.0f;
+                }
+            }
+        };
+
+        auto load_bt_to_smem = [&](int kv_start, int kv_valid) {
+            for (int i = tid; i < CHUNK_K; i += BLOCK_THREADS)
+                smem_bt[i] = (i < kv_valid) ? bt[kv_start + i] : 0;
+        };
+
+        auto prefetch_kv = [&](int kv_valid) {
+            #pragma unroll
+            for (int i = 0; i < NB_LOAD_KV; ++i) {
+                int idx = tid * VEC_LEN + i * BLOCK_THREADS * VEC_LEN;
+                int k = idx / HEAD_SIZE;
+                int d = idx % HEAD_SIZE;
+                if (k < kv_valid) {
+                    int phys = smem_bt[k];
+                    pf_kv[i] = *reinterpret_cast<const float4*>(
+                        kv_cache_ptr + (int64_t)phys * index_dim + d);
+                } else {
+                    pf_kv[i] = make_float4(0, 0, 0, 0);
+                }
+            }
+            #pragma unroll
+            for (int i = 0; i < NB_LOAD_SCALE; ++i) {
+                int idx = tid + i * BLOCK_THREADS;
+                if (idx < kv_valid) {
+                    int phys = smem_bt[idx];
+                    pf_scale[i] = *reinterpret_cast<const float*>(
+                        kv_cache_ptr + (int64_t)phys * index_dim + HEAD_SIZE);
+                } else {
+                    pf_scale[i] = 0.0f;
+                }
+            }
+        };
+
+        auto prefetch_bt = [&](int kv_start, int kv_valid) {
+            #pragma unroll
+            for (int i = 0; i < NB_LOAD_BT; ++i) {
+                int idx = tid + i * BLOCK_THREADS;
+                pf_bt[i] = (idx < kv_valid) ? bt[kv_start + idx] : 0;
+            }
+        };
+
+        auto flush_kv_prefetch = [&]() {
+            #pragma unroll
+            for (int i = 0; i < NB_LOAD_KV; ++i) {
+                int idx = tid * VEC_LEN + i * BLOCK_THREADS * VEC_LEN;
+                int k = idx / HEAD_SIZE;
+                int d = idx % HEAD_SIZE;
+                *reinterpret_cast<float4*>(&smem_KV[k][d]) = pf_kv[i];
+            }
+            #pragma unroll
+            for (int i = 0; i < NB_LOAD_SCALE; ++i) {
+                int idx = tid + i * BLOCK_THREADS;
+                if (idx < CHUNK_K) smem_scale[idx] = pf_scale[i];
+            }
+        };
+
+        auto flush_bt_prefetch = [&]() {
+            #pragma unroll
+            for (int i = 0; i < NB_LOAD_BT; ++i) {
+                int idx = tid + i * BLOCK_THREADS;
+                if (idx < CHUNK_K) smem_bt[idx] = pf_bt[i];
+            }
+        };
+
+        auto compute_and_store = [&](int kv_start, int kv_valid) {
+            for (int bk = warpId; bk < TILES_PER_CHUNK; bk += NUM_WARPS) {
+                const int k = bk * MFMA_MN;
+                const float kv_scale = (k + mfmaOutCol < kv_valid) ? smem_scale[k + mfmaOutCol] : 0.0f;
+
+                VecOutMFMA vC[H_LOOPS] = {};
+
+                #pragma unroll
+                for (int d = 0; d < D_LOOPS; ++d) {
+                    VecInMFMA vB = *reinterpret_cast<const VecInMFMA*>(
+                        &smem_KV[k + mfmaInRow][d * MFMA_K + mfmaInCol]);
+                    #pragma unroll
+                    for (int h = 0; h < H_LOOPS; ++h) {
+                        vC[h] = __builtin_amdgcn_mfma_f32_16x16x32_fp8_fp8(
+                            (long)q_reg[d][h], (long)vB, vC[h], 0, 0, 0);
+                    }
+                }
+
+                float total_score = 0.0f;
+                #pragma unroll
+                for (int h = 0; h < H_LOOPS; ++h)
+                    #pragma unroll
+                    for (int j = 0; j < numOutputElementMFMA; ++j)
+                        total_score += fmaxf(vC[h][j], 0.0f) * kv_scale * w_reg[h][j];
+                total_score += __shfl_down(total_score, 32);
+                total_score += __shfl_down(total_score, 16);
+
+                if (laneId < 16) {
+                    const int abs_pos = kv_start + k + laneId;
+                    if (abs_pos < ctx_len && abs_pos <= causal_limit && abs_pos < max_model_len)
+                        out_base[abs_pos] = total_score;
+                }
+            }
+        };
+
+        // ================================================================
+        //  Execution  (same flow as v3, minus the Q/W cooperative load)
+        // ================================================================
+        // Phase 1: first KV tile → SMEM; pre-stage bt[chunk 1] → smem_bt
+        const int first_valid = min(CHUNK_K, split_end - split_start);
+        load_kv_to_smem(split_start, first_valid);
+        if (split_start + CHUNK_K < split_end) {
+            const int next_valid = min(CHUNK_K, split_end - split_start - CHUNK_K);
+            load_bt_to_smem(split_start + CHUNK_K, next_valid);
+        }
+        __syncthreads();
+
+        // Phase 2: main loop — double-buffered KV + bt (identical to v3)
+        for (int kv_start = split_start; kv_start < split_end; kv_start += CHUNK_K) {
+            const int  kv_valid      = min(CHUNK_K, split_end - kv_start);
+            const bool has_next      = (kv_start +     CHUNK_K < split_end);
+            const bool has_next_next = (kv_start + 2 * CHUNK_K < split_end);
+
+            if (has_next) {
+                const int next_valid = min(CHUNK_K, split_end - kv_start - CHUNK_K);
+                prefetch_kv(next_valid);
+            }
+            if (has_next_next) {
+                const int next_next_valid = min(CHUNK_K, split_end - kv_start - 2 * CHUNK_K);
+                prefetch_bt(kv_start + 2 * CHUNK_K, next_next_valid);
+            }
+
+            compute_and_store(kv_start, kv_valid);
+
+            __syncthreads();
+
+            if (has_next)      flush_kv_prefetch();
+            if (has_next_next) flush_bt_prefetch();
+
+            __syncthreads();
+        }
+    }
+}
+
 // ============================================================================
 // Host dispatch
 // ============================================================================
@@ -498,20 +1340,42 @@ void launch_fp8_paged_mqa_logits(
     const int* d_ctx, const int* d_bt, float* d_out,
     int batch_size, int next_n,
     int max_blocks_per_seq, int max_model_len, int index_dim,
-    int ChunkK, int SplitKV, int num_warps, hipStream_t stream
+    int ChunkK, int SplitKV, int num_warps, hipStream_t stream,
+    int version = 2
 ) {
     const dim3 grid = dim3(batch_size, next_n, SplitKV);
 
-    #define LAUNCH(NW, CK)                                                              \
-       hipLaunchKernelGGL(( v2::fp8_paged_mqa_logits_kernel<NW, CK>), dim3(grid), dim3(NW * WARP_SIZE), 0, stream,          \
+    #define LAUNCH_V2(NW, CK)                                                           \
+       hipLaunchKernelGGL(( v2::fp8_paged_mqa_logits_kernel<NW, CK>), dim3(grid), dim3(NW * WARP_SIZE), 0, stream,   \
             d_q, d_kv, d_w, d_ctx, d_bt, d_out,                                        \
             batch_size, next_n, max_blocks_per_seq, max_model_len, index_dim, SplitKV);
 
+    #define LAUNCH_V3(NW, CK)                                                           \
+       hipLaunchKernelGGL(( v3::fp8_paged_mqa_logits_kernel<NW, CK>), dim3(grid), dim3(NW * WARP_SIZE), 0, stream,   \
+            d_q, d_kv, d_w, d_ctx, d_bt, d_out,                                        \
+            batch_size, next_n, max_blocks_per_seq, max_model_len, index_dim, SplitKV);
+
+    #define LAUNCH_V4(NW, CK)                                                           \
+       hipLaunchKernelGGL(( v4::fp8_paged_mqa_logits_kernel<NW, CK>), dim3(grid), dim3(NW * WARP_SIZE), 0, stream,   \
+            d_q, d_kv, d_w, d_ctx, d_bt, d_out,                                        \
+            batch_size, next_n, max_blocks_per_seq, max_model_len, index_dim, SplitKV);
+
+    #define LAUNCH_V5(NW, CK)                                                           \
+       hipLaunchKernelGGL(( v5::fp8_paged_mqa_logits_kernel<NW, CK>), dim3(grid), dim3(NW * WARP_SIZE), 0, stream,   \
+            d_q, d_kv, d_w, d_ctx, d_bt, d_out,                                        \
+            batch_size, next_n, max_blocks_per_seq, max_model_len, index_dim, SplitKV);
+
+    #define DISPATCH_VER(NW, CK)                                                        \
+        if      (version == 3) { LAUNCH_V3(NW, CK) }                                   \
+        else if (version == 4) { LAUNCH_V4(NW, CK) }                                   \
+        else if (version == 5) { LAUNCH_V5(NW, CK) }                                   \
+        else                   { LAUNCH_V2(NW, CK) }
+
     #define LAUNCH_NW(NW)                                                               \
         switch (ChunkK) {                                                               \
-            case 64:  { LAUNCH(NW, 64)  break; }                                       \
-            case 128: { LAUNCH(NW, 128) break; }                                       \
-            case 256: { LAUNCH(NW, 256) break; }                                       \
+            case 64:  { DISPATCH_VER(NW, 64)  break; }                                 \
+            case 128: { DISPATCH_VER(NW, 128) break; }                                 \
+            case 256: { DISPATCH_VER(NW, 256) break; }                                 \
             default:                                                                    \
                 throw std::runtime_error("Unsupported ChunkK=" + std::to_string(ChunkK)\
                     + ". Supported: 64, 128, 256");                                     \
@@ -526,7 +1390,11 @@ void launch_fp8_paged_mqa_logits(
                 + ". Supported: 2, 4, 8");
     }
     #undef LAUNCH_NW
-    #undef LAUNCH
+    #undef DISPATCH_VER
+    #undef LAUNCH_V5
+    #undef LAUNCH_V4
+    #undef LAUNCH_V3
+    #undef LAUNCH_V2
 }
 
 // ============================================================================
@@ -542,7 +1410,8 @@ torch::Tensor fp8_paged_mqa_logits(
     int ChunkK    = 256,
     int SplitKV   = -1,             // -1 = auto
     int num_warps = 4,
-    int TotalCuCount = 304
+    int TotalCuCount = 304,
+    int version   = 2               // 2=v2(PAD), 3=v3(PAD+bt-prefetch), 4=v4(swizzle), 5=v5(v3+direct-QW)
 ) {
     const int batch_size         = q_fp8.size(0);
     const int next_n             = q_fp8.size(1);
@@ -576,7 +1445,7 @@ torch::Tensor fp8_paged_mqa_logits(
         static_cast<int*>(block_tables.data_ptr()),
         out_logits.data_ptr<float>(),
         batch_size, next_n, max_blocks_per_seq, max_model_len, index_dim,
-        ChunkK, SplitKV, num_warps, stream);
+        ChunkK, SplitKV, num_warps, stream, version);
 
     return out_logits;
 }

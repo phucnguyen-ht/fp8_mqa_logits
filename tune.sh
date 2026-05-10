@@ -12,12 +12,16 @@ NUM_GPUS=${#GPUS[@]}
 rm -rf *.so *.egg-info
 python3 setup.py develop
 
-BATCHES=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 64 128 256 512)
-KV_LENGTHS=(512 1024 2048 4096 8192 12288 16384 20480 24576 28672 32768 36864 40960 45056 49152 53248 57344 61440 65536)
+# BATCHES=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 64 128 256 512)
+VERSION=3
+
+BATCHES=(1 2 3 4 5 6 7 8)
+# BATCHES=(1 2 3 4 5 6 7 8)
+KV_LENGTHS=(65536)
 MTP_LIST=(0 1)
 
-OUT_DIR="tune_results"
-LOG_DIR="${OUT_DIR}/logs"
+OUT_DIR="tune_results_ver$VERSION"
+LOG_DIR="${OUT_DIR}/logs_p8_p8"
 mkdir -p "${OUT_DIR}" "${LOG_DIR}"
 
 TIMEOUT="${TIMEOUT:-288000}"
@@ -69,6 +73,7 @@ if [ "${MODE}" = "tune" ]; then
                                 --tune_csv    "${GPU_CSV}" \
                                 --resume_csv  "${FINAL_CSV}" \
                                 --log_dir     "${RUN_LOG_DIR}" \
+                                --version     $VERSION \
                             >> "${GPU_LOG_DIR}/run.log" 2>&1
                         rc=$?
                         [ "$rc" -eq 124 ] || [ "$rc" -eq 137 ] && { echo "[gpu ${gpu_id}] killed by timeout"; exit 0; }
@@ -146,6 +151,7 @@ elif [ "${MODE}" = "bench" ]; then
                 -mtp       "${mtp_arg}" \
                 --use_tuned \
                 --run_csv  "${GPU_LOG_DIR}/run_gpu${gpu_id}.csv" \
+                --version  $VERSION \
             > "${GPU_LOG_DIR}/run.log" 2>&1
         ) &
         PIDS+=($!)

@@ -1,0 +1,1436 @@
+# Per-config tune log
+# shared inputs: batch_size=8 next_n=2 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+  B=8 nw=2 ck= 64 skv= -1(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.95538999999997) us
+  B=8 nw=2 ck= 64 skv= -1 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=  1(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(1456.764859999999) us
+  B=8 nw=2 ck= 64 skv=  1 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=  2(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(735.1757400000009) us
+  B=8 nw=2 ck= 64 skv=  2 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=  4(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(374.30287999999996) us
+  B=8 nw=2 ck= 64 skv=  4 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=  8(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(194.48757000000032) us
+  B=8 nw=2 ck= 64 skv=  8 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv= 16(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(107.50550000000003) us
+  B=8 nw=2 ck= 64 skv= 16 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv= 24(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(77.48515000000002) us
+  B=8 nw=2 ck= 64 skv= 24 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv= 32(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.56098) us
+  B=8 nw=2 ck= 64 skv= 32 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv= 40(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.45674000000004) us
+  B=8 nw=2 ck= 64 skv= 40 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv= 48(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(54.07667999999997) us
+  B=8 nw=2 ck= 64 skv= 48 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv= 56(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(51.194279999999964) us
+  B=8 nw=2 ck= 64 skv= 56 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv= 64(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(51.102229999999935) us
+  B=8 nw=2 ck= 64 skv= 64 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv= 72(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(49.157270000000054) us
+  B=8 nw=2 ck= 64 skv= 72 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv= 80(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.51645000000006) us
+  B=8 nw=2 ck= 64 skv= 80 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv= 88(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(63.68054999999992) us
+  B=8 nw=2 ck= 64 skv= 88 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv= 96(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(60.961319999999944) us
+  B=8 nw=2 ck= 64 skv= 96 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=104(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.21842000000006) us
+  B=8 nw=2 ck= 64 skv=104 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=112(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.1755) us
+  B=8 nw=2 ck= 64 skv=112 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=120(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.93791000000001) us
+  B=8 nw=2 ck= 64 skv=120 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=128(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(56.026339999999976) us
+  B=8 nw=2 ck= 64 skv=128 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=136(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(53.77941999999999) us
+  B=8 nw=2 ck= 64 skv=136 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=144(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(53.30466999999999) us
+  B=8 nw=2 ck= 64 skv=144 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=152(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(52.91965000000002) us
+  B=8 nw=2 ck= 64 skv=152 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=160(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(51.95633) us
+  B=8 nw=2 ck= 64 skv=160 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=168(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(52.269149999999996) us
+  B=8 nw=2 ck= 64 skv=168 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=176(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(57.18410999999994) us
+  B=8 nw=2 ck= 64 skv=176 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=184(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(57.72452999999996) us
+  B=8 nw=2 ck= 64 skv=184 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=192(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(57.37425999999993) us
+  B=8 nw=2 ck= 64 skv=192 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=200(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(54.493269999999946) us
+  B=8 nw=2 ck= 64 skv=200 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=208(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(52.52107999999998) us
+  B=8 nw=2 ck= 64 skv=208 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=216(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(52.553959999999954) us
+  B=8 nw=2 ck= 64 skv=216 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=224(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.283159999999974) us
+  B=8 nw=2 ck= 64 skv=224 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=232(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.243139999999904) us
+  B=8 nw=2 ck= 64 skv=232 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=240(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.39937000000002) us
+  B=8 nw=2 ck= 64 skv=240 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=248(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.53316000000007) us
+  B=8 nw=2 ck= 64 skv=248 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=256(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.141439999999974) us
+  B=8 nw=2 ck= 64 skv=256 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=264(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(57.901519999999955) us
+  B=8 nw=2 ck= 64 skv=264 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=272(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(57.87193000000005) us
+  B=8 nw=2 ck= 64 skv=272 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=280(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(57.92192999999998) us
+  B=8 nw=2 ck= 64 skv=280 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=288(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(57.40361000000001) us
+  B=8 nw=2 ck= 64 skv=288 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=296(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.23527000000001) us
+  B=8 nw=2 ck= 64 skv=296 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=304(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(57.49088000000002) us
+  B=8 nw=2 ck= 64 skv=304 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=312(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.071089999999955) us
+  B=8 nw=2 ck= 64 skv=312 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=320(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.24646000000004) us
+  B=8 nw=2 ck= 64 skv=320 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=328(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(57.76848999999995) us
+  B=8 nw=2 ck= 64 skv=328 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=336(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(57.564279999999954) us
+  B=8 nw=2 ck= 64 skv=336 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=344(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.324969999999986) us
+  B=8 nw=2 ck= 64 skv=344 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=352(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.870189999999965) us
+  B=8 nw=2 ck= 64 skv=352 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=360(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.526060000000015) us
+  B=8 nw=2 ck= 64 skv=360 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=368(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.439120000000024) us
+  B=8 nw=2 ck= 64 skv=368 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=376(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.67591000000004) us
+  B=8 nw=2 ck= 64 skv=376 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=384(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.61016000000002) us
+  B=8 nw=2 ck= 64 skv=384 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=392(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.54012000000005) us
+  B=8 nw=2 ck= 64 skv=392 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=400(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.58702000000001) us
+  B=8 nw=2 ck= 64 skv=400 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=408(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.71361999999999) us
+  B=8 nw=2 ck= 64 skv=408 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=416(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.67989999999997) us
+  B=8 nw=2 ck= 64 skv=416 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=424(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.87377999999998) us
+  B=8 nw=2 ck= 64 skv=424 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=432(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.852160000000076) us
+  B=8 nw=2 ck= 64 skv=432 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=440(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.36067000000003) us
+  B=8 nw=2 ck= 64 skv=440 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=448(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.60620000000001) us
+  B=8 nw=2 ck= 64 skv=448 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=456(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.88293999999999) us
+  B=8 nw=2 ck= 64 skv=456 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=464(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.458629999999985) us
+  B=8 nw=2 ck= 64 skv=464 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=472(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.70785000000007) us
+  B=8 nw=2 ck= 64 skv=472 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=480(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.41935) us
+  B=8 nw=2 ck= 64 skv=480 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=488(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.596609999999984) us
+  B=8 nw=2 ck= 64 skv=488 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=496(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.776050000000076) us
+  B=8 nw=2 ck= 64 skv=496 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=504(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.449989999999985) us
+  B=8 nw=2 ck= 64 skv=504 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=512(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.26604000000003) us
+  B=8 nw=2 ck= 64 skv=512 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=520(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.37817000000001) us
+  B=8 nw=2 ck= 64 skv=520 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=528(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.02217000000003) us
+  B=8 nw=2 ck= 64 skv=528 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=536(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.47551999999995) us
+  B=8 nw=2 ck= 64 skv=536 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=544(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.5528099999999) us
+  B=8 nw=2 ck= 64 skv=544 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=552(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(64.91203) us
+  B=8 nw=2 ck= 64 skv=552 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=560(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.86539999999994) us
+  B=8 nw=2 ck= 64 skv=560 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=568(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.77849999999992) us
+  B=8 nw=2 ck= 64 skv=568 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=576(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.65216000000005) us
+  B=8 nw=2 ck= 64 skv=576 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=584(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.06200000000005) us
+  B=8 nw=2 ck= 64 skv=584 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=592(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(63.23396) us
+  B=8 nw=2 ck= 64 skv=592 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=600(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.58098) us
+  B=8 nw=2 ck= 64 skv=600 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=608(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.75506) us
+  B=8 nw=2 ck= 64 skv=608 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=616(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(63.562719999999985) us
+  B=8 nw=2 ck= 64 skv=616 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=624(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.38128000000002) us
+  B=8 nw=2 ck= 64 skv=624 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=632(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(63.77389000000002) us
+  B=8 nw=2 ck= 64 skv=632 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=640(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.56199000000002) us
+  B=8 nw=2 ck= 64 skv=640 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=648(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.27367999999998) us
+  B=8 nw=2 ck= 64 skv=648 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=656(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.10020999999999) us
+  B=8 nw=2 ck= 64 skv=656 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=664(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.98604000000002) us
+  B=8 nw=2 ck= 64 skv=664 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=672(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.98599000000004) us
+  B=8 nw=2 ck= 64 skv=672 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=680(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.15181999999999) us
+  B=8 nw=2 ck= 64 skv=680 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=688(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.0087000000001) us
+  B=8 nw=2 ck= 64 skv=688 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=696(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.0898000000001) us
+  B=8 nw=2 ck= 64 skv=696 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=704(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.92419999999998) us
+  B=8 nw=2 ck= 64 skv=704 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=712(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.22511999999995) us
+  B=8 nw=2 ck= 64 skv=712 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=720(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.07132000000001) us
+  B=8 nw=2 ck= 64 skv=720 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=728(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.04248999999994) us
+  B=8 nw=2 ck= 64 skv=728 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=736(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.41172000000003) us
+  B=8 nw=2 ck= 64 skv=736 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=744(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.71476000000013) us
+  B=8 nw=2 ck= 64 skv=744 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=752(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.64496999999999) us
+  B=8 nw=2 ck= 64 skv=752 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=760(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.11254999999998) us
+  B=8 nw=2 ck= 64 skv=760 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=768(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(64.20177000000002) us
+  B=8 nw=2 ck= 64 skv=768 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=776(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(63.68492999999993) us
+  B=8 nw=2 ck= 64 skv=776 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=784(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.24211) us
+  B=8 nw=2 ck= 64 skv=784 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=792(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.45628999999997) us
+  B=8 nw=2 ck= 64 skv=792 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=800(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.44225999999999) us
+  B=8 nw=2 ck= 64 skv=800 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=808(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.91975999999998) us
+  B=8 nw=2 ck= 64 skv=808 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=816(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.69501000000002) us
+  B=8 nw=2 ck= 64 skv=816 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=824(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.45908000000003) us
+  B=8 nw=2 ck= 64 skv=824 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=832(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.47394999999992) us
+  B=8 nw=2 ck= 64 skv=832 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=840(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.02398) us
+  B=8 nw=2 ck= 64 skv=840 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=848(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.25154000000002) us
+  B=8 nw=2 ck= 64 skv=848 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=856(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.74069) us
+  B=8 nw=2 ck= 64 skv=856 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=864(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.04167999999994) us
+  B=8 nw=2 ck= 64 skv=864 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=872(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.15783999999996) us
+  B=8 nw=2 ck= 64 skv=872 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=880(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.90816000000005) us
+  B=8 nw=2 ck= 64 skv=880 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=888(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.23400000000001) us
+  B=8 nw=2 ck= 64 skv=888 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=896(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.39346000000003) us
+  B=8 nw=2 ck= 64 skv=896 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=904(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.11940999999993) us
+  B=8 nw=2 ck= 64 skv=904 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=912(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.02714000000007) us
+  B=8 nw=2 ck= 64 skv=912 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=920(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.66459000000003) us
+  B=8 nw=2 ck= 64 skv=920 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=928(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.38217999999998) us
+  B=8 nw=2 ck= 64 skv=928 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=936(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.06091) us
+  B=8 nw=2 ck= 64 skv=936 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=944(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.50682999999995) us
+  B=8 nw=2 ck= 64 skv=944 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=952(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(64.17851) us
+  B=8 nw=2 ck= 64 skv=952 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=960(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.48849000000008) us
+  B=8 nw=2 ck= 64 skv=960 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=968(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.21909000000004) us
+  B=8 nw=2 ck= 64 skv=968 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=976(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.95715000000004) us
+  B=8 nw=2 ck= 64 skv=976 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=984(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.45186000000007) us
+  B=8 nw=2 ck= 64 skv=984 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=992(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.82645999999994) us
+  B=8 nw=2 ck= 64 skv=992 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=1000(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.50072999999999) us
+  B=8 nw=2 ck= 64 skv=1000 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=1008(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.95222999999999) us
+  B=8 nw=2 ck= 64 skv=1008 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=1016(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.89746000000005) us
+  B=8 nw=2 ck= 64 skv=1016 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=1024(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.99919999999993) us
+  B=8 nw=2 ck= 64 skv=1024 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck= 64 skv=1028(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(88.68461000000003) us
+  B=8 nw=2 ck= 64 skv=1028 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv= -1(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.31338999999991) us
+  B=8 nw=2 ck=128 skv= -1 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=  1(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(1170.5385299999998) us
+  B=8 nw=2 ck=128 skv=  1 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=  2(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(592.22665) us
+  B=8 nw=2 ck=128 skv=  2 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=  4(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(304.28214999999983) us
+  B=8 nw=2 ck=128 skv=  4 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=  8(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(161.04139000000004) us
+  B=8 nw=2 ck=128 skv=  8 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv= 16(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(94.59831000000003) us
+  B=8 nw=2 ck=128 skv= 16 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv= 24(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(71.39082000000005) us
+  B=8 nw=2 ck=128 skv= 24 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv= 32(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(62.813250000000025) us
+  B=8 nw=2 ck=128 skv= 32 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv= 40(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.06258000000008) us
+  B=8 nw=2 ck=128 skv= 40 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv= 48(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(77.55209999999992) us
+  B=8 nw=2 ck=128 skv= 48 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv= 56(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(73.33778999999993) us
+  B=8 nw=2 ck=128 skv= 56 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv= 64(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.64703000000003) us
+  B=8 nw=2 ck=128 skv= 64 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv= 72(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.21965999999995) us
+  B=8 nw=2 ck=128 skv= 72 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv= 80(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(61.29739000000001) us
+  B=8 nw=2 ck=128 skv= 80 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv= 88(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(72.39796000000001) us
+  B=8 nw=2 ck=128 skv= 88 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv= 96(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(72.95240999999986) us
+  B=8 nw=2 ck=128 skv= 96 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=104(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.9891) us
+  B=8 nw=2 ck=128 skv=104 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=112(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.43496999999994) us
+  B=8 nw=2 ck=128 skv=112 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=120(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.467) us
+  B=8 nw=2 ck=128 skv=120 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=128(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.70697000000003) us
+  B=8 nw=2 ck=128 skv=128 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=136(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(73.1483099999999) us
+  B=8 nw=2 ck=128 skv=136 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=144(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(72.64666999999994) us
+  B=8 nw=2 ck=128 skv=144 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=152(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(72.51373000000007) us
+  B=8 nw=2 ck=128 skv=152 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=160(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(72.86064999999994) us
+  B=8 nw=2 ck=128 skv=160 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=168(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(72.13440999999995) us
+  B=8 nw=2 ck=128 skv=168 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=176(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(75.04189999999993) us
+  B=8 nw=2 ck=128 skv=176 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=184(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(74.14621999999994) us
+  B=8 nw=2 ck=128 skv=184 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=192(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(74.33120999999991) us
+  B=8 nw=2 ck=128 skv=192 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=200(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(74.21111000000008) us
+  B=8 nw=2 ck=128 skv=200 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=208(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(75.24977999999992) us
+  B=8 nw=2 ck=128 skv=208 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=216(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(74.25191000000001) us
+  B=8 nw=2 ck=128 skv=216 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=224(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(74.20258999999993) us
+  B=8 nw=2 ck=128 skv=224 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=232(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(74.33520000000003) us
+  B=8 nw=2 ck=128 skv=232 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=240(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(75.99491999999991) us
+  B=8 nw=2 ck=128 skv=240 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=248(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(74.11164999999998) us
+  B=8 nw=2 ck=128 skv=248 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=256(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(73.93057999999998) us
+  B=8 nw=2 ck=128 skv=256 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=264(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(82.45413) us
+  B=8 nw=2 ck=128 skv=264 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=272(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(82.60394000000002) us
+  B=8 nw=2 ck=128 skv=272 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=280(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(82.36315) us
+  B=8 nw=2 ck=128 skv=280 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=288(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.52491999999998) us
+  B=8 nw=2 ck=128 skv=288 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=296(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(82.87836999999985) us
+  B=8 nw=2 ck=128 skv=296 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=304(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.05109000000002) us
+  B=8 nw=2 ck=128 skv=304 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=312(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(82.28673000000013) us
+  B=8 nw=2 ck=128 skv=312 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=320(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(81.68135999999997) us
+  B=8 nw=2 ck=128 skv=320 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=328(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(82.43371000000003) us
+  B=8 nw=2 ck=128 skv=328 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=336(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(82.64879000000005) us
+  B=8 nw=2 ck=128 skv=336 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=344(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(80.97555000000013) us
+  B=8 nw=2 ck=128 skv=344 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=352(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.63275999999992) us
+  B=8 nw=2 ck=128 skv=352 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=360(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(82.45299999999989) us
+  B=8 nw=2 ck=128 skv=360 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=368(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(82.86515999999997) us
+  B=8 nw=2 ck=128 skv=368 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=376(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(81.01399000000005) us
+  B=8 nw=2 ck=128 skv=376 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=384(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(82.89037000000002) us
+  B=8 nw=2 ck=128 skv=384 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=392(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(82.77020999999993) us
+  B=8 nw=2 ck=128 skv=392 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=400(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(81.46031999999997) us
+  B=8 nw=2 ck=128 skv=400 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=408(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(82.39365000000002) us
+  B=8 nw=2 ck=128 skv=408 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=416(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.30262000000005) us
+  B=8 nw=2 ck=128 skv=416 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=424(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(81.29756000000002) us
+  B=8 nw=2 ck=128 skv=424 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=432(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.18203000000003) us
+  B=8 nw=2 ck=128 skv=432 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=440(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(82.26234000000005) us
+  B=8 nw=2 ck=128 skv=440 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=448(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(82.73611000000001) us
+  B=8 nw=2 ck=128 skv=448 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=456(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(81.16660999999998) us
+  B=8 nw=2 ck=128 skv=456 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=464(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.00707000000003) us
+  B=8 nw=2 ck=128 skv=464 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=472(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(82.34521999999998) us
+  B=8 nw=2 ck=128 skv=472 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=480(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.13116999999991) us
+  B=8 nw=2 ck=128 skv=480 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=488(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(82.22382999999995) us
+  B=8 nw=2 ck=128 skv=488 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=496(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(81.88537000000002) us
+  B=8 nw=2 ck=128 skv=496 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=504(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(81.12383999999997) us
+  B=8 nw=2 ck=128 skv=504 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=512(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.17285) us
+  B=8 nw=2 ck=128 skv=512 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=128 skv=514(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(114.34087000000011) us
+  B=8 nw=2 ck=128 skv=514 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv= -1(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(88.96102000000002) us
+  B=8 nw=2 ck=256 skv= -1 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=  1(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(1084.611169999999) us
+  B=8 nw=2 ck=256 skv=  1 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=  2(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(553.2529599999993) us
+  B=8 nw=2 ck=256 skv=  2 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=  4(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(287.9782800000001) us
+  B=8 nw=2 ck=256 skv=  4 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=  8(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(156.50454) us
+  B=8 nw=2 ck=256 skv=  8 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv= 16(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(93.06234999999994) us
+  B=8 nw=2 ck=256 skv= 16 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv= 24(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(124.31699000000002) us
+  B=8 nw=2 ck=256 skv= 24 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv= 32(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(107.07970999999979) us
+  B=8 nw=2 ck=256 skv= 32 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv= 40(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(90.14322000000006) us
+  B=8 nw=2 ck=256 skv= 40 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv= 48(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(112.0430300000001) us
+  B=8 nw=2 ck=256 skv= 48 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv= 56(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(100.41171000000004) us
+  B=8 nw=2 ck=256 skv= 56 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv= 64(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(100.72259999999999) us
+  B=8 nw=2 ck=256 skv= 64 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv= 72(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(112.61864000000003) us
+  B=8 nw=2 ck=256 skv= 72 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv= 80(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(113.01291999999995) us
+  B=8 nw=2 ck=256 skv= 80 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv= 88(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(117.02611999999986) us
+  B=8 nw=2 ck=256 skv= 88 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv= 96(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(117.56972999999995) us
+  B=8 nw=2 ck=256 skv= 96 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=104(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(118.61575000000005) us
+  B=8 nw=2 ck=256 skv=104 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=112(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(117.44110999999997) us
+  B=8 nw=2 ck=256 skv=112 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=120(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(118.66895000000001) us
+  B=8 nw=2 ck=256 skv=120 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=128(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(119.02264999999997) us
+  B=8 nw=2 ck=256 skv=128 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=136(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(131.40227) us
+  B=8 nw=2 ck=256 skv=136 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=144(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(131.65470000000002) us
+  B=8 nw=2 ck=256 skv=144 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=152(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(131.04775000000004) us
+  B=8 nw=2 ck=256 skv=152 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=160(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(131.8012499999999) us
+  B=8 nw=2 ck=256 skv=160 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=168(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(131.14708) us
+  B=8 nw=2 ck=256 skv=168 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=176(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(131.5725699999999) us
+  B=8 nw=2 ck=256 skv=176 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=184(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(131.2012199999998) us
+  B=8 nw=2 ck=256 skv=184 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=192(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(131.60906) us
+  B=8 nw=2 ck=256 skv=192 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=200(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(130.99008999999998) us
+  B=8 nw=2 ck=256 skv=200 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=208(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(131.65431999999976) us
+  B=8 nw=2 ck=256 skv=208 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=216(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(131.1824199999999) us
+  B=8 nw=2 ck=256 skv=216 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=224(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(131.72079000000014) us
+  B=8 nw=2 ck=256 skv=224 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=232(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(131.19202999999996) us
+  B=8 nw=2 ck=256 skv=232 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=240(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(131.85265999999984) us
+  B=8 nw=2 ck=256 skv=240 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=248(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(131.2472500000001) us
+  B=8 nw=2 ck=256 skv=248 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=256(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(131.75282000000018) us
+  B=8 nw=2 ck=256 skv=256 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=2 ck=256 skv=257(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(187.90624) us
+  B=8 nw=2 ck=256 skv=257 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv= -1(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(52.45061) us
+  B=8 nw=4 ck= 64 skv= -1 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=  1(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(987.0813700000008) us
+  B=8 nw=4 ck= 64 skv=  1 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=  2(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(499.53563999999983) us
+  B=8 nw=4 ck= 64 skv=  2 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=  4(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(256.1182700000002) us
+  B=8 nw=4 ck= 64 skv=  4 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=  8(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(135.36751000000004) us
+  B=8 nw=4 ck= 64 skv=  8 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv= 16(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(77.4527) us
+  B=8 nw=4 ck= 64 skv= 16 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv= 24(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.50164999999997) us
+  B=8 nw=4 ck= 64 skv= 24 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv= 32(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(56.14774999999997) us
+  B=8 nw=4 ck= 64 skv= 32 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv= 40(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(51.67105000000001) us
+  B=8 nw=4 ck= 64 skv= 40 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv= 48(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(48.70220999999999) us
+  B=8 nw=4 ck= 64 skv= 48 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv= 56(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(46.47334) us
+  B=8 nw=4 ck= 64 skv= 56 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv= 64(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(46.40958999999996) us
+  B=8 nw=4 ck= 64 skv= 64 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv= 72(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(47.19317999999999) us
+  B=8 nw=4 ck= 64 skv= 72 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv= 80(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(57.720109999999984) us
+  B=8 nw=4 ck= 64 skv= 80 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv= 88(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(54.343470000000025) us
+  B=8 nw=4 ck= 64 skv= 88 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv= 96(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(52.93571000000003) us
+  B=8 nw=4 ck= 64 skv= 96 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=104(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(51.66740999999993) us
+  B=8 nw=4 ck= 64 skv=104 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=112(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(51.81767000000003) us
+  B=8 nw=4 ck= 64 skv=112 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=120(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(49.9761099999999) us
+  B=8 nw=4 ck= 64 skv=120 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=128(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(50.00976999999992) us
+  B=8 nw=4 ck= 64 skv=128 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=136(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(50.47689000000001) us
+  B=8 nw=4 ck= 64 skv=136 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=144(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(50.72120000000002) us
+  B=8 nw=4 ck= 64 skv=144 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=152(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(50.634650000000036) us
+  B=8 nw=4 ck= 64 skv=152 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=160(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(51.13509000000003) us
+  B=8 nw=4 ck= 64 skv=160 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=168(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(50.230120000000014) us
+  B=8 nw=4 ck= 64 skv=168 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=176(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(53.91765999999995) us
+  B=8 nw=4 ck= 64 skv=176 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=184(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(53.11395999999995) us
+  B=8 nw=4 ck= 64 skv=184 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=192(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(53.95932000000003) us
+  B=8 nw=4 ck= 64 skv=192 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=200(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(53.45047) us
+  B=8 nw=4 ck= 64 skv=200 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=208(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(53.60039000000008) us
+  B=8 nw=4 ck= 64 skv=208 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=216(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(53.22258999999995) us
+  B=8 nw=4 ck= 64 skv=216 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=224(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(50.88947000000002) us
+  B=8 nw=4 ck= 64 skv=224 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=232(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(53.10960999999995) us
+  B=8 nw=4 ck= 64 skv=232 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=240(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(50.56608) us
+  B=8 nw=4 ck= 64 skv=240 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=248(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(53.247359999999986) us
+  B=8 nw=4 ck= 64 skv=248 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=256(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(53.44613999999997) us
+  B=8 nw=4 ck= 64 skv=256 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=264(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.57805999999999) us
+  B=8 nw=4 ck= 64 skv=264 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=272(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(56.085649999999966) us
+  B=8 nw=4 ck= 64 skv=272 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=280(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.47956) us
+  B=8 nw=4 ck= 64 skv=280 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=288(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.37860999999998) us
+  B=8 nw=4 ck= 64 skv=288 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=296(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.68186999999996) us
+  B=8 nw=4 ck= 64 skv=296 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=304(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(56.18373) us
+  B=8 nw=4 ck= 64 skv=304 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=312(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.37535000000002) us
+  B=8 nw=4 ck= 64 skv=312 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=320(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.628119999999996) us
+  B=8 nw=4 ck= 64 skv=320 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=328(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.39659999999997) us
+  B=8 nw=4 ck= 64 skv=328 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=336(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(56.02310999999996) us
+  B=8 nw=4 ck= 64 skv=336 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=344(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.76479000000001) us
+  B=8 nw=4 ck= 64 skv=344 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=352(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.66867999999996) us
+  B=8 nw=4 ck= 64 skv=352 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=360(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(57.919959999999975) us
+  B=8 nw=4 ck= 64 skv=360 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=368(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.62461000000005) us
+  B=8 nw=4 ck= 64 skv=368 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=376(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.30617000000006) us
+  B=8 nw=4 ck= 64 skv=376 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=384(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.03487999999997) us
+  B=8 nw=4 ck= 64 skv=384 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=392(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(57.971669999999996) us
+  B=8 nw=4 ck= 64 skv=392 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=400(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(57.95522000000005) us
+  B=8 nw=4 ck= 64 skv=400 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=408(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.832520000000066) us
+  B=8 nw=4 ck= 64 skv=408 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=416(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.73520000000002) us
+  B=8 nw=4 ck= 64 skv=416 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=424(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.03013000000008) us
+  B=8 nw=4 ck= 64 skv=424 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=432(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.69716999999998) us
+  B=8 nw=4 ck= 64 skv=432 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=440(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.929889999999986) us
+  B=8 nw=4 ck= 64 skv=440 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=448(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.83688000000002) us
+  B=8 nw=4 ck= 64 skv=448 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=456(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.064399999999914) us
+  B=8 nw=4 ck= 64 skv=456 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=464(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.651029999999935) us
+  B=8 nw=4 ck= 64 skv=464 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=472(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.875400000000035) us
+  B=8 nw=4 ck= 64 skv=472 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=480(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.33424000000003) us
+  B=8 nw=4 ck= 64 skv=480 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=488(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.13952000000003) us
+  B=8 nw=4 ck= 64 skv=488 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=496(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.66785000000004) us
+  B=8 nw=4 ck= 64 skv=496 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=504(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.23677999999995) us
+  B=8 nw=4 ck= 64 skv=504 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=512(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.769300000000115) us
+  B=8 nw=4 ck= 64 skv=512 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=520(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.78988999999997) us
+  B=8 nw=4 ck= 64 skv=520 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=528(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.48461999999994) us
+  B=8 nw=4 ck= 64 skv=528 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=536(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.99661000000006) us
+  B=8 nw=4 ck= 64 skv=536 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=544(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.67490000000004) us
+  B=8 nw=4 ck= 64 skv=544 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=552(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.58359000000002) us
+  B=8 nw=4 ck= 64 skv=552 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=560(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.20205) us
+  B=8 nw=4 ck= 64 skv=560 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=568(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.79198999999996) us
+  B=8 nw=4 ck= 64 skv=568 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=576(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.73780999999995) us
+  B=8 nw=4 ck= 64 skv=576 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=584(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.50980000000006) us
+  B=8 nw=4 ck= 64 skv=584 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=592(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.95054000000006) us
+  B=8 nw=4 ck= 64 skv=592 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=600(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.70132000000001) us
+  B=8 nw=4 ck= 64 skv=600 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=608(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.73823000000002) us
+  B=8 nw=4 ck= 64 skv=608 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=616(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.61440999999999) us
+  B=8 nw=4 ck= 64 skv=616 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=624(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.12961000000001) us
+  B=8 nw=4 ck= 64 skv=624 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=632(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.51917999999995) us
+  B=8 nw=4 ck= 64 skv=632 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=640(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.81141999999994) us
+  B=8 nw=4 ck= 64 skv=640 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=648(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.81276000000007) us
+  B=8 nw=4 ck= 64 skv=648 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=656(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.46785000000006) us
+  B=8 nw=4 ck= 64 skv=656 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=664(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.87648000000007) us
+  B=8 nw=4 ck= 64 skv=664 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=672(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.04333999999997) us
+  B=8 nw=4 ck= 64 skv=672 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=680(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.26991) us
+  B=8 nw=4 ck= 64 skv=680 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=688(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.72529999999993) us
+  B=8 nw=4 ck= 64 skv=688 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=696(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.04717) us
+  B=8 nw=4 ck= 64 skv=696 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=704(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.74183) us
+  B=8 nw=4 ck= 64 skv=704 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=712(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.62957999999999) us
+  B=8 nw=4 ck= 64 skv=712 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=720(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.08571000000002) us
+  B=8 nw=4 ck= 64 skv=720 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=728(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.65663999999992) us
+  B=8 nw=4 ck= 64 skv=728 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=736(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.52137999999994) us
+  B=8 nw=4 ck= 64 skv=736 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=744(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.13175999999983) us
+  B=8 nw=4 ck= 64 skv=744 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=752(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.83312999999998) us
+  B=8 nw=4 ck= 64 skv=752 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=760(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.75033999999997) us
+  B=8 nw=4 ck= 64 skv=760 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=768(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.84143999999996) us
+  B=8 nw=4 ck= 64 skv=768 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=776(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.96583000000001) us
+  B=8 nw=4 ck= 64 skv=776 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=784(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.97648999999994) us
+  B=8 nw=4 ck= 64 skv=784 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=792(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.08948999999997) us
+  B=8 nw=4 ck= 64 skv=792 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=800(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.43490999999993) us
+  B=8 nw=4 ck= 64 skv=800 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=808(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.68171999999996) us
+  B=8 nw=4 ck= 64 skv=808 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=816(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.07681000000002) us
+  B=8 nw=4 ck= 64 skv=816 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=824(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.95575000000007) us
+  B=8 nw=4 ck= 64 skv=824 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=832(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.01740999999994) us
+  B=8 nw=4 ck= 64 skv=832 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=840(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.03597000000008) us
+  B=8 nw=4 ck= 64 skv=840 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=848(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.37635999999998) us
+  B=8 nw=4 ck= 64 skv=848 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=856(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.67260000000003) us
+  B=8 nw=4 ck= 64 skv=856 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=864(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.45143000000006) us
+  B=8 nw=4 ck= 64 skv=864 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=872(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.63283999999994) us
+  B=8 nw=4 ck= 64 skv=872 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=880(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.25468999999994) us
+  B=8 nw=4 ck= 64 skv=880 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=888(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.61526999999997) us
+  B=8 nw=4 ck= 64 skv=888 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=896(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.85008000000008) us
+  B=8 nw=4 ck= 64 skv=896 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=904(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.50749000000012) us
+  B=8 nw=4 ck= 64 skv=904 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=912(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.98467999999991) us
+  B=8 nw=4 ck= 64 skv=912 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=920(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.19270999999995) us
+  B=8 nw=4 ck= 64 skv=920 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=928(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.01460000000002) us
+  B=8 nw=4 ck= 64 skv=928 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=936(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.36807999999996) us
+  B=8 nw=4 ck= 64 skv=936 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=944(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.89157000000007) us
+  B=8 nw=4 ck= 64 skv=944 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=952(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.85111000000005) us
+  B=8 nw=4 ck= 64 skv=952 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=960(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.14723000000005) us
+  B=8 nw=4 ck= 64 skv=960 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=968(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.12124999999996) us
+  B=8 nw=4 ck= 64 skv=968 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=976(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.19000000000004) us
+  B=8 nw=4 ck= 64 skv=976 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=984(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.84373) us
+  B=8 nw=4 ck= 64 skv=984 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=992(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.52785000000002) us
+  B=8 nw=4 ck= 64 skv=992 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=1000(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.89966) us
+  B=8 nw=4 ck= 64 skv=1000 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=1008(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.91008999999994) us
+  B=8 nw=4 ck= 64 skv=1008 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=1016(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.05203) us
+  B=8 nw=4 ck= 64 skv=1016 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=1024(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.59564999999992) us
+  B=8 nw=4 ck= 64 skv=1024 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck= 64 skv=1028(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(94.44597000000005) us
+  B=8 nw=4 ck= 64 skv=1028 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv= -1(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.35857000000001) us
+  B=8 nw=4 ck=128 skv= -1 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=  1(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(765.7097399999998) us
+  B=8 nw=4 ck=128 skv=  1 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=  2(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(389.46266000000026) us
+  B=8 nw=4 ck=128 skv=  2 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=  4(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(202.47985999999986) us
+  B=8 nw=4 ck=128 skv=  4 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=  8(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(110.98348999999996) us
+  B=8 nw=4 ck=128 skv=  8 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv= 16(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.93657999999999) us
+  B=8 nw=4 ck=128 skv= 16 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv= 24(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(56.00629999999997) us
+  B=8 nw=4 ck=128 skv= 24 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv= 32(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(49.71979000000002) us
+  B=8 nw=4 ck=128 skv= 32 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv= 40(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.37549000000001) us
+  B=8 nw=4 ck=128 skv= 40 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv= 48(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(61.566250000000025) us
+  B=8 nw=4 ck=128 skv= 48 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv= 56(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.66628999999996) us
+  B=8 nw=4 ck=128 skv= 56 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv= 64(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.954540000000016) us
+  B=8 nw=4 ck=128 skv= 64 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv= 72(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(54.73922999999997) us
+  B=8 nw=4 ck=128 skv= 72 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv= 80(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(52.27389999999998) us
+  B=8 nw=4 ck=128 skv= 80 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv= 88(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.78560000000004) us
+  B=8 nw=4 ck=128 skv= 88 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv= 96(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.052090000000035) us
+  B=8 nw=4 ck=128 skv= 96 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=104(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(57.92914999999999) us
+  B=8 nw=4 ck=128 skv=104 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=112(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.89332000000006) us
+  B=8 nw=4 ck=128 skv=112 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=120(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(57.499700000000004) us
+  B=8 nw=4 ck=128 skv=120 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=128(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(57.18124999999993) us
+  B=8 nw=4 ck=128 skv=128 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=136(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.253579999999964) us
+  B=8 nw=4 ck=128 skv=136 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=144(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.17619999999992) us
+  B=8 nw=4 ck=128 skv=144 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=152(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.59692000000008) us
+  B=8 nw=4 ck=128 skv=152 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=160(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.95876000000003) us
+  B=8 nw=4 ck=128 skv=160 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=168(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.03482999999989) us
+  B=8 nw=4 ck=128 skv=168 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=176(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.68793999999997) us
+  B=8 nw=4 ck=128 skv=176 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=184(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(60.591460000000005) us
+  B=8 nw=4 ck=128 skv=184 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=192(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.33528999999999) us
+  B=8 nw=4 ck=128 skv=192 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=200(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.88962999999997) us
+  B=8 nw=4 ck=128 skv=200 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=208(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(60.00188) us
+  B=8 nw=4 ck=128 skv=208 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=216(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.633299999999956) us
+  B=8 nw=4 ck=128 skv=216 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=224(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.34131999999993) us
+  B=8 nw=4 ck=128 skv=224 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=232(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(60.39446000000002) us
+  B=8 nw=4 ck=128 skv=232 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=240(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(61.641459999999995) us
+  B=8 nw=4 ck=128 skv=240 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=248(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.70948000000003) us
+  B=8 nw=4 ck=128 skv=248 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=256(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.26908999999998) us
+  B=8 nw=4 ck=128 skv=256 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=264(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.14873000000006) us
+  B=8 nw=4 ck=128 skv=264 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=272(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.55898999999998) us
+  B=8 nw=4 ck=128 skv=272 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=280(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.18558000000002) us
+  B=8 nw=4 ck=128 skv=280 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=288(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.41167999999999) us
+  B=8 nw=4 ck=128 skv=288 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=296(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.29102) us
+  B=8 nw=4 ck=128 skv=296 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=304(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.85100999999999) us
+  B=8 nw=4 ck=128 skv=304 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=312(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.63033999999988) us
+  B=8 nw=4 ck=128 skv=312 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=320(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.38998000000002) us
+  B=8 nw=4 ck=128 skv=320 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=328(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.24371999999995) us
+  B=8 nw=4 ck=128 skv=328 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=336(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.2937) us
+  B=8 nw=4 ck=128 skv=336 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=344(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.01628000000004) us
+  B=8 nw=4 ck=128 skv=344 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=352(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.88792999999995) us
+  B=8 nw=4 ck=128 skv=352 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=360(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.07990000000008) us
+  B=8 nw=4 ck=128 skv=360 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=368(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.84226999999998) us
+  B=8 nw=4 ck=128 skv=368 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=376(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.37435) us
+  B=8 nw=4 ck=128 skv=376 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=384(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.31351000000005) us
+  B=8 nw=4 ck=128 skv=384 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=392(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.45763) us
+  B=8 nw=4 ck=128 skv=392 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=400(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.25457999999998) us
+  B=8 nw=4 ck=128 skv=400 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=408(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.91688999999988) us
+  B=8 nw=4 ck=128 skv=408 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=416(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.59600000000005) us
+  B=8 nw=4 ck=128 skv=416 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=424(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.16684) us
+  B=8 nw=4 ck=128 skv=424 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=432(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.04505000000002) us
+  B=8 nw=4 ck=128 skv=432 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=440(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.5014200000001) us
+  B=8 nw=4 ck=128 skv=440 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=448(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.03344000000003) us
+  B=8 nw=4 ck=128 skv=448 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=456(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.66654000000004) us
+  B=8 nw=4 ck=128 skv=456 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=464(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.2795199999999) us
+  B=8 nw=4 ck=128 skv=464 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=472(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.72325) us
+  B=8 nw=4 ck=128 skv=472 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=480(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.47159999999998) us
+  B=8 nw=4 ck=128 skv=480 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=488(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.05456999999996) us
+  B=8 nw=4 ck=128 skv=488 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=496(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.67488000000009) us
+  B=8 nw=4 ck=128 skv=496 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=504(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.02261000000011) us
+  B=8 nw=4 ck=128 skv=504 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=512(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.93995999999991) us
+  B=8 nw=4 ck=128 skv=512 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=128 skv=514(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(94.91393000000008) us
+  B=8 nw=4 ck=128 skv=514 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv= -1(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(61.76289000000003) us
+  B=8 nw=4 ck=256 skv= -1 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=  1(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(669.0796400000003) us
+  B=8 nw=4 ck=256 skv=  1 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=  2(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(343.3924800000002) us
+  B=8 nw=4 ck=256 skv=  2 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=  4(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(181.3147800000001) us
+  B=8 nw=4 ck=256 skv=  4 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=  8(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(102.06336000000009) us
+  B=8 nw=4 ck=256 skv=  8 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv= 16(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.32139999999993) us
+  B=8 nw=4 ck=256 skv= 16 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv= 24(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(79.75492000000003) us
+  B=8 nw=4 ck=256 skv= 24 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv= 32(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(72.11401000000005) us
+  B=8 nw=4 ck=256 skv= 32 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv= 40(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(64.44687999999995) us
+  B=8 nw=4 ck=256 skv= 40 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv= 48(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(75.00583999999999) us
+  B=8 nw=4 ck=256 skv= 48 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv= 56(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.91668999999992) us
+  B=8 nw=4 ck=256 skv= 56 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv= 64(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.20033999999991) us
+  B=8 nw=4 ck=256 skv= 64 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv= 72(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(76.00572) us
+  B=8 nw=4 ck=256 skv= 72 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv= 80(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(75.88397999999992) us
+  B=8 nw=4 ck=256 skv= 80 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv= 88(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(77.65737999999979) us
+  B=8 nw=4 ck=256 skv= 88 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv= 96(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(77.59562999999999) us
+  B=8 nw=4 ck=256 skv= 96 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=104(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(77.94467000000007) us
+  B=8 nw=4 ck=256 skv=104 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=112(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(75.95852999999997) us
+  B=8 nw=4 ck=256 skv=112 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=120(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(77.98347000000008) us
+  B=8 nw=4 ck=256 skv=120 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=128(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(77.57928000000005) us
+  B=8 nw=4 ck=256 skv=128 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=136(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.46283000000007) us
+  B=8 nw=4 ck=256 skv=136 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=144(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.55447000000002) us
+  B=8 nw=4 ck=256 skv=144 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=152(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.84292999999994) us
+  B=8 nw=4 ck=256 skv=152 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=160(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.77236999999995) us
+  B=8 nw=4 ck=256 skv=160 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=168(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.54289000000009) us
+  B=8 nw=4 ck=256 skv=168 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=176(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(82.92485000000005) us
+  B=8 nw=4 ck=256 skv=176 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=184(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.96742999999995) us
+  B=8 nw=4 ck=256 skv=184 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=192(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(85.02676999999993) us
+  B=8 nw=4 ck=256 skv=192 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=200(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.64830000000009) us
+  B=8 nw=4 ck=256 skv=200 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=208(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.28538000000005) us
+  B=8 nw=4 ck=256 skv=208 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=216(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.48489999999993) us
+  B=8 nw=4 ck=256 skv=216 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=224(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.74553000000002) us
+  B=8 nw=4 ck=256 skv=224 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=232(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(85.39647999999988) us
+  B=8 nw=4 ck=256 skv=232 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=240(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.81241000000007) us
+  B=8 nw=4 ck=256 skv=240 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=248(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.28214999999996) us
+  B=8 nw=4 ck=256 skv=248 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=256(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.76526999999996) us
+  B=8 nw=4 ck=256 skv=256 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=4 ck=256 skv=257(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(119.76376000000006) us
+  B=8 nw=4 ck=256 skv=257 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv= -1(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(53.50581000000007) us
+  B=8 nw=8 ck= 64 skv= -1 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=  1(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(923.8951200000007) us
+  B=8 nw=8 ck= 64 skv=  1 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=  2(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(468.50331000000006) us
+  B=8 nw=8 ck= 64 skv=  2 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=  4(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(240.34567000000013) us
+  B=8 nw=8 ck= 64 skv=  4 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=  8(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(127.60138000000008) us
+  B=8 nw=8 ck= 64 skv=  8 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv= 16(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(73.62656000000004) us
+  B=8 nw=8 ck= 64 skv= 16 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv= 24(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(62.83694000000005) us
+  B=8 nw=8 ck= 64 skv= 24 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv= 32(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(54.14476999999999) us
+  B=8 nw=8 ck= 64 skv= 32 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv= 40(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(52.98658999999994) us
+  B=8 nw=8 ck= 64 skv= 40 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv= 48(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(50.53818000000001) us
+  B=8 nw=8 ck= 64 skv= 48 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv= 56(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(49.39769000000001) us
+  B=8 nw=8 ck= 64 skv= 56 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv= 64(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(51.42346999999999) us
+  B=8 nw=8 ck= 64 skv= 64 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv= 72(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(48.13814000000002) us
+  B=8 nw=8 ck= 64 skv= 72 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv= 80(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.06082000000005) us
+  B=8 nw=8 ck= 64 skv= 80 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv= 88(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(56.485869999999984) us
+  B=8 nw=8 ck= 64 skv= 88 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv= 96(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.97350999999995) us
+  B=8 nw=8 ck= 64 skv= 96 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=104(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(54.24649999999996) us
+  B=8 nw=8 ck= 64 skv=104 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=112(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(54.71596999999999) us
+  B=8 nw=8 ck= 64 skv=112 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=120(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(54.07775000000001) us
+  B=8 nw=8 ck= 64 skv=120 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=128(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(54.3037900000001) us
+  B=8 nw=8 ck= 64 skv=128 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=136(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(54.00779000000006) us
+  B=8 nw=8 ck= 64 skv=136 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=144(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(54.34222999999998) us
+  B=8 nw=8 ck= 64 skv=144 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=152(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(54.73082999999999) us
+  B=8 nw=8 ck= 64 skv=152 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=160(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.26517000000003) us
+  B=8 nw=8 ck= 64 skv=160 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=168(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(54.38230000000007) us
+  B=8 nw=8 ck= 64 skv=168 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=176(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.30254999999997) us
+  B=8 nw=8 ck= 64 skv=176 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=184(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.332959999999964) us
+  B=8 nw=8 ck= 64 skv=184 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=192(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.30855000000003) us
+  B=8 nw=8 ck= 64 skv=192 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=200(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.409990000000015) us
+  B=8 nw=8 ck= 64 skv=200 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=208(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(60.39130999999998) us
+  B=8 nw=8 ck= 64 skv=208 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=216(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(60.04716000000001) us
+  B=8 nw=8 ck= 64 skv=216 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=224(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(60.241830000000036) us
+  B=8 nw=8 ck= 64 skv=224 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=232(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.84762000000005) us
+  B=8 nw=8 ck= 64 skv=232 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=240(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.82117000000004) us
+  B=8 nw=8 ck= 64 skv=240 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=248(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.68617000000007) us
+  B=8 nw=8 ck= 64 skv=248 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=256(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(60.32556000000009) us
+  B=8 nw=8 ck= 64 skv=256 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=264(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(63.876849999999976) us
+  B=8 nw=8 ck= 64 skv=264 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=272(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(62.9892099999999) us
+  B=8 nw=8 ck= 64 skv=272 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=280(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(62.65183000000004) us
+  B=8 nw=8 ck= 64 skv=280 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=288(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(63.15884) us
+  B=8 nw=8 ck= 64 skv=288 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=296(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(62.79200999999998) us
+  B=8 nw=8 ck= 64 skv=296 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=304(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(63.126030000000036) us
+  B=8 nw=8 ck= 64 skv=304 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=312(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(63.09013000000002) us
+  B=8 nw=8 ck= 64 skv=312 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=320(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(63.38569000000005) us
+  B=8 nw=8 ck= 64 skv=320 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=328(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(64.52899000000002) us
+  B=8 nw=8 ck= 64 skv=328 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=336(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(62.79480000000002) us
+  B=8 nw=8 ck= 64 skv=336 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=344(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.93872000000003) us
+  B=8 nw=8 ck= 64 skv=344 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=352(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.81931999999998) us
+  B=8 nw=8 ck= 64 skv=352 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=360(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.42513999999997) us
+  B=8 nw=8 ck= 64 skv=360 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=368(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(70.39093000000001) us
+  B=8 nw=8 ck= 64 skv=368 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=376(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.52322999999997) us
+  B=8 nw=8 ck= 64 skv=376 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=384(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(70.25439999999995) us
+  B=8 nw=8 ck= 64 skv=384 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=392(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.87417000000009) us
+  B=8 nw=8 ck= 64 skv=392 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=400(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(70.63690000000007) us
+  B=8 nw=8 ck= 64 skv=400 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=408(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(70.49629) us
+  B=8 nw=8 ck= 64 skv=408 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=416(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.90747000000005) us
+  B=8 nw=8 ck= 64 skv=416 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=424(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.51843999999994) us
+  B=8 nw=8 ck= 64 skv=424 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=432(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(70.03363000000009) us
+  B=8 nw=8 ck= 64 skv=432 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=440(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.72717000000011) us
+  B=8 nw=8 ck= 64 skv=440 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=448(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.79804999999999) us
+  B=8 nw=8 ck= 64 skv=448 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=456(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.78010000000006) us
+  B=8 nw=8 ck= 64 skv=456 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=464(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(70.21469999999994) us
+  B=8 nw=8 ck= 64 skv=464 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=472(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(70.20944) us
+  B=8 nw=8 ck= 64 skv=472 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=480(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.72289999999998) us
+  B=8 nw=8 ck= 64 skv=480 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=488(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.49059000000001) us
+  B=8 nw=8 ck= 64 skv=488 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=496(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(70.30874000000009) us
+  B=8 nw=8 ck= 64 skv=496 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=504(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.70792999999999) us
+  B=8 nw=8 ck= 64 skv=504 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=512(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(70.4654899999999) us
+  B=8 nw=8 ck= 64 skv=512 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=520(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.9439199999999) us
+  B=8 nw=8 ck= 64 skv=520 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=528(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.45870000000005) us
+  B=8 nw=8 ck= 64 skv=528 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=536(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.25766000000009) us
+  B=8 nw=8 ck= 64 skv=536 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=544(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.23368) us
+  B=8 nw=8 ck= 64 skv=544 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=552(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.54843000000001) us
+  B=8 nw=8 ck= 64 skv=552 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=560(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.64729) us
+  B=8 nw=8 ck= 64 skv=560 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=568(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(82.90478999999992) us
+  B=8 nw=8 ck= 64 skv=568 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=576(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.39873999999992) us
+  B=8 nw=8 ck= 64 skv=576 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=584(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.24092000000007) us
+  B=8 nw=8 ck= 64 skv=584 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=592(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(85.03555000000017) us
+  B=8 nw=8 ck= 64 skv=592 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=600(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.37345999999991) us
+  B=8 nw=8 ck= 64 skv=600 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=608(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(85.2214999999999) us
+  B=8 nw=8 ck= 64 skv=608 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=616(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(82.76741999999994) us
+  B=8 nw=8 ck= 64 skv=616 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=624(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.55530000000007) us
+  B=8 nw=8 ck= 64 skv=624 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=632(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.72592999999998) us
+  B=8 nw=8 ck= 64 skv=632 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=640(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.85296999999998) us
+  B=8 nw=8 ck= 64 skv=640 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=648(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.70523000000001) us
+  B=8 nw=8 ck= 64 skv=648 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=656(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.98926) us
+  B=8 nw=8 ck= 64 skv=656 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=664(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.73112999999987) us
+  B=8 nw=8 ck= 64 skv=664 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=672(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.64700999999994) us
+  B=8 nw=8 ck= 64 skv=672 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=680(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.48573999999996) us
+  B=8 nw=8 ck= 64 skv=680 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=688(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.54014000000002) us
+  B=8 nw=8 ck= 64 skv=688 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=696(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(82.46818999999992) us
+  B=8 nw=8 ck= 64 skv=696 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=704(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.9350300000001) us
+  B=8 nw=8 ck= 64 skv=704 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=712(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.84143000000006) us
+  B=8 nw=8 ck= 64 skv=712 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=720(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.81771999999997) us
+  B=8 nw=8 ck= 64 skv=720 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=728(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.42549999999996) us
+  B=8 nw=8 ck= 64 skv=728 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=736(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.97275999999998) us
+  B=8 nw=8 ck= 64 skv=736 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=744(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.58582000000013) us
+  B=8 nw=8 ck= 64 skv=744 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=752(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.60172000000003) us
+  B=8 nw=8 ck= 64 skv=752 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=760(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.20397999999992) us
+  B=8 nw=8 ck= 64 skv=760 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=768(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.84820999999994) us
+  B=8 nw=8 ck= 64 skv=768 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=776(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.20049000000004) us
+  B=8 nw=8 ck= 64 skv=776 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=784(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.55289) us
+  B=8 nw=8 ck= 64 skv=784 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=792(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.23878) us
+  B=8 nw=8 ck= 64 skv=792 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=800(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(85.1309599999999) us
+  B=8 nw=8 ck= 64 skv=800 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=808(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.32336000000004) us
+  B=8 nw=8 ck= 64 skv=808 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=816(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.73236000000001) us
+  B=8 nw=8 ck= 64 skv=816 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=824(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.98044000000007) us
+  B=8 nw=8 ck= 64 skv=824 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=832(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.15158999999993) us
+  B=8 nw=8 ck= 64 skv=832 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=840(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.13186) us
+  B=8 nw=8 ck= 64 skv=840 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=848(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.40021000000006) us
+  B=8 nw=8 ck= 64 skv=848 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=856(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.92911999999993) us
+  B=8 nw=8 ck= 64 skv=856 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=864(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.45346000000004) us
+  B=8 nw=8 ck= 64 skv=864 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=872(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.81814999999999) us
+  B=8 nw=8 ck= 64 skv=872 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=880(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.10380999999998) us
+  B=8 nw=8 ck= 64 skv=880 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=888(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.73477999999996) us
+  B=8 nw=8 ck= 64 skv=888 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=896(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(85.03796999999997) us
+  B=8 nw=8 ck= 64 skv=896 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=904(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(85.11454000000005) us
+  B=8 nw=8 ck= 64 skv=904 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=912(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.56494999999994) us
+  B=8 nw=8 ck= 64 skv=912 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=920(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(83.71286000000002) us
+  B=8 nw=8 ck= 64 skv=920 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=928(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.42388000000004) us
+  B=8 nw=8 ck= 64 skv=928 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=936(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(85.35410000000003) us
+  B=8 nw=8 ck= 64 skv=936 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=944(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(85.60525000000005) us
+  B=8 nw=8 ck= 64 skv=944 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=952(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.62821000000007) us
+  B=8 nw=8 ck= 64 skv=952 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=960(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(85.37212) us
+  B=8 nw=8 ck= 64 skv=960 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=968(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.07138000000005) us
+  B=8 nw=8 ck= 64 skv=968 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=976(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(85.68534999999999) us
+  B=8 nw=8 ck= 64 skv=976 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=984(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.92224999999995) us
+  B=8 nw=8 ck= 64 skv=984 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=992(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(85.27276000000005) us
+  B=8 nw=8 ck= 64 skv=992 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=1000(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.42425999999992) us
+  B=8 nw=8 ck= 64 skv=1000 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=1008(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(85.83478000000001) us
+  B=8 nw=8 ck= 64 skv=1008 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=1016(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(84.92422999999991) us
+  B=8 nw=8 ck= 64 skv=1016 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=1024(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(85.62485000000014) us
+  B=8 nw=8 ck= 64 skv=1024 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck= 64 skv=1028(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(133.24345999999994) us
+  B=8 nw=8 ck= 64 skv=1028 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv= -1(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(60.08787) us
+  B=8 nw=8 ck=128 skv= -1 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=  1(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(584.6112000000002) us
+  B=8 nw=8 ck=128 skv=  1 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=  2(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(298.50545000000005) us
+  B=8 nw=8 ck=128 skv=  2 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=  4(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(156.8382999999999) us
+  B=8 nw=8 ck=128 skv=  4 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=  8(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(87.98637999999997) us
+  B=8 nw=8 ck=128 skv=  8 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv= 16(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(56.38770000000008) us
+  B=8 nw=8 ck=128 skv= 16 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv= 24(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(52.72862000000005) us
+  B=8 nw=8 ck=128 skv= 24 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv= 32(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(47.26968999999995) us
+  B=8 nw=8 ck=128 skv= 32 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv= 40(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(61.550520000000006) us
+  B=8 nw=8 ck=128 skv= 40 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv= 48(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(54.83825000000002) us
+  B=8 nw=8 ck=128 skv= 48 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv= 56(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(52.99819999999996) us
+  B=8 nw=8 ck=128 skv= 56 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv= 64(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(50.37680000000006) us
+  B=8 nw=8 ck=128 skv= 64 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv= 72(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(52.182660000000006) us
+  B=8 nw=8 ck=128 skv= 72 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv= 80(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(51.353749999999984) us
+  B=8 nw=8 ck=128 skv= 80 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv= 88(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.06571000000004) us
+  B=8 nw=8 ck=128 skv= 88 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv= 96(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(54.528110000000034) us
+  B=8 nw=8 ck=128 skv= 96 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=104(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.28800000000003) us
+  B=8 nw=8 ck=128 skv=104 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=112(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(52.75305000000002) us
+  B=8 nw=8 ck=128 skv=112 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=120(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(52.64291000000001) us
+  B=8 nw=8 ck=128 skv=120 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=128(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(54.92788000000002) us
+  B=8 nw=8 ck=128 skv=128 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=136(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(56.248289999999976) us
+  B=8 nw=8 ck=128 skv=136 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=144(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.635759999999934) us
+  B=8 nw=8 ck=128 skv=144 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=152(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.74193999999997) us
+  B=8 nw=8 ck=128 skv=152 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=160(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.80440000000012) us
+  B=8 nw=8 ck=128 skv=160 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=168(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(56.22992999999994) us
+  B=8 nw=8 ck=128 skv=168 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=176(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.50412999999994) us
+  B=8 nw=8 ck=128 skv=176 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=184(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.95030000000006) us
+  B=8 nw=8 ck=128 skv=184 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=192(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.741969999999995) us
+  B=8 nw=8 ck=128 skv=192 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=200(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.51268000000002) us
+  B=8 nw=8 ck=128 skv=200 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=208(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.23831000000008) us
+  B=8 nw=8 ck=128 skv=208 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=216(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.162250000000064) us
+  B=8 nw=8 ck=128 skv=216 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=224(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.26795000000006) us
+  B=8 nw=8 ck=128 skv=224 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=232(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(56.53590999999999) us
+  B=8 nw=8 ck=128 skv=232 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=240(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.120990000000035) us
+  B=8 nw=8 ck=128 skv=240 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=248(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(58.664250000000045) us
+  B=8 nw=8 ck=128 skv=248 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=256(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(59.020799999999966) us
+  B=8 nw=8 ck=128 skv=256 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=264(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.90026999999998) us
+  B=8 nw=8 ck=128 skv=264 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=272(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.74645999999994) us
+  B=8 nw=8 ck=128 skv=272 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=280(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.03369) us
+  B=8 nw=8 ck=128 skv=280 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=288(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.14887) us
+  B=8 nw=8 ck=128 skv=288 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=296(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.00579999999995) us
+  B=8 nw=8 ck=128 skv=296 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=304(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.81957) us
+  B=8 nw=8 ck=128 skv=304 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=312(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.94769999999997) us
+  B=8 nw=8 ck=128 skv=312 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=320(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.2162) us
+  B=8 nw=8 ck=128 skv=320 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=328(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.79571000000001) us
+  B=8 nw=8 ck=128 skv=328 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=336(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.23735000000002) us
+  B=8 nw=8 ck=128 skv=336 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=344(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.26625000000004) us
+  B=8 nw=8 ck=128 skv=344 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=352(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.38557999999999) us
+  B=8 nw=8 ck=128 skv=352 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=360(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.96443999999995) us
+  B=8 nw=8 ck=128 skv=360 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=368(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.20567000000005) us
+  B=8 nw=8 ck=128 skv=368 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=376(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.91274000000011) us
+  B=8 nw=8 ck=128 skv=376 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=384(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.65449999999991) us
+  B=8 nw=8 ck=128 skv=384 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=392(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.36998000000001) us
+  B=8 nw=8 ck=128 skv=392 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=400(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.48369999999998) us
+  B=8 nw=8 ck=128 skv=400 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=408(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.77966000000002) us
+  B=8 nw=8 ck=128 skv=408 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=416(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.67896000000002) us
+  B=8 nw=8 ck=128 skv=416 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=424(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.64948999999996) us
+  B=8 nw=8 ck=128 skv=424 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=432(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.18179999999998) us
+  B=8 nw=8 ck=128 skv=432 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=440(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.46894) us
+  B=8 nw=8 ck=128 skv=440 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=448(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.46849999999999) us
+  B=8 nw=8 ck=128 skv=448 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=456(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.51204999999999) us
+  B=8 nw=8 ck=128 skv=456 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=464(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(69.31009000000006) us
+  B=8 nw=8 ck=128 skv=464 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=472(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.63598999999998) us
+  B=8 nw=8 ck=128 skv=472 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=480(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.25382000000006) us
+  B=8 nw=8 ck=128 skv=480 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=488(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.53293) us
+  B=8 nw=8 ck=128 skv=488 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=496(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.56044000000001) us
+  B=8 nw=8 ck=128 skv=496 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=504(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.36641000000004) us
+  B=8 nw=8 ck=128 skv=504 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=512(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.92872999999999) us
+  B=8 nw=8 ck=128 skv=512 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=128 skv=514(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(98.80892999999989) us
+  B=8 nw=8 ck=128 skv=514 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv= -1(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.51525000000001) us
+  B=8 nw=8 ck=256 skv= -1 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=  1(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(507.39459000000005) us
+  B=8 nw=8 ck=256 skv=  1 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=  2(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(261.23154999999997) us
+  B=8 nw=8 ck=256 skv=  2 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=  4(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(139.02613000000008) us
+  B=8 nw=8 ck=256 skv=  4 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=  8(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(79.86915999999998) us
+  B=8 nw=8 ck=256 skv=  8 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv= 16(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(56.27189999999997) us
+  B=8 nw=8 ck=256 skv= 16 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv= 24(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(70.92894999999999) us
+  B=8 nw=8 ck=256 skv= 24 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv= 32(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(61.680760000000056) us
+  B=8 nw=8 ck=256 skv= 32 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv= 40(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(55.33088000000001) us
+  B=8 nw=8 ck=256 skv= 40 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv= 48(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.67310000000003) us
+  B=8 nw=8 ck=256 skv= 48 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv= 56(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(60.37241000000007) us
+  B=8 nw=8 ck=256 skv= 56 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv= 64(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(60.03071000000009) us
+  B=8 nw=8 ck=256 skv= 64 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv= 72(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(64.74415999999994) us
+  B=8 nw=8 ck=256 skv= 72 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv= 80(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.06181000000002) us
+  B=8 nw=8 ck=256 skv= 80 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv= 88(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(64.8794700000001) us
+  B=8 nw=8 ck=256 skv= 88 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv= 96(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.18237999999994) us
+  B=8 nw=8 ck=256 skv= 96 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=104(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.27975000000006) us
+  B=8 nw=8 ck=256 skv=104 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=112(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.19328999999999) us
+  B=8 nw=8 ck=256 skv=112 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=120(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.02383999999988) us
+  B=8 nw=8 ck=256 skv=120 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=128(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.77850000000001) us
+  B=8 nw=8 ck=256 skv=128 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=136(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.44175000000006) us
+  B=8 nw=8 ck=256 skv=136 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=144(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(65.95877000000011) us
+  B=8 nw=8 ck=256 skv=144 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=152(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.46012999999999) us
+  B=8 nw=8 ck=256 skv=152 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=160(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.52353999999997) us
+  B=8 nw=8 ck=256 skv=160 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=168(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(66.34452999999999) us
+  B=8 nw=8 ck=256 skv=168 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=176(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.50425000000008) us
+  B=8 nw=8 ck=256 skv=176 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=184(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.50897999999998) us
+  B=8 nw=8 ck=256 skv=184 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=192(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.13893999999996) us
+  B=8 nw=8 ck=256 skv=192 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=200(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.44537000000003) us
+  B=8 nw=8 ck=256 skv=200 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=208(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.12448000000006) us
+  B=8 nw=8 ck=256 skv=208 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=216(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.74578999999997) us
+  B=8 nw=8 ck=256 skv=216 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=224(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.92817999999998) us
+  B=8 nw=8 ck=256 skv=224 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=232(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(68.74888000000006) us
+  B=8 nw=8 ck=256 skv=232 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=240(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.66207999999999) us
+  B=8 nw=8 ck=256 skv=240 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=248(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.69294999999994) us
+  B=8 nw=8 ck=256 skv=248 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=256(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(67.65768000000007) us
+  B=8 nw=8 ck=256 skv=256 (moreh vs deepgemm) cosine_diff = 0.000000 
+  B=8 nw=8 ck=256 skv=257(moreh vs ref)      cosine_diff = 0.000748  -> elapsed_us=np.float64(93.05114999999992) us
+  B=8 nw=8 ck=256 skv=257 (moreh vs deepgemm) cosine_diff = 0.000000 

@@ -1,0 +1,2 @@
+batch_size,next_n,heads,index_dim,avg_kv_length,var_ratio,deepgemm_us,deepgemm_stage1_us,moreh_v2_us,moreh_v4_us,speedup_v2_deepgemm,speedup_v4_deepgemm,speedup_v4_vs_v2
+8,1,32,128,65536,0.00390625,56.9,117.4,35.8,35.5,1.59x,1.60x,1.01x

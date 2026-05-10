@@ -415,7 +415,7 @@ def tune_moreh(args: argparse.Namespace):
                                 if p >= 16:
                                     break
                                 p *= 2
-                            for v in range(24, num_chunks, 8):
+                            for v in range(24, num_chunks, 2):
                                 skv_set.add(v)
                             skv_set.add(num_chunks)
                             split_kv_list = [-1] + sorted(skv_set)
@@ -430,6 +430,7 @@ def tune_moreh(args: argparse.Namespace):
                                         q_fp8, kv_cache_fp8, weights, context_lens, block_tables, max_model_len,
                                         ChunkK=chunk_k, SplitKV=split_kv, num_warps=num_warps,
                                         TotalCuCount=get_num_compute_units(),
+                                        version=args.version,
                                     )
                                     diff = eval_accuracy(out, ref_logits, mask,
                                                         f"B={batch_size} nw={num_warps} ck={chunk_k:3d} skv={split_kv:3d}(moreh vs ref)     ",
@@ -560,8 +561,8 @@ def _load_tuned_configs(csv_path: str) -> dict:
 def run_profile(args: argparse.Namespace):
     # Default moreh config — used when no tuned entry matches.
     DEFAULT_CHUNK_K   = 64
-    DEFAULT_SPLIT_KV  = 120
-    DEFAULT_NUM_WARPS = 8
+    DEFAULT_SPLIT_KV  = 440
+    DEFAULT_NUM_WARPS = 4
 
     tuned_configs = _load_tuned_configs(args.tuned_csv) if args.use_tuned else {}
     if args.use_tuned:
@@ -590,7 +591,7 @@ def run_profile(args: argparse.Namespace):
         print(f"{batch_size=}, {next_n=}, {heads=}, {index_dim=}, {avg_kv_length=}, {var_ratio=}")
         q_fp8, kv_cache_fp8, weights, context_lens, block_tables, _, mask = make_inputs(
             batch_size, next_n, heads, index_dim, avg_kv_length, max_model_len,
-            blocksize=blocksize, var_ratio=var_ratio, padding=args.padding,
+            blocksize=blocksize, var_ratio=var_ratio, padding=args.padding, 
             reference=False
         )
 
@@ -617,7 +618,7 @@ def run_profile(args: argparse.Namespace):
             moreh_fp8_paged_mqa_logits,
             q_fp8, kv_cache_fp8, weights, context_lens, block_tables, max_model_len,
             ChunkK=m_ck, SplitKV=m_skv, num_warps=m_nw,
-            TotalCuCount=get_num_compute_units(),
+            TotalCuCount=get_num_compute_units(), version=args.version,
             num_iters=100, num_warmup=5
         )
 
@@ -626,8 +627,8 @@ def run_profile(args: argparse.Namespace):
 def run_benchmark(args: argparse.Namespace):
     # Default moreh config — used when no tuned entry matches.
     DEFAULT_CHUNK_K   = 64
-    DEFAULT_SPLIT_KV  = 120
-    DEFAULT_NUM_WARPS = 8
+    DEFAULT_SPLIT_KV  = 96
+    DEFAULT_NUM_WARPS = 4
 
     tuned_configs = _load_tuned_configs(args.tuned_csv) if args.use_tuned else {}
     if args.use_tuned:
@@ -689,25 +690,35 @@ def run_benchmark(args: argparse.Namespace):
         else:
             m_nw, m_ck, m_skv = DEFAULT_NUM_WARPS, DEFAULT_CHUNK_K, DEFAULT_SPLIT_KV
 
-        moreh_out, moreh_us = run_perftest(
+        moreh_v2_out, moreh_v2_us = run_perftest(
             moreh_fp8_paged_mqa_logits,
             q_fp8, kv_cache_fp8, weights, context_lens, block_tables, max_model_len,
             ChunkK=m_ck, SplitKV=m_skv, num_warps=m_nw,
-            TotalCuCount=get_num_compute_units()
+            TotalCuCount=get_num_compute_units(), version=2,
+        )
+
+        moreh_v4_out, moreh_v4_us = run_perftest(
+            moreh_fp8_paged_mqa_logits,
+            q_fp8, kv_cache_fp8, weights, context_lens, block_tables, max_model_len,
+            ChunkK=m_ck, SplitKV=m_skv, num_warps=m_nw,
+            TotalCuCount=get_num_compute_units(), version=3,
         )
 
         print(f"\n[B={batch_size} next_n={next_n} var_ratio={var_ratio} kv_length={avg_kv_length}]"
               f" num_warps={m_nw} ChunkK={m_ck} SplitKV={m_skv}")
-        eval_accuracy(out_logits,          ref_logits, mask, "deepgemm        vs ref", doCheckAllClose=False)
-        eval_accuracy(deepgemm_stage1_out, ref_logits, mask, "deepgemm_stage1 vs ref", doCheckAllClose=False)
-        eval_accuracy(moreh_out,           ref_logits, mask, "moreh           vs ref: ", doCheckAllClose=False)
-        eval_accuracy(moreh_out,           out_logits, mask, "moreh           vs deepgemm: ", doCheckAllClose=True)
-        eval_accuracy(deepgemm_stage1_out, moreh_out,  mask, "deepgemm_stage1 vs moreh: ", doCheckAllClose=True)
+        eval_accuracy(out_logits,     ref_logits,   mask, "deepgemm        vs ref     ", doCheckAllClose=False)
+        eval_accuracy(deepgemm_stage1_out, ref_logits, mask, "deepgemm_stage1 vs ref  ", doCheckAllClose=False)
+        eval_accuracy(moreh_v2_out,   ref_logits,   mask, "moreh_v2        vs ref     ", doCheckAllClose=False)
+        eval_accuracy(moreh_v4_out,   ref_logits,   mask, "moreh_v4        vs ref     ", doCheckAllClose=False)
+        eval_accuracy(moreh_v4_out,   moreh_v2_out, mask, "moreh_v4        vs moreh_v2", doCheckAllClose=True)
         print(f"  deepgemm        : {deepgemm_us:.2f} us")
         print(f"  deepgemm_stage1 : {deepgemm_stage1_us:.2f} us")
-        print(f"  moreh           : {moreh_us:.2f} us")
-        print(f"  speedup (deepgemm        / moreh) : {deepgemm_us / moreh_us:.2f}x")
-        print(f"  speedup (deepgemm_stage1 / moreh) : {deepgemm_stage1_us / moreh_us:.2f}x")
+        print(f"  moreh_v2 (PAD)  : {moreh_v2_us:.2f} us")
+        print(f"  moreh_v4 (swiz) : {moreh_v4_us:.2f} us")
+        print(f"  speedup v2 / deepgemm        : {deepgemm_us / moreh_v2_us:.2f}x")
+        print(f"  speedup v4 / deepgemm        : {deepgemm_us / moreh_v4_us:.2f}x")
+        print(f"  speedup v4 / v2              : {moreh_v2_us / moreh_v4_us:.2f}x")
+        moreh_out, moreh_us = moreh_v2_out, moreh_v2_us  # keep rows compatible
 
         rows.append({
             "batch_size"         : batch_size,
@@ -718,9 +729,11 @@ def run_benchmark(args: argparse.Namespace):
             "var_ratio"          : var_ratio,
             "deepgemm_us"        : round(deepgemm_us, 1),
             "deepgemm_stage1_us" : round(deepgemm_stage1_us, 1),
-            "moreh_us"           : round(moreh_us, 1),
-            "speedup_deepgemm"   : f"{deepgemm_us / moreh_us:.2f}x",
-            "speedup_stage1"     : f"{deepgemm_stage1_us / moreh_us:.2f}x",
+            "moreh_v2_us"        : round(moreh_v2_us, 1),
+            "moreh_v4_us"        : round(moreh_v4_us, 1),
+            "speedup_v2_deepgemm": f"{deepgemm_us / moreh_v2_us:.2f}x",
+            "speedup_v4_deepgemm": f"{deepgemm_us / moreh_v4_us:.2f}x",
+            "speedup_v4_vs_v2"   : f"{moreh_v2_us / moreh_v4_us:.2f}x",
         })
 
     df = pd.DataFrame(rows)
@@ -763,6 +776,10 @@ if __name__ == "__main__":
     parser.add_argument("--resume_csv", type=str, default=None,
                         help="CSV to read done_keys from for resume (multi-GPU: pass the shared "
                              "final merged CSV so all workers skip already-tuned configs).")
+    parser.add_argument("--version", type=int, default=2, choices=[2, 3, 4, 5],
+                        help="Kernel version for --tune: 2=PAD(v2), 3=PAD+bt-prefetch(v3), "
+                             "4=swizzle(v4), 5=v3+direct-QW(v5). "
+                             "run_benchmark always compares both v2 and v4.")
     args = parser.parse_args()
     if args.profile:
         run_profile(args)
