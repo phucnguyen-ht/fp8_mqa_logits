@@ -337,176 +337,182 @@ def tune_moreh(args: argparse.Namespace):
     detail_f.write("# Per-config tune log\n")
     detail_f.flush()
 
-    # Resume support: skip batch_sizes whose (batch_size, next_n, heads, index_dim, avg_kv_length)
-    # row already exists in the master tune_csv / _top1.csv.
-    csv_path = args.tune_csv
+    # Resume support: read done_keys from --resume_csv (shared final CSV) if provided,
+    # otherwise fall back to --tune_csv itself (single-GPU / standalone usage).
+    csv_path  = args.tune_csv
     top1_path = os.path.splitext(csv_path)[0] + "_top1.csv"
+    resume_path      = args.resume_csv if args.resume_csv else csv_path
+    resume_top1_path = os.path.splitext(resume_path)[0] + "_top1.csv"
     key_cols = ["batch_size", "next_n", "heads", "index_dim", "avg_kv_length"]
-    existing_full_df = pd.read_csv(csv_path)  if os.path.isfile(csv_path)  else None
-    existing_top1_df = pd.read_csv(top1_path) if os.path.isfile(top1_path) else None
-    src_for_keys = existing_top1_df if existing_top1_df is not None else existing_full_df
+    # done_keys: read from shared final CSV (resume_path) to skip already-tuned configs
+    resume_full_df = pd.read_csv(resume_path)      if os.path.isfile(resume_path)      else None
+    resume_top1_df = pd.read_csv(resume_top1_path) if os.path.isfile(resume_top1_path) else None
+    src_for_keys = resume_top1_df if resume_top1_df is not None else resume_full_df
     if src_for_keys is not None and len(src_for_keys):
         done_keys = set(map(tuple, src_for_keys[key_cols].astype(int).values.tolist()))
     else:
         done_keys = set()
+    # existing rows: read from per-GPU CSV (csv_path) to accumulate results across invocations
+    existing_full_df = pd.read_csv(csv_path)      if os.path.isfile(csv_path)      else None
+    existing_top1_df = pd.read_csv(top1_path) if os.path.isfile(top1_path) else None
 
     rows = []
     top1_rows = []
     for avg_kv_length in kv_length_list:
         var_ratio = 256 / avg_kv_length
-        shared_header = (
-            f"# shared inputs: heads={heads} index_dim={index_dim}"
-            f" avg_kv_length={avg_kv_length} max_model_len={max_model_len}"
-            f" blocksize={blocksize} var_ratio={var_ratio}\n"
-        )
-        warn_f.write(shared_header)
-        warn_f.flush()
-        detail_f.write(shared_header)
-        detail_f.flush()
         for mtp in mtp_list:
             next_n = mtp + 1
             for batch_size in batch_sizes:
                 key = (batch_size, next_n, heads, index_dim, avg_kv_length)
-            if key in done_keys:
-                print(f"[skip] B={batch_size} next_n={next_n} heads={heads}"
-                      f" index_dim={index_dim} avg_kv_length={avg_kv_length} already tuned")
-                continue
-            print(f"\n[tune] B={batch_size} next_n={next_n} heads={heads} index_dim={index_dim}"
-                  f" avg_kv_length={avg_kv_length} max_model_len={max_model_len}")
-
-            q_fp8, kv_cache_fp8, weights, context_lens, block_tables, ref_logits, mask = make_inputs(
-                batch_size, next_n, heads, index_dim, avg_kv_length, max_model_len,
-                blocksize=blocksize, var_ratio=var_ratio, padding=args.padding,
-                seed=int(time.time_ns()) & 0x7FFFFFFF,
-            )
-
-            # Max ctx_len after var_ratio variation. SplitKV is derived from this per chunk_k.
-            max_ctx_len = int(avg_kv_length * (1 + var_ratio)) + 1
-
-            out_logits = torch.full(
-                (batch_size * next_n, max_model_len), float("-inf"), device="cuda", dtype=torch.float32
-            )
-            try:
-                _, deepgemm_us = run_perftest(
-                    deepgemm_fp8_paged_mqa_logits,
-                    q_fp8, kv_cache_fp8, weights, out_logits, context_lens, block_tables, max_model_len,
-                    ChunkK=256, Preshuffle=blocksize % 16 == 0, KVBlockSize=blocksize,
-                    TotalCuCount=get_num_compute_units(),
+                shared_header = (
+                    f"# shared inputs: batch_size={batch_size} next_n={next_n}"
+                    f" heads={heads} index_dim={index_dim}"
+                    f" avg_kv_length={avg_kv_length} max_model_len={max_model_len}"
+                    f" blocksize={blocksize} var_ratio={var_ratio}\n"
                 )
-
-                # Each block processes split_chunks*chunk_k = x*chunk_k KVs; cap at this many.
-                MAX_KV_PER_BLOCK = 4096
-
-                results = []
-                for num_warps in num_warps_list:
-                    for chunk_k in chunk_k_list:
-                        # Canonical SplitKV per kernel structure:
-                        #   split_chunks = ceil(ctx_chunks / SplitKV)  (kernel formula)
-                        # Reparam by x = split_chunks (chunks/block):
-                        #   SplitKV = ceil(max_ctx_len / (chunk_k * x))
-                        # Iterate x ∈ [1, 2, 4, 6, ..., T] with T = MAX_KV_PER_BLOCK/chunk_k.
-                        # Each x gives a unique "useful" SplitKV; non-canonical SplitKV values
-                        # (e.g. SplitKV=5 when x=3 is the canonical) only add idle blocks.
-                        T = max(1, MAX_KV_PER_BLOCK // chunk_k)
-                        x_list = list(range(1, T + 1, 1))
-                        split_kv_set = set()
-                        split_kv_list = [-1]  # always test "auto" (kernel default heuristic)
-                        for x in x_list:
-                            skv = cdiv(max_ctx_len, chunk_k * x)
-                            if skv < 1 or skv in split_kv_set:
-                                continue
-                            split_kv_set.add(skv)
-                            split_kv_list.append(skv)
-                        # split_kv_list = make_split_kv_list(batch_size, next_n, avg_kv_length, chunk_k, step=STEP_TUNE)
-                        print(f"  ck={chunk_k:3d} -> {len(split_kv_list)} SplitKV values: {split_kv_list}")
-
-                        for split_kv in split_kv_list:
-                            out = None
-                            try:
-                                out, elapsed_us = run_perftest(
-                                    moreh_fp8_paged_mqa_logits,
-                                    q_fp8, kv_cache_fp8, weights, context_lens, block_tables, max_model_len,
-                                    ChunkK=chunk_k, SplitKV=split_kv, num_warps=num_warps,
-                                    TotalCuCount=get_num_compute_units(),
-                                )
-                                diff = eval_accuracy(out, ref_logits, mask,
-                                                    f"B={batch_size} nw={num_warps} ck={chunk_k:3d} skv={split_kv:3d} (moreh vs ref)     ",
-                                                    text=f" -> {elapsed_us=} us",
-                                                    log_file=detail_f)
-                                diff_dg = eval_accuracy(out, out_logits, mask,
-                                              f"B={batch_size} nw={num_warps} ck={chunk_k:3d} skv={split_kv:3d} (moreh vs deepgemm)",
-                                              log_file=detail_f)
-                                if diff > ACC_DIFF_THRESHOLD:
-                                    warn_f.write(
-                                        f"B={batch_size} num_warps={num_warps} ChunkK={chunk_k} SplitKV={split_kv}"
-                                        f" -> cosine_diff={diff:.6f}\n"
-                                    )
-                                    warn_f.flush()
-                                results.append((elapsed_us, num_warps, chunk_k, split_kv, diff, diff_dg))
-                            except Exception as exc:
-                                detail_f.write(
-                                    f"  tune: B={batch_size} num_warps={num_warps}, ChunkK={chunk_k:3d}, SplitKV={split_kv:3d}"
-                                    f"  -> FAILED ({exc})\n"
-                                )
-                                detail_f.flush()
-                            finally:
-                                # Free the per-config moreh output so PyTorch's caching allocator
-                                # can reuse the memory across the ~800 configs in the inner loop.
-                                if out is not None:
-                                    del out
-                                gc.collect()
-                                torch.cuda.empty_cache()
-
-                if not results:
-                    print(f"  All tune configs failed for B={batch_size}, skipping")
+                warn_f.write(shared_header)
+                warn_f.flush()
+                detail_f.write(shared_header)
+                detail_f.flush()
+                if key in done_keys:
+                    print(f"[skip] B={batch_size} next_n={next_n} heads={heads}"
+                          f" index_dim={index_dim} avg_kv_length={avg_kv_length} already tuned")
                     continue
+                
+                print(f"\n[tune] B={batch_size} next_n={next_n} heads={heads} index_dim={index_dim}"
+                      f" avg_kv_length={avg_kv_length} max_model_len={max_model_len}")
+    
+                q_fp8, kv_cache_fp8, weights, context_lens, block_tables, ref_logits, mask = make_inputs(
+                    batch_size, next_n, heads, index_dim, avg_kv_length, max_model_len,
+                    blocksize=blocksize, var_ratio=var_ratio, padding=args.padding,
+                    seed=int(time.time_ns()) & 0x7FFFFFFF,
+                )
+    
+                # Max ctx_len after var_ratio variation. SplitKV is derived from this per chunk_k.
+                max_ctx_len = int(avg_kv_length * (1 + var_ratio))
+    
+                out_logits = torch.full(
+                    (batch_size * next_n, max_model_len), float("-inf"), device="cuda", dtype=torch.float32
+                )
+                try:
+                    _, deepgemm_us = run_perftest(
+                        deepgemm_fp8_paged_mqa_logits,
+                        q_fp8, kv_cache_fp8, weights, out_logits, context_lens, block_tables, max_model_len,
+                        ChunkK=256, Preshuffle=blocksize % 16 == 0, KVBlockSize=blocksize,
+                        TotalCuCount=get_num_compute_units(),
+                    )
+    
+                    results = []
+                    for num_warps in num_warps_list:
+                        for chunk_k in chunk_k_list:
+                            # SplitKV search space: powers-of-2 up to 16, then multiples of 8,
+                            # always including X = num_chunks (one chunk per block = max SKV).
+                            num_chunks = cdiv(max_ctx_len, chunk_k)
+                            skv_set = set()
+                            p = 1
+                            while p <= num_chunks:
+                                skv_set.add(p)
+                                if p >= 16:
+                                    break
+                                p *= 2
+                            for v in range(24, num_chunks, 8):
+                                skv_set.add(v)
+                            skv_set.add(num_chunks)
+                            split_kv_list = [-1] + sorted(skv_set)
+                            # split_kv_list = list(set([-1] + list(range(1, 33)) + list(range(32, 400, 16))))
+                            print(f"  ck={chunk_k:3d} -> {len(split_kv_list)} SplitKV values: {split_kv_list}")
+    
+                            for split_kv in split_kv_list:
+                                out = None
+                                try:
+                                    out, elapsed_us = run_perftest(
+                                        moreh_fp8_paged_mqa_logits,
+                                        q_fp8, kv_cache_fp8, weights, context_lens, block_tables, max_model_len,
+                                        ChunkK=chunk_k, SplitKV=split_kv, num_warps=num_warps,
+                                        TotalCuCount=get_num_compute_units(),
+                                    )
+                                    diff = eval_accuracy(out, ref_logits, mask,
+                                                        f"B={batch_size} nw={num_warps} ck={chunk_k:3d} skv={split_kv:3d}(moreh vs ref)     ",
+                                                        text=f" -> {elapsed_us=} us",
+                                                        log_file=detail_f)
+                                    diff_dg = eval_accuracy(out, out_logits, mask,
+                                                  f"B={batch_size} nw={num_warps} ck={chunk_k:3d} skv={split_kv:3d} (moreh vs deepgemm)",
+                                                  log_file=detail_f)
+                                    if diff > ACC_DIFF_THRESHOLD:
+                                        warn_f.write(
+                                            f"B={batch_size} num_warps={num_warps} ChunkK={chunk_k} SplitKV={split_kv}"
+                                            f" -> cosine_diff={diff:.6f}\n"
+                                        )
+                                        warn_f.flush()
+                                    results.append((elapsed_us, num_warps, chunk_k, split_kv, diff, diff_dg))
+                                except Exception as exc:
+                                    detail_f.write(
+                                        f"  tune: B={batch_size} num_warps={num_warps}, ChunkK={chunk_k:3d}, SplitKV={split_kv:3d}"
+                                        f"  -> FAILED ({exc})\n"
+                                    )
+                                    detail_f.flush()
+                                finally:
+                                    # Free the per-config moreh output so PyTorch's caching allocator
+                                    # can reuse the memory across the ~800 configs in the inner loop.
+                                    if out is not None:
+                                        del out
+                                    gc.collect()
+                                    torch.cuda.empty_cache()
+    
+                    if not results:
+                        print(f"  All tune configs failed for B={batch_size}, skipping")
+                        continue
+    
+                    results.sort()
+                    top10 = results[:10]
+                    print(f"\n--- Top-10 configs (B={batch_size}) ---")
+                    for elapsed, nw, ck, skv, diff, diff_dg in top10:
+                        print(f"  num_warps={nw}, ChunkK={ck:3d}, SplitKV={skv:3d}"
+                              f"  -> {elapsed:.2f} us  cosine_diff(vs ref)={diff:.6f}"
+                              f"  cosine_diff(vs deepgemm)={diff_dg:.6f}")
+    
+                    best_us       = top10[0][0]
+                    best_nw       = top10[0][1]
+                    best_ck       = top10[0][2]
+                    best_skv      = top10[0][3]
+                    top_configs   = [(nw, ck, skv, int(elapsed)) for elapsed, nw, ck, skv, _, _ in top10]
+    
+                    speedup = round(deepgemm_us / best_us, 3) if best_us > 0 else None
 
-                results.sort()
-                top10 = results[:10]
-                print(f"\n--- Top-10 configs (B={batch_size}) ---")
-                for elapsed, nw, ck, skv, diff, diff_dg in top10:
-                    print(f"  num_warps={nw}, ChunkK={ck:3d}, SplitKV={skv:3d}"
-                          f"  -> {elapsed:.2f} us  cosine_diff(vs ref)={diff:.6f}"
-                          f"  cosine_diff(vs deepgemm)={diff_dg:.6f}")
+                    rows.append({
+                        "batch_size"   : batch_size,
+                        "next_n"       : next_n,
+                        "heads"        : heads,
+                        "index_dim"    : index_dim,
+                        "avg_kv_length": avg_kv_length,
+                        "var_ratio"    : var_ratio,
+                        "deepgemm_us"  : round(deepgemm_us, 1),
+                        "moreh_us"     : round(best_us, 1),
+                        "speedup"      : speedup,
+                        "top_configs"  : str(top_configs),
+                    })
 
-                best_us       = top10[0][0]
-                best_nw       = top10[0][1]
-                best_ck       = top10[0][2]
-                best_skv      = top10[0][3]
-                top_configs   = [(nw, ck, skv, int(elapsed)) for elapsed, nw, ck, skv, _, _ in top10]
-
-                rows.append({
-                    "batch_size"   : batch_size,
-                    "next_n"       : next_n,
-                    "heads"        : heads,
-                    "index_dim"    : index_dim,
-                    "avg_kv_length": avg_kv_length,
-                    "var_ratio"    : var_ratio,
-                    "deepgemm_us"  : round(deepgemm_us, 1),
-                    "moreh_us"     : round(best_us, 1),
-                    "top_configs"  : str(top_configs),
-                })
-
-                top1_rows.append({
-                    "batch_size"   : batch_size,
-                    "next_n"       : next_n,
-                    "heads"        : heads,
-                    "index_dim"    : index_dim,
-                    "avg_kv_length": avg_kv_length,
-                    "var_ratio"    : var_ratio,
-                    "deepgemm_us"  : round(deepgemm_us, 1),
-                    "moreh_us"     : round(best_us, 1),
-                    "num_warp"     : best_nw,
-                    "chunkK"       : best_ck,
-                    "splitK"       : best_skv,
-                })
-            finally:
-                # Release per-batch input tensors before moving to the next batch_size.
-                # Without this, the caching allocator pins memory across batches and OOMs
-                # when the next batch tries to allocate fresh inputs.
-                del q_fp8, kv_cache_fp8, weights, context_lens, block_tables, ref_logits, mask, out_logits
-                gc.collect()
-                torch.cuda.empty_cache()
+                    top1_rows.append({
+                        "batch_size"   : batch_size,
+                        "next_n"       : next_n,
+                        "heads"        : heads,
+                        "index_dim"    : index_dim,
+                        "avg_kv_length": avg_kv_length,
+                        "var_ratio"    : var_ratio,
+                        "deepgemm_us"  : round(deepgemm_us, 1),
+                        "moreh_us"     : round(best_us, 1),
+                        "speedup"      : speedup,
+                        "num_warp"     : best_nw,
+                        "chunkK"       : best_ck,
+                        "splitK"       : best_skv,
+                    })
+                finally:
+                    # Release per-batch input tensors before moving to the next batch_size.
+                    # Without this, the caching allocator pins memory across batches and OOMs
+                    # when the next batch tries to allocate fresh inputs.
+                    del q_fp8, kv_cache_fp8, weights, context_lens, block_tables, ref_logits, mask, out_logits
+                    gc.collect()
+                    torch.cuda.empty_cache()
 
     warn_f.close()
     detail_f.close()
@@ -579,46 +585,44 @@ def run_profile(args: argparse.Namespace):
     rows = []
     for (batch_size, next_n, heads, index_dim, avg_kv_length) in shape_list:
         max_model_len = 202752
-        var_ratio_list = [256 / avg_kv_length]
+        var_ratio = 256 / avg_kv_length
 
-        for var_ratio in var_ratio_list:
-            print(f"{batch_size=}, {next_n=}, {heads=}, {index_dim=}, {avg_kv_length=}, {var_ratio=}")
-            q_fp8, kv_cache_fp8, weights, context_lens, block_tables, _, mask = make_inputs(
-                batch_size, next_n, heads, index_dim, avg_kv_length, max_model_len,
-                blocksize=blocksize, var_ratio=var_ratio, padding=args.padding,
-                reference=False
-            )
+        print(f"{batch_size=}, {next_n=}, {heads=}, {index_dim=}, {avg_kv_length=}, {var_ratio=}")
+        q_fp8, kv_cache_fp8, weights, context_lens, block_tables, _, mask = make_inputs(
+            batch_size, next_n, heads, index_dim, avg_kv_length, max_model_len,
+            blocksize=blocksize, var_ratio=var_ratio, padding=args.padding,
+            reference=False
+        )
 
-            # ---------------------------------------------------------- deepgemm (E2E config)
-            out_logits = torch.full(
-                (batch_size * next_n, max_model_len), float("-inf"), device="cuda", dtype=torch.float32
-            )
-            _, deepgemm_us = run_perftest_identity(
-                deepgemm_fp8_paged_mqa_logits,
-                q_fp8, kv_cache_fp8, weights, out_logits, context_lens, block_tables, max_model_len,
-                ChunkK=256, Preshuffle=blocksize % 16 == 0, KVBlockSize=blocksize,
-                TotalCuCount=get_num_compute_units(),
-                num_iters=100, num_warmup=5
-            )
+        # ---------------------------------------------------------- deepgemm (E2E config)
+        out_logits = torch.full(
+            (batch_size * next_n, max_model_len), float("-inf"), device="cuda", dtype=torch.float32
+        )
+        _, deepgemm_us = run_perftest_identity(
+            deepgemm_fp8_paged_mqa_logits,
+            q_fp8, kv_cache_fp8, weights, out_logits, context_lens, block_tables, max_model_len,
+            ChunkK=256, Preshuffle=blocksize % 16 == 0, KVBlockSize=blocksize,
+            TotalCuCount=get_num_compute_units(),
+            num_iters=100, num_warmup=5
+        )
 
-            # ---------------------------------------------------------- moreh kernel
-            tuned = tuned_configs.get((batch_size, next_n, heads, index_dim))
-            if tuned is not None:
-                m_nw, m_ck, m_skv = tuned
-                print(f"  [tuned] B={batch_size}: num_warps={m_nw} ChunkK={m_ck} SplitKV={m_skv}")
-            else:
-                m_nw, m_ck, m_skv = DEFAULT_NUM_WARPS, DEFAULT_CHUNK_K, DEFAULT_SPLIT_KV
-            moreh_out, moreh_us = run_perftest_identity(
-                moreh_fp8_paged_mqa_logits,
-                q_fp8, kv_cache_fp8, weights, context_lens, block_tables, max_model_len,
-                ChunkK=m_ck, SplitKV=m_skv, num_warps=m_nw,
-                TotalCuCount=get_num_compute_units(),
-                num_iters=100, num_warmup=5
-            )
-            
+        # ---------------------------------------------------------- moreh kernel
+        tuned = tuned_configs.get((batch_size, next_n, heads, index_dim))
+        if tuned is not None:
+            m_nw, m_ck, m_skv = tuned
+            print(f"  [tuned] B={batch_size}: num_warps={m_nw} ChunkK={m_ck} SplitKV={m_skv}")
+        else:
+            m_nw, m_ck, m_skv = DEFAULT_NUM_WARPS, DEFAULT_CHUNK_K, DEFAULT_SPLIT_KV
+        moreh_out, moreh_us = run_perftest_identity(
+            moreh_fp8_paged_mqa_logits,
+            q_fp8, kv_cache_fp8, weights, context_lens, block_tables, max_model_len,
+            ChunkK=m_ck, SplitKV=m_skv, num_warps=m_nw,
+            TotalCuCount=get_num_compute_units(),
+            num_iters=100, num_warmup=5
+        )
 
-            # eval_accuracy(moreh_out,           out_logits, mask, "moreh           vs deepgemm: ", doCheckAllClose=True)
-            
+        # eval_accuracy(moreh_out,           out_logits, mask, "moreh           vs deepgemm: ", doCheckAllClose=True)
+
 def run_benchmark(args: argparse.Namespace):
     # Default moreh config — used when no tuned entry matches.
     DEFAULT_CHUNK_K   = 64
@@ -643,87 +647,88 @@ def run_benchmark(args: argparse.Namespace):
     #   0.01 → context_lens within ±1% of avg  (most realistic for this workload)
     #   0.05 → ±5%  (moderate spread)
     #   0.10 → ±10% (stress-test load imbalance)
-    var_ratio_list = [0.002]
 
     rows = []
     for (batch_size, next_n, heads, index_dim, avg_kv_length) in shape_list:
         max_model_len = 202752
+        var_ratio = 256 / avg_kv_length
 
-        for var_ratio in var_ratio_list:
-            q_fp8, kv_cache_fp8, weights, context_lens, block_tables, ref_logits, mask = make_inputs(
-                batch_size, next_n, heads, index_dim, avg_kv_length, max_model_len,
-                blocksize=blocksize, var_ratio=var_ratio, padding=args.padding,
-            )
+        q_fp8, kv_cache_fp8, weights, context_lens, block_tables, ref_logits, mask = make_inputs(
+            batch_size, next_n, heads, index_dim, avg_kv_length, max_model_len,
+            blocksize=blocksize, var_ratio=var_ratio, padding=args.padding,
+        )
 
-            # ---------------------------------------------------------- deepgemm (E2E config)
-            out_logits = torch.full(
-                (batch_size * next_n, max_model_len), float("-inf"), device="cuda", dtype=torch.float32
-            )
-            _, deepgemm_us = run_perftest(
-                deepgemm_fp8_paged_mqa_logits,
-                q_fp8, kv_cache_fp8, weights, out_logits, context_lens, block_tables, max_model_len,
-                ChunkK=256, Preshuffle=blocksize % 16 == 0, KVBlockSize=blocksize,
-                TotalCuCount=get_num_compute_units(),
-            )
+        # ---------------------------------------------------------- deepgemm (E2E config)
+        out_logits = torch.full(
+            (batch_size * next_n, max_model_len), float("-inf"), device="cuda", dtype=torch.float32
+        )
+        _, deepgemm_us = run_perftest(
+            deepgemm_fp8_paged_mqa_logits,
+            q_fp8, kv_cache_fp8, weights, out_logits, context_lens, block_tables, max_model_len,
+            ChunkK=256, Preshuffle=blocksize % 16 == 0, KVBlockSize=blocksize,
+            TotalCuCount=get_num_compute_units(),
+        )
 
-            deepgemm_stage1_out = torch.full(
-                (heads, batch_size * next_n, max_model_len),
-                float("-inf"),
-                device="cuda",
-                dtype=torch.float32,
-            )
-            deepgemm_stage1_out, deepgemm_stage1_us = run_perftest(
-                _deepgemm_fp8_paged_mqa_logits_stage1,
-                q_fp8, kv_cache_fp8, weights, context_lens, block_tables, max_model_len,
-                heads, batch_size, next_n, deepgemm_stage1_out, 
-                ChunkK=256, TotalCuCount=get_num_compute_units(),
-            )
+        deepgemm_stage1_out = torch.full(
+            (heads, batch_size * next_n, max_model_len),
+            float("-inf"),
+            device="cuda",
+            dtype=torch.float32,
+        )
+        deepgemm_stage1_out, deepgemm_stage1_us = run_perftest(
+            _deepgemm_fp8_paged_mqa_logits_stage1,
+            q_fp8, kv_cache_fp8, weights, context_lens, block_tables, max_model_len,
+            heads, batch_size, next_n, deepgemm_stage1_out,
+            ChunkK=256, TotalCuCount=get_num_compute_units(),
+        )
 
-            # ---------------------------------------------------------- moreh kernel
-            tuned = tuned_configs.get((batch_size, next_n, heads, index_dim))
-            if tuned is not None:
-                m_nw, m_ck, m_skv = tuned
-                print(f"  [tuned] B={batch_size}: num_warps={m_nw} ChunkK={m_ck} SplitKV={m_skv}")
-            else:
-                m_nw, m_ck, m_skv = DEFAULT_NUM_WARPS, DEFAULT_CHUNK_K, DEFAULT_SPLIT_KV
-            moreh_out, moreh_us = run_perftest(
-                moreh_fp8_paged_mqa_logits,
-                q_fp8, kv_cache_fp8, weights, context_lens, block_tables, max_model_len,
-                ChunkK=m_ck, SplitKV=m_skv, num_warps=m_nw,
-                TotalCuCount=get_num_compute_units()
-            )
+        # ---------------------------------------------------------- moreh kernel
+        tuned = tuned_configs.get((batch_size, next_n, heads, index_dim))
+        if tuned is not None:
+            m_nw, m_ck, m_skv = tuned
+        else:
+            m_nw, m_ck, m_skv = DEFAULT_NUM_WARPS, DEFAULT_CHUNK_K, DEFAULT_SPLIT_KV
 
-            print(f"\n[B={batch_size} next_n={next_n} var_ratio={var_ratio}]")
-            eval_accuracy(out_logits,          ref_logits, mask, "deepgemm        vs ref", doCheckAllClose=False)
-            eval_accuracy(deepgemm_stage1_out, ref_logits, mask, "deepgemm_stage1 vs ref", doCheckAllClose=False)
-            eval_accuracy(moreh_out,           ref_logits, mask, "moreh           vs ref: ", doCheckAllClose=False)
-            eval_accuracy(moreh_out,           out_logits, mask, "moreh           vs deepgemm: ", doCheckAllClose=True)
-            eval_accuracy(deepgemm_stage1_out, moreh_out,  mask, "deepgemm_stage1 vs moreh: ", doCheckAllClose=True)
-            print(f"  deepgemm        : {deepgemm_us:.2f} us")
-            print(f"  deepgemm_stage1 : {deepgemm_stage1_us:.2f} us")
-            print(f"  moreh           : {moreh_us:.2f} us")
-            print(f"  speedup (deepgemm        / moreh) : {deepgemm_us / moreh_us:.2f}x")
-            print(f"  speedup (deepgemm_stage1 / moreh) : {deepgemm_stage1_us / moreh_us:.2f}x")
+        moreh_out, moreh_us = run_perftest(
+            moreh_fp8_paged_mqa_logits,
+            q_fp8, kv_cache_fp8, weights, context_lens, block_tables, max_model_len,
+            ChunkK=m_ck, SplitKV=m_skv, num_warps=m_nw,
+            TotalCuCount=get_num_compute_units()
+        )
 
-            rows.append({
-                "batch_size"         : batch_size,
-                "next_n"             : next_n,
-                "heads"              : heads,
-                "index_dim"          : index_dim,
-                "avg_kv_length"      : avg_kv_length,
-                "var_ratio"          : var_ratio,
-                "deepgemm_us"        : round(deepgemm_us, 1),
-                "deepgemm_stage1_us" : round(deepgemm_stage1_us, 1),
-                "moreh_us"           : round(moreh_us, 1),
-                "speedup_deepgemm"   : f"{deepgemm_us / moreh_us:.2f}x",
-                "speedup_stage1"     : f"{deepgemm_stage1_us / moreh_us:.2f}x",
-            })
+        print(f"\n[B={batch_size} next_n={next_n} var_ratio={var_ratio} kv_length={avg_kv_length}]"
+              f" num_warps={m_nw} ChunkK={m_ck} SplitKV={m_skv}")
+        eval_accuracy(out_logits,          ref_logits, mask, "deepgemm        vs ref", doCheckAllClose=False)
+        eval_accuracy(deepgemm_stage1_out, ref_logits, mask, "deepgemm_stage1 vs ref", doCheckAllClose=False)
+        eval_accuracy(moreh_out,           ref_logits, mask, "moreh           vs ref: ", doCheckAllClose=False)
+        eval_accuracy(moreh_out,           out_logits, mask, "moreh           vs deepgemm: ", doCheckAllClose=True)
+        eval_accuracy(deepgemm_stage1_out, moreh_out,  mask, "deepgemm_stage1 vs moreh: ", doCheckAllClose=True)
+        print(f"  deepgemm        : {deepgemm_us:.2f} us")
+        print(f"  deepgemm_stage1 : {deepgemm_stage1_us:.2f} us")
+        print(f"  moreh           : {moreh_us:.2f} us")
+        print(f"  speedup (deepgemm        / moreh) : {deepgemm_us / moreh_us:.2f}x")
+        print(f"  speedup (deepgemm_stage1 / moreh) : {deepgemm_stage1_us / moreh_us:.2f}x")
+
+        rows.append({
+            "batch_size"         : batch_size,
+            "next_n"             : next_n,
+            "heads"              : heads,
+            "index_dim"          : index_dim,
+            "avg_kv_length"      : avg_kv_length,
+            "var_ratio"          : var_ratio,
+            "deepgemm_us"        : round(deepgemm_us, 1),
+            "deepgemm_stage1_us" : round(deepgemm_stage1_us, 1),
+            "moreh_us"           : round(moreh_us, 1),
+            "speedup_deepgemm"   : f"{deepgemm_us / moreh_us:.2f}x",
+            "speedup_stage1"     : f"{deepgemm_stage1_us / moreh_us:.2f}x",
+        })
 
     df = pd.DataFrame(rows)
     for col in ("batch_size", "next_n", "heads", "index_dim", "avg_kv_length"):
         df[col] = df[col].astype(int)
     print("\n" + df.to_string(index=False))
-    df.to_csv("run.csv")
+    df.to_csv(args.run_csv, index=False)
+    print(f"Saved benchmark CSV to {args.run_csv}")
 
 # chunkk -> mỗi block xử lý chunkk*x
 # splitkv = max_ctx_len / (chunkk * x)
@@ -753,6 +758,11 @@ if __name__ == "__main__":
                         default=os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                              "paged_fp8_mqa_logits_tuned.csv"),
                         help="CSV with tuned (num_warp, chunkK, splitK) per shape.")
+    parser.add_argument("--run_csv", type=str, default="run.csv",
+                        help="CSV output path for benchmark results.")
+    parser.add_argument("--resume_csv", type=str, default=None,
+                        help="CSV to read done_keys from for resume (multi-GPU: pass the shared "
+                             "final merged CSV so all workers skip already-tuned configs).")
     args = parser.parse_args()
     if args.profile:
         run_profile(args)

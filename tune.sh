@@ -1,78 +1,192 @@
-export HIP_VISIBLE_DEVICES=7
+#!/usr/bin/env bash
+# Usage:
+#   MODE=tune  VISIBLE_DEVICES=4,5,6,7 [TIMEOUT=10800] ./tune.sh   (default)
+#   MODE=bench VISIBLE_DEVICES=4,5,6,7 ./tune.sh
 
+MODE="${MODE:-tune}"
+VISIBLE_DEVICES="${VISIBLE_DEVICES:-0,1,2,3,4,5,6,7}"
+IFS=',' read -ra GPUS <<< "$VISIBLE_DEVICES"
+NUM_GPUS=${#GPUS[@]}
+
+# Build once before parallelising (shared .so)
 rm -rf *.so *.egg-info
 python3 setup.py develop
 
-# Batch sizes 1..32 + 64,128,256 — passed one-at-a-time so each python invocation
-# gets a fresh GPU memory state (works around an allocator leak we couldn't pin down).
-BATCHES=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 64 128 256)
-
-# kv_length: 512, 1024, 2048, 4096, then 8192 + 4096*k for k=0..14 (up to 65536)
+BATCHES=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 64 128 256 512)
 KV_LENGTHS=(512 1024 2048 4096 8192 12288 16384 20480 24576 28672 32768 36864 40960 45056 49152 53248 57344 61440 65536)
+MTP_LIST=(0 1)
 
 OUT_DIR="tune_results"
 LOG_DIR="${OUT_DIR}/logs"
 mkdir -p "${OUT_DIR}" "${LOG_DIR}"
 
-# Single accumulating CSV across all (mtp, kv_length, batch) — Python skips rows already present.
-# Placed inside logs/ so all tune outputs (csv + per-run logs) sit under one folder.
-CSV_FILE="${LOG_DIR}/tune_results.csv"
-
-# Total wall-clock budget for the whole tune.sh (default 5h30m = 19800s).
-# Override via env, e.g. TIMEOUT=7200 ./tune.sh for 2 hours.
-# TIMEOUT="${TIMEOUT:-19800}"
-TIMEOUT="${TIMEOUT:-60}"
+TIMEOUT="${TIMEOUT:-288000}"
 START_TS=$(date +%s)
-echo "[budget] TIMEOUT=${TIMEOUT}s ($((TIMEOUT/3600))h$(( (TIMEOUT%3600)/60 ))m), started at $(date -d @${START_TS} '+%F %T')"
 
-stop_reason=""
-for mtp in 0 1; do
-    for kv_length in "${KV_LENGTHS[@]}"; do
-        for batch in "${BATCHES[@]}"; do
-            NOW=$(date +%s)
-            ELAPSED=$((NOW - START_TS))
-            REMAINING=$((TIMEOUT - ELAPSED))
-            if [ "${REMAINING}" -le 0 ]; then
-                stop_reason="budget exhausted before iteration (elapsed=${ELAPSED}s)"
-                break 3
-            fi
+echo "[budget]    TIMEOUT=${TIMEOUT}s ($((TIMEOUT/3600))h$(( (TIMEOUT%3600)/60 ))m), started at $(date -d @${START_TS} '+%F %T')"
+echo "[multi-gpu] MODE=${MODE}, ${NUM_GPUS} GPU(s): ${GPUS[*]}"
 
-            RUN_LOG_DIR="${LOG_DIR}/mtp_${mtp}/kvlength_${kv_length}"
-            mkdir -p "${RUN_LOG_DIR}"
-            RUN_LOG="${RUN_LOG_DIR}/run.log"
-
-            echo "------------------------------------------------"
-            echo "Tuning: mtp=${mtp}, kv_length=${kv_length}, batch=${batch}"
-            echo "  csv       -> ${CSV_FILE}"
-            echo "  log_dir   -> ${RUN_LOG_DIR}"
-            echo "  elapsed   -> ${ELAPSED}s / ${TIMEOUT}s   (remaining ${REMAINING}s)"
-            echo "------------------------------------------------"
-
-            # Hard-cap this python invocation at REMAINING seconds. SIGTERM first, then
-            # SIGKILL 30s later if it doesn't exit. Exit code 124 = timeout was hit.
-            timeout --kill-after=30s "${REMAINING}s" \
-                python3 test_fp8_paged_mqa_logits.py --tune \
-                    --batch "${batch}" \
-                    -kv_length "${kv_length}" \
-                    -mtp "${mtp}" \
-                    --tune_csv "${CSV_FILE}" \
-                    --log_dir "${RUN_LOG_DIR}" \
-                    >> "${RUN_LOG}" 2>&1
-            rc=$?
-            if [ "$rc" -eq 124 ] || [ "$rc" -eq 137 ]; then
-                stop_reason="python killed by timeout (rc=$rc) at mtp=${mtp} kv_length=${kv_length} batch=${batch}"
-                break 3
-            elif [ "$rc" -ne 0 ]; then
-                echo "  [warn] python exited with rc=$rc at batch=${batch} (see ${RUN_LOG}); continuing"
-            fi
-        done
-    done
+# Round-robin: assign BATCHES[i] → GPU[i % NUM_GPUS]
+declare -A GPU_BATCH_LISTS
+for i in "${!GPUS[@]}"; do GPU_BATCH_LISTS[$i]=""; done
+for i in "${!BATCHES[@]}"; do
+    slot=$((i % NUM_GPUS))
+    GPU_BATCH_LISTS[$slot]+="${BATCHES[$i]} "
 done
 
-TOTAL=$(( $(date +%s) - START_TS ))
-echo "================================================"
-if [ -n "${stop_reason}" ]; then
-    echo "[timeout] Stopped early: ${stop_reason}"
+# ============================================================
+if [ "${MODE}" = "tune" ]; then
+# ============================================================
+
+    FINAL_CSV="${LOG_DIR}/tune_results.csv"
+    PIDS=()
+    for i in "${!GPUS[@]}"; do
+        gpu_id="${GPUS[$i]}"
+        batches_str="${GPU_BATCH_LISTS[$i]}"
+        [[ -z "${batches_str// /}" ]] && { echo "[gpu ${gpu_id}] no batches assigned, skip"; continue; }
+
+        GPU_CSV="${LOG_DIR}/tune_results_gpu${gpu_id}.csv"
+        GPU_LOG_DIR="${LOG_DIR}/gpu${gpu_id}"
+        mkdir -p "${GPU_LOG_DIR}"
+        echo "[gpu ${gpu_id}] batches: ${batches_str}"
+
+        (
+            export HIP_VISIBLE_DEVICES="${gpu_id}"
+            for mtp in "${MTP_LIST[@]}"; do
+                for kv_length in "${KV_LENGTHS[@]}"; do
+                    for batch in ${batches_str}; do
+                        REMAINING=$(( TIMEOUT - ($(date +%s) - START_TS) ))
+                        [ "${REMAINING}" -le 0 ] && { echo "[gpu ${gpu_id}] budget exhausted"; exit 0; }
+
+                        RUN_LOG_DIR="${GPU_LOG_DIR}/mtp_${mtp}/kvlength_${kv_length}"
+                        mkdir -p "${RUN_LOG_DIR}"
+
+                        timeout --kill-after=30s "${REMAINING}s" \
+                            python3 test_fp8_paged_mqa_logits.py --tune \
+                                --batch       "${batch}" \
+                                -kv_length    "${kv_length}" \
+                                -mtp          "${mtp}" \
+                                --tune_csv    "${GPU_CSV}" \
+                                --resume_csv  "${FINAL_CSV}" \
+                                --log_dir     "${RUN_LOG_DIR}" \
+                            >> "${GPU_LOG_DIR}/run.log" 2>&1
+                        rc=$?
+                        [ "$rc" -eq 124 ] || [ "$rc" -eq 137 ] && { echo "[gpu ${gpu_id}] killed by timeout"; exit 0; }
+                        [ "$rc" -ne 0 ] && echo "[gpu ${gpu_id}] warn: rc=$rc at mtp=${mtp} kv=${kv_length} B=${batch}"
+                    done
+                done
+            done
+        ) &
+        PIDS+=($!)
+    done
+
+    echo "[barrier] waiting for ${#PIDS[@]} worker(s)..."
+    for pid in "${PIDS[@]}"; do wait "$pid" || true; done
+    TOTAL=$(( $(date +%s) - START_TS ))
+    echo "[barrier] all done. elapsed: ${TOTAL}s / ${TIMEOUT}s"
+
+    echo "[merge] merging per-GPU CSVs → ${FINAL_CSV}"
+    python3 - <<PYEOF
+import pandas as pd, glob, os, sys
+
+log_dir   = "${LOG_DIR}"
+final_csv = "${FINAL_CSV}"
+key_cols  = ["batch_size", "next_n", "heads", "index_dim", "avg_kv_length"]
+
+def merge_pattern(pattern, out_path):
+    csvs = sorted(glob.glob(pattern))
+    if not csvs:
+        print(f"  [merge] no files match {pattern}")
+        return
+    frames = []
+    for f in csvs:
+        try:
+            df = pd.read_csv(f)
+            frames.append(df)
+            print(f"  {f}: {len(df)} rows")
+        except Exception as e:
+            print(f"  {f}: SKIP ({e})")
+    if not frames:
+        return
+    merged = (pd.concat(frames, ignore_index=True)
+                .pipe(lambda d: d.assign(**{c: d[c].astype(int) for c in key_cols if c in d}))
+                .sort_values(key_cols)
+                .drop_duplicates(subset=key_cols, keep="first")
+                .reset_index(drop=True))
+    merged.to_csv(out_path, index=False)
+    print(f"  -> {out_path}: {len(merged)} rows")
+
+merge_pattern(f"{log_dir}/tune_results_gpu*.csv",       final_csv)
+merge_pattern(f"{log_dir}/tune_results_gpu*_top1.csv",  os.path.splitext(final_csv)[0] + "_top1.csv")
+PYEOF
+
+# ============================================================
+elif [ "${MODE}" = "bench" ]; then
+# ============================================================
+
+    PIDS=()
+    for i in "${!GPUS[@]}"; do
+        gpu_id="${GPUS[$i]}"
+        batches_str="${GPU_BATCH_LISTS[$i]}"
+        [[ -z "${batches_str// /}" ]] && { echo "[gpu ${gpu_id}] no batches assigned, skip"; continue; }
+
+        GPU_LOG_DIR="${LOG_DIR}/bench_gpu${gpu_id}"
+        mkdir -p "${GPU_LOG_DIR}"
+        echo "[gpu ${gpu_id}] batches: ${batches_str}"
+
+        (
+            export HIP_VISIBLE_DEVICES="${gpu_id}"
+            batches_arg="${batches_str// /,}"; batches_arg="${batches_arg%,}"
+            kv_arg="${KV_LENGTHS[*]}";         kv_arg="${kv_arg// /,}"
+            mtp_arg="${MTP_LIST[*]}";           mtp_arg="${mtp_arg// /,}"
+
+            python3 test_fp8_paged_mqa_logits.py \
+                --batch    "${batches_arg}" \
+                -kv_length "${kv_arg}" \
+                -mtp       "${mtp_arg}" \
+                --use_tuned \
+                --run_csv  "${GPU_LOG_DIR}/run_gpu${gpu_id}.csv" \
+            > "${GPU_LOG_DIR}/run.log" 2>&1
+        ) &
+        PIDS+=($!)
+    done
+
+    echo "[barrier] waiting for ${#PIDS[@]} worker(s)..."
+    for pid in "${PIDS[@]}"; do wait "$pid" || true; done
+    TOTAL=$(( $(date +%s) - START_TS ))
+    echo "[barrier] all done. elapsed: ${TOTAL}s / ${TIMEOUT}s"
+
+    echo "[merge] merging per-GPU bench CSVs → run.csv"
+    python3 - <<PYEOF
+import pandas as pd, glob, sys
+
+log_dir  = "${LOG_DIR}"
+key_cols = ["batch_size", "next_n", "heads", "index_dim", "avg_kv_length"]
+
+csvs = sorted(glob.glob(f"{log_dir}/bench_gpu*/run_gpu*.csv"))
+if not csvs:
+    print("  [merge] no bench CSVs found")
+    sys.exit(0)
+frames = []
+for f in csvs:
+    try:
+        df = pd.read_csv(f)
+        frames.append(df)
+        print(f"  {f}: {len(df)} rows")
+    except Exception as e:
+        print(f"  {f}: SKIP ({e})")
+if not frames:
+    sys.exit(0)
+merged = (pd.concat(frames, ignore_index=True)
+            .pipe(lambda d: d.assign(**{c: d[c].astype(int) for c in key_cols if c in d}))
+            .sort_values(key_cols)
+            .reset_index(drop=True))
+merged.to_csv("run.csv", index=False)
+print(f"  -> run.csv: {len(merged)} rows")
+print(merged.to_string(index=False))
+PYEOF
+
+else
+    echo "[error] unknown MODE=${MODE}. Use tune or bench."
+    exit 1
 fi
-echo "[budget] Total elapsed: ${TOTAL}s / ${TIMEOUT}s"
-echo "================================================"
