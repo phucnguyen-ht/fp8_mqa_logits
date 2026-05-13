@@ -2870,3 +2870,7 @@
   B=13 nw=8 ck=256 skv=256 (moreh vs deepgemm) cosine_diff = 0.000000 
   B=13 nw=8 ck=256 skv=257(moreh vs ref)      cosine_diff = 0.000791  -> elapsed_us=np.float64(151.43593) us
   B=13 nw=8 ck=256 skv=257 (moreh vs deepgemm) cosine_diff = 0.000000 
+# Per-config tune log
+# shared inputs: batch_size=5 next_n=2 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# Per-config tune log
+# shared inputs: batch_size=13 next_n=2 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625

@@ -552,7 +552,7 @@ namespace v3 {
         const int mfmaOutCol = laneId % MFMA_MN;                            // [0...15]
 
         // ---- shared memory ----
-        __shared__ fp8   smem_Q    [NUM_HEADS * HEAD_SIZE + NUM_HEADS * 8];     // 4 KB
+        __shared__ fp8   smem_Q    [NUM_HEADS * HEAD_SIZE];     // 4 KB
         __shared__ float smem_W    [NUM_HEADS];                 // 128 B
         __shared__ fp8   smem_KV   [CHUNK_K][KV_ROW];           // CHUNK_K × 136 B
         __shared__ float smem_scale[CHUNK_K];                   // CHUNK_K × 4 B
@@ -837,7 +837,7 @@ namespace v4 {
         constexpr int GPRs_AB = 2;
         constexpr int GPRs_C  = 4;
         constexpr int numInputElementMFMA  = GPRs_AB * sizeof(float) / sizeof(fp8);  // 8
-        constexpr int numOutputElementMFMA = GPRs_C;                                  // 4
+        constexpr int numOutputElementMFMA = GPRs_C;                                 // 4
 
         using VecInMFMA  = __attribute__((__vector_size__(GPRs_AB * sizeof(float)))) fp8;
         using VecOutMFMA = __attribute__((__vector_size__(GPRs_C  * sizeof(float)))) float;

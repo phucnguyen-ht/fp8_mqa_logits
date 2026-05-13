@@ -415,7 +415,7 @@ def tune_moreh(args: argparse.Namespace):
                                 if p >= 16:
                                     break
                                 p *= 2
-                            for v in range(24, num_chunks, 2):
+                            for v in range(24, num_chunks, 8):
                                 skv_set.add(v)
                             skv_set.add(num_chunks)
                             split_kv_list = [-1] + sorted(skv_set)
