@@ -522,3 +522,179 @@ Saved top-1 tune CSV to tune_results_ver3/logs/tune_results_gpu7_top1.csv  (now 
          24       1     32        128          65536   0.003906        205.7      87.2    2.359         4      64      24
          32       1     32        128          65536   0.003906        261.3     108.8    2.402         4      64      -1
 [aiter] import [module_aiter_enum] under /home/phuc-nguyen/workspace/mv-4261/ssr-index-cache-branch/vllm-moreh/3rdparty/aiter/aiter/jit/module_aiter_enum.so
+[aiter] import [module_aiter_enum] under /usr/local/lib/python3.12/dist-packages/aiter/jit/module_aiter_enum.so
+Traceback (most recent call last):
+  File "/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/test_fp8_paged_mqa_logits.py", line 22, in <module>
+    from moreh_fp8_paged_mqa_logits import fp8_paged_mqa_logits as moreh_fp8_paged_mqa_logits
+ModuleNotFoundError: No module named 'moreh_fp8_paged_mqa_logits'
+[aiter] import [module_aiter_enum] under /usr/local/lib/python3.12/dist-packages/aiter/jit/module_aiter_enum.so
+Traceback (most recent call last):
+  File "/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/test_fp8_paged_mqa_logits.py", line 22, in <module>
+    from moreh_fp8_paged_mqa_logits import fp8_paged_mqa_logits as moreh_fp8_paged_mqa_logits
+ModuleNotFoundError: No module named 'moreh_fp8_paged_mqa_logits'
+[aiter] import [module_aiter_enum] under /usr/local/lib/python3.12/dist-packages/aiter/jit/module_aiter_enum.so
+Traceback (most recent call last):
+  File "/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/test_fp8_paged_mqa_logits.py", line 22, in <module>
+    from moreh_fp8_paged_mqa_logits import fp8_paged_mqa_logits as moreh_fp8_paged_mqa_logits
+ModuleNotFoundError: No module named 'moreh_fp8_paged_mqa_logits'
+[aiter] import [module_aiter_enum] under /usr/local/lib/python3.12/dist-packages/aiter/jit/module_aiter_enum.so
+Traceback (most recent call last):
+  File "/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/test_fp8_paged_mqa_logits.py", line 22, in <module>
+    from moreh_fp8_paged_mqa_logits import fp8_paged_mqa_logits as moreh_fp8_paged_mqa_logits
+ModuleNotFoundError: No module named 'moreh_fp8_paged_mqa_logits'
+[aiter] import [module_aiter_enum] under /usr/local/lib/python3.12/dist-packages/aiter/jit/module_aiter_enum.so
+/usr/local/lib/python3.12/dist-packages/torch/profiler/profiler.py:217: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+
+[tune] B=24 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752
+  ck= 64 -> 133 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 520, 528, 536, 544, 552, 560, 568, 576, 584, 592, 600, 608, 616, 624, 632, 640, 648, 656, 664, 672, 680, 688, 696, 704, 712, 720, 728, 736, 744, 752, 760, 768, 776, 784, 792, 800, 808, 816, 824, 832, 840, 848, 856, 864, 872, 880, 888, 896, 904, 912, 920, 928, 936, 944, 952, 960, 968, 976, 984, 992, 1000, 1008, 1016, 1024, 1028]
+  ck=128 -> 69 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 514]
+  ck=256 -> 37 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 257]
+  ck= 64 -> 133 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 520, 528, 536, 544, 552, 560, 568, 576, 584, 592, 600, 608, 616, 624, 632, 640, 648, 656, 664, 672, 680, 688, 696, 704, 712, 720, 728, 736, 744, 752, 760, 768, 776, 784, 792, 800, 808, 816, 824, 832, 840, 848, 856, 864, 872, 880, 888, 896, 904, 912, 920, 928, 936, 944, 952, 960, 968, 976, 984, 992, 1000, 1008, 1016, 1024, 1028]
+  ck=128 -> 69 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 514]
+  ck=256 -> 37 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 257]
+  ck= 64 -> 133 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 520, 528, 536, 544, 552, 560, 568, 576, 584, 592, 600, 608, 616, 624, 632, 640, 648, 656, 664, 672, 680, 688, 696, 704, 712, 720, 728, 736, 744, 752, 760, 768, 776, 784, 792, 800, 808, 816, 824, 832, 840, 848, 856, 864, 872, 880, 888, 896, 904, 912, 920, 928, 936, 944, 952, 960, 968, 976, 984, 992, 1000, 1008, 1016, 1024, 1028]
+  ck=128 -> 69 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 514]
+  ck=256 -> 37 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 257]
+
+--- Top-10 configs (B=24) ---
+  num_warps=4, ChunkK=128, SplitKV= 24  -> 78.95 us  cosine_diff(vs ref)=0.000597  cosine_diff(vs deepgemm)=0.000000
+  num_warps=8, ChunkK=128, SplitKV= 24  -> 79.70 us  cosine_diff(vs ref)=0.000597  cosine_diff(vs deepgemm)=0.000000
+  num_warps=4, ChunkK= 64, SplitKV= 40  -> 81.31 us  cosine_diff(vs ref)=0.000597  cosine_diff(vs deepgemm)=0.000000
+  num_warps=8, ChunkK= 64, SplitKV= 24  -> 85.34 us  cosine_diff(vs ref)=0.000597  cosine_diff(vs deepgemm)=0.000000
+  num_warps=4, ChunkK= 64, SplitKV= 48  -> 85.88 us  cosine_diff(vs ref)=0.000597  cosine_diff(vs deepgemm)=0.000000
+  num_warps=2, ChunkK= 64, SplitKV= 48  -> 85.97 us  cosine_diff(vs ref)=0.000597  cosine_diff(vs deepgemm)=0.000000
+  num_warps=2, ChunkK= 64, SplitKV= 40  -> 86.37 us  cosine_diff(vs ref)=0.000597  cosine_diff(vs deepgemm)=0.000000
+  num_warps=8, ChunkK= 64, SplitKV= 32  -> 86.82 us  cosine_diff(vs ref)=0.000597  cosine_diff(vs deepgemm)=0.000000
+  num_warps=8, ChunkK= 64, SplitKV= 40  -> 87.11 us  cosine_diff(vs ref)=0.000597  cosine_diff(vs deepgemm)=0.000000
+  num_warps=4, ChunkK= 64, SplitKV= -1  -> 87.26 us  cosine_diff(vs ref)=0.000597  cosine_diff(vs deepgemm)=0.000000
+Saved accuracy warnings to tune_results_ver3/logs/gpu7/mtp_0/kvlength_65536/warnings.log
+Saved per-config detail log to tune_results_ver3/logs/gpu7/mtp_0/kvlength_65536/detail.log
+
+Saved tune CSV to tune_results_ver3/logs/tune_results_gpu7.csv  (now 1 rows total)
+ batch_size  next_n  heads  index_dim  avg_kv_length  var_ratio  deepgemm_us  moreh_us  speedup                                                                                                                                                                  top_configs
+         24       1     32        128          65536   0.003906        168.2      78.9    2.131 [(4, 128, 24, 78), (8, 128, 24, 79), (4, 64, 40, 81), (8, 64, 24, 85), (4, 64, 48, 85), (2, 64, 48, 85), (2, 64, 40, 86), (8, 64, 32, 86), (8, 64, 40, 87), (4, 64, -1, 87)]
+
+Saved top-1 tune CSV to tune_results_ver3/logs/tune_results_gpu7_top1.csv  (now 1 rows total)
+ batch_size  next_n  heads  index_dim  avg_kv_length  var_ratio  deepgemm_us  moreh_us  speedup  num_warp  chunkK  splitK
+         24       1     32        128          65536   0.003906        168.2      78.9    2.131         4     128      24
+[aiter] import [module_aiter_enum] under /usr/local/lib/python3.12/dist-packages/aiter/jit/module_aiter_enum.so
+/usr/local/lib/python3.12/dist-packages/torch/profiler/profiler.py:217: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+
+[tune] B=32 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752
+  ck= 64 -> 133 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 520, 528, 536, 544, 552, 560, 568, 576, 584, 592, 600, 608, 616, 624, 632, 640, 648, 656, 664, 672, 680, 688, 696, 704, 712, 720, 728, 736, 744, 752, 760, 768, 776, 784, 792, 800, 808, 816, 824, 832, 840, 848, 856, 864, 872, 880, 888, 896, 904, 912, 920, 928, 936, 944, 952, 960, 968, 976, 984, 992, 1000, 1008, 1016, 1024, 1028]
+  ck=128 -> 69 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 514]
+  ck=256 -> 37 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 257]
+  ck= 64 -> 133 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 520, 528, 536, 544, 552, 560, 568, 576, 584, 592, 600, 608, 616, 624, 632, 640, 648, 656, 664, 672, 680, 688, 696, 704, 712, 720, 728, 736, 744, 752, 760, 768, 776, 784, 792, 800, 808, 816, 824, 832, 840, 848, 856, 864, 872, 880, 888, 896, 904, 912, 920, 928, 936, 944, 952, 960, 968, 976, 984, 992, 1000, 1008, 1016, 1024, 1028]
+  ck=128 -> 69 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 514]
+  ck=256 -> 37 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 257]
+  ck= 64 -> 133 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 520, 528, 536, 544, 552, 560, 568, 576, 584, 592, 600, 608, 616, 624, 632, 640, 648, 656, 664, 672, 680, 688, 696, 704, 712, 720, 728, 736, 744, 752, 760, 768, 776, 784, 792, 800, 808, 816, 824, 832, 840, 848, 856, 864, 872, 880, 888, 896, 904, 912, 920, 928, 936, 944, 952, 960, 968, 976, 984, 992, 1000, 1008, 1016, 1024, 1028]
+  ck=128 -> 69 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 514]
+  ck=256 -> 37 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 257]
+
+--- Top-10 configs (B=32) ---
+  num_warps=8, ChunkK= 64, SplitKV= 16  -> 105.67 us  cosine_diff(vs ref)=0.000669  cosine_diff(vs deepgemm)=0.000000
+  num_warps=8, ChunkK=128, SplitKV= 16  -> 107.71 us  cosine_diff(vs ref)=0.000669  cosine_diff(vs deepgemm)=0.000000
+  num_warps=8, ChunkK= 64, SplitKV= 24  -> 111.55 us  cosine_diff(vs ref)=0.000669  cosine_diff(vs deepgemm)=0.000000
+  num_warps=4, ChunkK=128, SplitKV= 16  -> 111.67 us  cosine_diff(vs ref)=0.000669  cosine_diff(vs deepgemm)=0.000000
+  num_warps=2, ChunkK= 64, SplitKV= 24  -> 112.11 us  cosine_diff(vs ref)=0.000669  cosine_diff(vs deepgemm)=0.000000
+  num_warps=8, ChunkK= 64, SplitKV= -1  -> 112.33 us  cosine_diff(vs ref)=0.000669  cosine_diff(vs deepgemm)=0.000000
+  num_warps=4, ChunkK= 64, SplitKV=224  -> 113.30 us  cosine_diff(vs ref)=0.000669  cosine_diff(vs deepgemm)=0.000000
+  num_warps=4, ChunkK= 64, SplitKV=248  -> 113.65 us  cosine_diff(vs ref)=0.000669  cosine_diff(vs deepgemm)=0.000000
+  num_warps=4, ChunkK= 64, SplitKV=232  -> 113.67 us  cosine_diff(vs ref)=0.000669  cosine_diff(vs deepgemm)=0.000000
+  num_warps=4, ChunkK= 64, SplitKV=200  -> 113.88 us  cosine_diff(vs ref)=0.000669  cosine_diff(vs deepgemm)=0.000000
+Saved accuracy warnings to tune_results_ver3/logs/gpu7/mtp_0/kvlength_65536/warnings.log
+Saved per-config detail log to tune_results_ver3/logs/gpu7/mtp_0/kvlength_65536/detail.log
+
+Saved tune CSV to tune_results_ver3/logs/tune_results_gpu7.csv  (now 2 rows total)
+ batch_size  next_n  heads  index_dim  avg_kv_length  var_ratio  deepgemm_us  moreh_us  speedup                                                                                                                                                                                top_configs
+         24       1     32        128          65536   0.003906        168.2      78.9    2.131               [(4, 128, 24, 78), (8, 128, 24, 79), (4, 64, 40, 81), (8, 64, 24, 85), (4, 64, 48, 85), (2, 64, 48, 85), (2, 64, 40, 86), (8, 64, 32, 86), (8, 64, 40, 87), (4, 64, -1, 87)]
+         32       1     32        128          65536   0.003906        211.9     105.7    2.005 [(8, 64, 16, 105), (8, 128, 16, 107), (8, 64, 24, 111), (4, 128, 16, 111), (2, 64, 24, 112), (8, 64, -1, 112), (4, 64, 224, 113), (4, 64, 248, 113), (4, 64, 232, 113), (4, 64, 200, 113)]
+
+Saved top-1 tune CSV to tune_results_ver3/logs/tune_results_gpu7_top1.csv  (now 2 rows total)
+ batch_size  next_n  heads  index_dim  avg_kv_length  var_ratio  deepgemm_us  moreh_us  speedup  num_warp  chunkK  splitK
+         24       1     32        128          65536   0.003906        168.2      78.9    2.131         4     128      24
+         32       1     32        128          65536   0.003906        211.9     105.7    2.005         8      64      16
+[aiter] import [module_aiter_enum] under /usr/local/lib/python3.12/dist-packages/aiter/jit/module_aiter_enum.so
+/usr/local/lib/python3.12/dist-packages/torch/profiler/profiler.py:217: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+
+[tune] B=24 next_n=2 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752
+  ck= 64 -> 133 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 520, 528, 536, 544, 552, 560, 568, 576, 584, 592, 600, 608, 616, 624, 632, 640, 648, 656, 664, 672, 680, 688, 696, 704, 712, 720, 728, 736, 744, 752, 760, 768, 776, 784, 792, 800, 808, 816, 824, 832, 840, 848, 856, 864, 872, 880, 888, 896, 904, 912, 920, 928, 936, 944, 952, 960, 968, 976, 984, 992, 1000, 1008, 1016, 1024, 1028]
+  ck=128 -> 69 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 514]
+  ck=256 -> 37 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 257]
+  ck= 64 -> 133 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 520, 528, 536, 544, 552, 560, 568, 576, 584, 592, 600, 608, 616, 624, 632, 640, 648, 656, 664, 672, 680, 688, 696, 704, 712, 720, 728, 736, 744, 752, 760, 768, 776, 784, 792, 800, 808, 816, 824, 832, 840, 848, 856, 864, 872, 880, 888, 896, 904, 912, 920, 928, 936, 944, 952, 960, 968, 976, 984, 992, 1000, 1008, 1016, 1024, 1028]
+  ck=128 -> 69 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 514]
+  ck=256 -> 37 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 257]
+  ck= 64 -> 133 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 520, 528, 536, 544, 552, 560, 568, 576, 584, 592, 600, 608, 616, 624, 632, 640, 648, 656, 664, 672, 680, 688, 696, 704, 712, 720, 728, 736, 744, 752, 760, 768, 776, 784, 792, 800, 808, 816, 824, 832, 840, 848, 856, 864, 872, 880, 888, 896, 904, 912, 920, 928, 936, 944, 952, 960, 968, 976, 984, 992, 1000, 1008, 1016, 1024, 1028]
+  ck=128 -> 69 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 514]
+  ck=256 -> 37 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 257]
+
+--- Top-10 configs (B=24) ---
+  num_warps=8, ChunkK= 64, SplitKV= 24  -> 105.25 us  cosine_diff(vs ref)=0.000737  cosine_diff(vs deepgemm)=0.000000
+  num_warps=4, ChunkK= 64, SplitKV= 24  -> 105.45 us  cosine_diff(vs ref)=0.000737  cosine_diff(vs deepgemm)=0.000000
+  num_warps=8, ChunkK= 64, SplitKV= -1  -> 108.98 us  cosine_diff(vs ref)=0.000737  cosine_diff(vs deepgemm)=0.000000
+  num_warps=4, ChunkK= 64, SplitKV= 48  -> 109.64 us  cosine_diff(vs ref)=0.000737  cosine_diff(vs deepgemm)=0.000000
+  num_warps=4, ChunkK= 64, SplitKV= -1  -> 110.17 us  cosine_diff(vs ref)=0.000737  cosine_diff(vs deepgemm)=0.000000
+  num_warps=8, ChunkK=128, SplitKV= 24  -> 111.21 us  cosine_diff(vs ref)=0.000737  cosine_diff(vs deepgemm)=0.000000
+  num_warps=4, ChunkK= 64, SplitKV= 72  -> 114.07 us  cosine_diff(vs ref)=0.000737  cosine_diff(vs deepgemm)=0.000000
+  num_warps=4, ChunkK= 64, SplitKV= 40  -> 114.21 us  cosine_diff(vs ref)=0.000737  cosine_diff(vs deepgemm)=0.000000
+  num_warps=8, ChunkK= 64, SplitKV= 48  -> 114.77 us  cosine_diff(vs ref)=0.000737  cosine_diff(vs deepgemm)=0.000000
+  num_warps=4, ChunkK= 64, SplitKV= 64  -> 114.99 us  cosine_diff(vs ref)=0.000737  cosine_diff(vs deepgemm)=0.000000
+Saved accuracy warnings to tune_results_ver3/logs/gpu7/mtp_1/kvlength_65536/warnings.log
+Saved per-config detail log to tune_results_ver3/logs/gpu7/mtp_1/kvlength_65536/detail.log
+
+Saved tune CSV to tune_results_ver3/logs/tune_results_gpu7.csv  (now 3 rows total)
+ batch_size  next_n  heads  index_dim  avg_kv_length  var_ratio  deepgemm_us  moreh_us  speedup                                                                                                                                                                                top_configs
+         24       1     32        128          65536   0.003906        168.2      78.9    2.131               [(4, 128, 24, 78), (8, 128, 24, 79), (4, 64, 40, 81), (8, 64, 24, 85), (4, 64, 48, 85), (2, 64, 48, 85), (2, 64, 40, 86), (8, 64, 32, 86), (8, 64, 40, 87), (4, 64, -1, 87)]
+         24       2     32        128          65536   0.003906        282.2     105.3    2.681      [(8, 64, 24, 105), (4, 64, 24, 105), (8, 64, -1, 108), (4, 64, 48, 109), (4, 64, -1, 110), (8, 128, 24, 111), (4, 64, 72, 114), (4, 64, 40, 114), (8, 64, 48, 114), (4, 64, 64, 114)]
+         32       1     32        128          65536   0.003906        211.9     105.7    2.005 [(8, 64, 16, 105), (8, 128, 16, 107), (8, 64, 24, 111), (4, 128, 16, 111), (2, 64, 24, 112), (8, 64, -1, 112), (4, 64, 224, 113), (4, 64, 248, 113), (4, 64, 232, 113), (4, 64, 200, 113)]
+
+Saved top-1 tune CSV to tune_results_ver3/logs/tune_results_gpu7_top1.csv  (now 3 rows total)
+ batch_size  next_n  heads  index_dim  avg_kv_length  var_ratio  deepgemm_us  moreh_us  speedup  num_warp  chunkK  splitK
+         24       1     32        128          65536   0.003906        168.2      78.9    2.131         4     128      24
+         24       2     32        128          65536   0.003906        282.2     105.3    2.681         8      64      24
+         32       1     32        128          65536   0.003906        211.9     105.7    2.005         8      64      16
+[aiter] import [module_aiter_enum] under /usr/local/lib/python3.12/dist-packages/aiter/jit/module_aiter_enum.so
+/usr/local/lib/python3.12/dist-packages/torch/profiler/profiler.py:217: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+
+[tune] B=32 next_n=2 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752
+  ck= 64 -> 133 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 520, 528, 536, 544, 552, 560, 568, 576, 584, 592, 600, 608, 616, 624, 632, 640, 648, 656, 664, 672, 680, 688, 696, 704, 712, 720, 728, 736, 744, 752, 760, 768, 776, 784, 792, 800, 808, 816, 824, 832, 840, 848, 856, 864, 872, 880, 888, 896, 904, 912, 920, 928, 936, 944, 952, 960, 968, 976, 984, 992, 1000, 1008, 1016, 1024, 1028]
+  ck=128 -> 69 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 514]
+  ck=256 -> 37 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 257]
+  ck= 64 -> 133 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 520, 528, 536, 544, 552, 560, 568, 576, 584, 592, 600, 608, 616, 624, 632, 640, 648, 656, 664, 672, 680, 688, 696, 704, 712, 720, 728, 736, 744, 752, 760, 768, 776, 784, 792, 800, 808, 816, 824, 832, 840, 848, 856, 864, 872, 880, 888, 896, 904, 912, 920, 928, 936, 944, 952, 960, 968, 976, 984, 992, 1000, 1008, 1016, 1024, 1028]
+  ck=128 -> 69 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 514]
+  ck=256 -> 37 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 257]
+  ck= 64 -> 133 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 520, 528, 536, 544, 552, 560, 568, 576, 584, 592, 600, 608, 616, 624, 632, 640, 648, 656, 664, 672, 680, 688, 696, 704, 712, 720, 728, 736, 744, 752, 760, 768, 776, 784, 792, 800, 808, 816, 824, 832, 840, 848, 856, 864, 872, 880, 888, 896, 904, 912, 920, 928, 936, 944, 952, 960, 968, 976, 984, 992, 1000, 1008, 1016, 1024, 1028]
+  ck=128 -> 69 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336, 344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440, 448, 456, 464, 472, 480, 488, 496, 504, 512, 514]
+  ck=256 -> 37 SplitKV values: [-1, 1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 257]
+
+--- Top-10 configs (B=32) ---
+  num_warps=4, ChunkK= 64, SplitKV= 16  -> 136.07 us  cosine_diff(vs ref)=0.000674  cosine_diff(vs deepgemm)=0.000000
+  num_warps=8, ChunkK= 64, SplitKV= 16  -> 139.19 us  cosine_diff(vs ref)=0.000674  cosine_diff(vs deepgemm)=0.000000
+  num_warps=4, ChunkK= 64, SplitKV= 56  -> 145.18 us  cosine_diff(vs ref)=0.000674  cosine_diff(vs deepgemm)=0.000000
+  num_warps=4, ChunkK= 64, SplitKV= 32  -> 146.42 us  cosine_diff(vs ref)=0.000674  cosine_diff(vs deepgemm)=0.000000
+  num_warps=8, ChunkK=128, SplitKV=  8  -> 147.12 us  cosine_diff(vs ref)=0.000674  cosine_diff(vs deepgemm)=0.000000
+  num_warps=4, ChunkK= 64, SplitKV= 48  -> 147.70 us  cosine_diff(vs ref)=0.000674  cosine_diff(vs deepgemm)=0.000000
+  num_warps=8, ChunkK= 64, SplitKV= 56  -> 149.14 us  cosine_diff(vs ref)=0.000674  cosine_diff(vs deepgemm)=0.000000
+  num_warps=8, ChunkK= 64, SplitKV= 32  -> 149.30 us  cosine_diff(vs ref)=0.000674  cosine_diff(vs deepgemm)=0.000000
+  num_warps=4, ChunkK= 64, SplitKV= 96  -> 149.33 us  cosine_diff(vs ref)=0.000674  cosine_diff(vs deepgemm)=0.000000
+  num_warps=4, ChunkK= 64, SplitKV= 72  -> 149.40 us  cosine_diff(vs ref)=0.000674  cosine_diff(vs deepgemm)=0.000000
+Saved accuracy warnings to tune_results_ver3/logs/gpu7/mtp_1/kvlength_65536/warnings.log
+Saved per-config detail log to tune_results_ver3/logs/gpu7/mtp_1/kvlength_65536/detail.log
+
+Saved tune CSV to tune_results_ver3/logs/tune_results_gpu7.csv  (now 4 rows total)
+ batch_size  next_n  heads  index_dim  avg_kv_length  var_ratio  deepgemm_us  moreh_us  speedup                                                                                                                                                                                top_configs
+         24       1     32        128          65536   0.003906        168.2      78.9    2.131               [(4, 128, 24, 78), (8, 128, 24, 79), (4, 64, 40, 81), (8, 64, 24, 85), (4, 64, 48, 85), (2, 64, 48, 85), (2, 64, 40, 86), (8, 64, 32, 86), (8, 64, 40, 87), (4, 64, -1, 87)]
+         24       2     32        128          65536   0.003906        282.2     105.3    2.681      [(8, 64, 24, 105), (4, 64, 24, 105), (8, 64, -1, 108), (4, 64, 48, 109), (4, 64, -1, 110), (8, 128, 24, 111), (4, 64, 72, 114), (4, 64, 40, 114), (8, 64, 48, 114), (4, 64, 64, 114)]
+         32       1     32        128          65536   0.003906        211.9     105.7    2.005 [(8, 64, 16, 105), (8, 128, 16, 107), (8, 64, 24, 111), (4, 128, 16, 111), (2, 64, 24, 112), (8, 64, -1, 112), (4, 64, 224, 113), (4, 64, 248, 113), (4, 64, 232, 113), (4, 64, 200, 113)]
+         32       2     32        128          65536   0.003906        434.2     136.1    3.191       [(4, 64, 16, 136), (8, 64, 16, 139), (4, 64, 56, 145), (4, 64, 32, 146), (8, 128, 8, 147), (4, 64, 48, 147), (8, 64, 56, 149), (8, 64, 32, 149), (4, 64, 96, 149), (4, 64, 72, 149)]
+
+Saved top-1 tune CSV to tune_results_ver3/logs/tune_results_gpu7_top1.csv  (now 4 rows total)
+ batch_size  next_n  heads  index_dim  avg_kv_length  var_ratio  deepgemm_us  moreh_us  speedup  num_warp  chunkK  splitK
+         24       1     32        128          65536   0.003906        168.2      78.9    2.131         4     128      24
+         24       2     32        128          65536   0.003906        282.2     105.3    2.681         8      64      24
+         32       1     32        128          65536   0.003906        211.9     105.7    2.005         8      64      16
+         32       2     32        128          65536   0.003906        434.2     136.1    3.191         4      64      16
