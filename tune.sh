@@ -9,15 +9,15 @@ IFS=',' read -ra GPUS <<< "$VISIBLE_DEVICES"
 NUM_GPUS=${#GPUS[@]}
 
 # Build once before parallelising (shared .so)
-rm -rf *.so *.egg-info
+rm -rf *.so *.egg-info build/
 python3 setup.py develop
 
 # BATCHES=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 64 128 256 512)
-VERSION=3
+VERSION=7
 
 # BATCHES=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32)
 # BATCHES=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16)
-BATCHES=($(seq 33 48))
+BATCHES=($(seq 1 128))
 # BATCHES=(1 2 3 4 5 6 7 8)
 KV_LENGTHS=(65536)
 MTP_LIST=(0 1)

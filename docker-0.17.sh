@@ -1,4 +1,4 @@
-WORKING_DIR=/remote/vast0/phuc-nguyen/workspace/tickets/mv-4077/optests/fp8_paged_mqa_logits
+WORKING_DIR=/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits
 CONTAINER_NAME=phucnguyen-dev-tune-paged-fp8-0.17
 
 docker run -d \
@@ -11,7 +11,7 @@ docker run -d \
   -w $WORKING_DIR \
   --name $CONTAINER_NAME \
   --entrypoint bash \
-  vllm/vllm-openai-rocm:v0.17.0 \
+  255250787067.dkr.ecr.ap-northeast-2.amazonaws.com/unencrypted/moreh-vllm:0.17.0-260518-3bedd64-hsa-tilelang \
   -lc 'sleep infinity'
 
 docker exec -ti $CONTAINER_NAME bash

@@ -1,0 +1,22 @@
+# Accuracy warnings: configs with cosine_diff > 0.01
+# shared inputs: batch_size=2 next_n=2 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# Accuracy warnings: configs with cosine_diff > 0.01
+# shared inputs: batch_size=10 next_n=2 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# Accuracy warnings: configs with cosine_diff > 0.01
+# shared inputs: batch_size=18 next_n=2 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# Accuracy warnings: configs with cosine_diff > 0.01
+# shared inputs: batch_size=26 next_n=2 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# Accuracy warnings: configs with cosine_diff > 0.01
+# shared inputs: batch_size=34 next_n=2 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# Accuracy warnings: configs with cosine_diff > 0.01
+# shared inputs: batch_size=42 next_n=2 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# Accuracy warnings: configs with cosine_diff > 0.01
+# shared inputs: batch_size=50 next_n=2 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# Accuracy warnings: configs with cosine_diff > 0.01
+# shared inputs: batch_size=58 next_n=2 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# Accuracy warnings: configs with cosine_diff > 0.01
+# shared inputs: batch_size=66 next_n=2 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# Accuracy warnings: configs with cosine_diff > 0.01
+# shared inputs: batch_size=74 next_n=2 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# Accuracy warnings: configs with cosine_diff > 0.01
+# shared inputs: batch_size=82 next_n=2 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625

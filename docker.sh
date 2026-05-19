@@ -1,5 +1,6 @@
 WORKING_DIR=/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits
-CONTAINER_NAME=phucnguyen-dev-tune-paged-fp8
+# CONTAINER_NAME=phucnguyen-dev-tune-paged-fp8
+CONTAINER_NAME=phucnguyen-dev-test-testgemm
 
 docker run -d \
   --ipc=host --network=host --group-add render \

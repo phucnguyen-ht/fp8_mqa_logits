@@ -12,12 +12,12 @@ import os
 import pandas as pd
 
 from aiter_testcommon import run_perftest, checkAllclose
-import aiter.ops.triton.attention.pa_mqa_logits as _pamqa
+# import aiter.ops.triton.attention.pa_mqa_logits as _pamqa
 # Force the non-gluon (regular triton) path. The gluon kernel uses gl.amd.AMDMFMALayout
 # which on triton 3.6 requires instr_shape in (M, N, K) format — incompatible with the
 # kernel sources here, so disable gluon entirely.
-_pamqa.enable_gluon_pa_mqa_logits = False
-_pamqa.enable_jit_gluon_pa_mqa_logits_kernel = False
+# _pamqa.enable_gluon_pa_mqa_logits = False
+# _pamqa.enable_jit_gluon_pa_mqa_logits_kernel = False
 from aiter.ops.triton.attention.pa_mqa_logits import deepgemm_fp8_paged_mqa_logits, deepgemm_fp8_paged_mqa_logits_stage1
 from moreh_fp8_paged_mqa_logits import fp8_paged_mqa_logits as moreh_fp8_paged_mqa_logits
 
@@ -188,7 +188,7 @@ def eval_accuracy(out: torch.Tensor, ref: torch.Tensor, mask: torch.Tensor, labe
     else:
         print(msg)
     if doCheckAllClose:
-        checkAllclose(out_m, ref_m, atol=ATOL, rtol=RTOL, msg=f"{label} vs ref: ")
+        checkAllclose(out_m, ref_m, atol=ATOL, rtol=RTOL, msg=f"{label}: ")
     return diff
 
 
@@ -425,12 +425,17 @@ def tune_moreh(args: argparse.Namespace):
                             for split_kv in split_kv_list:
                                 out = None
                                 try:
+                                    moreh_out_logits = torch.full(
+                                        (batch_size * next_n, max_model_len), float("-inf"),
+                                        device="cuda", dtype=torch.float32,
+                                    )
                                     out, elapsed_us = run_perftest(
                                         moreh_fp8_paged_mqa_logits,
                                         q_fp8, kv_cache_fp8, weights, context_lens, block_tables, max_model_len,
                                         ChunkK=chunk_k, SplitKV=split_kv, num_warps=num_warps,
                                         TotalCuCount=get_num_compute_units(),
                                         version=args.version,
+                                        out_logits=moreh_out_logits,
                                     )
                                     diff = eval_accuracy(out, ref_logits, mask,
                                                         f"B={batch_size} nw={num_warps} ck={chunk_k:3d} skv={split_kv:3d}(moreh vs ref)     ",
@@ -614,12 +619,17 @@ def run_profile(args: argparse.Namespace):
             print(f"  [tuned] B={batch_size}: num_warps={m_nw} ChunkK={m_ck} SplitKV={m_skv}")
         else:
             m_nw, m_ck, m_skv = DEFAULT_NUM_WARPS, DEFAULT_CHUNK_K, DEFAULT_SPLIT_KV
+        moreh_out_logits = torch.full(
+            (batch_size * next_n, max_model_len), float("-inf"), device="cuda", dtype=torch.float32
+        )
         moreh_out, moreh_us = run_perftest_identity(
             moreh_fp8_paged_mqa_logits,
             q_fp8, kv_cache_fp8, weights, context_lens, block_tables, max_model_len,
             ChunkK=m_ck, SplitKV=m_skv, num_warps=m_nw,
             TotalCuCount=get_num_compute_units(), version=args.version,
-            num_iters=100, num_warmup=5
+            out_logits=moreh_out_logits,
+            num_iters=100, num_warmup=5,
+            version=7
         )
 
         # eval_accuracy(moreh_out,           out_logits, mask, "moreh           vs deepgemm: ", doCheckAllClose=True)
@@ -627,7 +637,7 @@ def run_profile(args: argparse.Namespace):
 def run_benchmark(args: argparse.Namespace):
     # Default moreh config — used when no tuned entry matches.
     DEFAULT_CHUNK_K   = 64
-    DEFAULT_SPLIT_KV  = 96
+    DEFAULT_SPLIT_KV  = -1
     DEFAULT_NUM_WARPS = 4
 
     tuned_configs = _load_tuned_configs(args.tuned_csv) if args.use_tuned else {}
@@ -652,7 +662,8 @@ def run_benchmark(args: argparse.Namespace):
     rows = []
     for (batch_size, next_n, heads, index_dim, avg_kv_length) in shape_list:
         max_model_len = 202752
-        var_ratio = 256 / avg_kv_length
+        avg_kv_length += 128
+        var_ratio = 128 / avg_kv_length
 
         q_fp8, kv_cache_fp8, weights, context_lens, block_tables, ref_logits, mask = make_inputs(
             batch_size, next_n, heads, index_dim, avg_kv_length, max_model_len,
@@ -690,18 +701,26 @@ def run_benchmark(args: argparse.Namespace):
         else:
             m_nw, m_ck, m_skv = DEFAULT_NUM_WARPS, DEFAULT_CHUNK_K, DEFAULT_SPLIT_KV
 
+        moreh_v2_out_logits = torch.full(
+            (batch_size * next_n, max_model_len), float("-inf"), device="cuda", dtype=torch.float32
+        )
         moreh_v2_out, moreh_v2_us = run_perftest(
             moreh_fp8_paged_mqa_logits,
             q_fp8, kv_cache_fp8, weights, context_lens, block_tables, max_model_len,
             ChunkK=m_ck, SplitKV=m_skv, num_warps=m_nw,
             TotalCuCount=get_num_compute_units(), version=2,
+            out_logits=moreh_v2_out_logits,
         )
 
-        moreh_v4_out, moreh_v4_us = run_perftest(
+        moreh_v7_out_logits = torch.full(
+            (batch_size * next_n, max_model_len), float("-inf"), device="cuda", dtype=torch.float32
+        )
+        moreh_v7_out, moreh_v7_us = run_perftest(
             moreh_fp8_paged_mqa_logits,
             q_fp8, kv_cache_fp8, weights, context_lens, block_tables, max_model_len,
             ChunkK=m_ck, SplitKV=m_skv, num_warps=m_nw,
-            TotalCuCount=get_num_compute_units(), version=3,
+            TotalCuCount=get_num_compute_units(), version=7,
+            out_logits=moreh_v7_out_logits,
         )
 
         print(f"\n[B={batch_size} next_n={next_n} var_ratio={var_ratio} kv_length={avg_kv_length}]"
@@ -709,15 +728,16 @@ def run_benchmark(args: argparse.Namespace):
         eval_accuracy(out_logits,     ref_logits,   mask, "deepgemm        vs ref     ", doCheckAllClose=False)
         eval_accuracy(deepgemm_stage1_out, ref_logits, mask, "deepgemm_stage1 vs ref  ", doCheckAllClose=False)
         eval_accuracy(moreh_v2_out,   ref_logits,   mask, "moreh_v2        vs ref     ", doCheckAllClose=False)
-        eval_accuracy(moreh_v4_out,   ref_logits,   mask, "moreh_v4        vs ref     ", doCheckAllClose=False)
-        eval_accuracy(moreh_v4_out,   moreh_v2_out, mask, "moreh_v4        vs moreh_v2", doCheckAllClose=True)
+        eval_accuracy(moreh_v7_out,   ref_logits,   mask, "moreh_v7        vs ref     ", doCheckAllClose=False)
+        eval_accuracy(moreh_v7_out,   out_logits, mask, "moreh_v7        vs deepgemm", doCheckAllClose=True)
+        eval_accuracy(moreh_v7_out,   moreh_v2_out, mask, "moreh_v7        vs moreh_v2", doCheckAllClose=True)
         print(f"  deepgemm        : {deepgemm_us:.2f} us")
         print(f"  deepgemm_stage1 : {deepgemm_stage1_us:.2f} us")
         print(f"  moreh_v2 (PAD)  : {moreh_v2_us:.2f} us")
-        print(f"  moreh_v4 (swiz) : {moreh_v4_us:.2f} us")
+        print(f"  moreh_v7 (swiz) : {moreh_v7_us:.2f} us")
         print(f"  speedup v2 / deepgemm        : {deepgemm_us / moreh_v2_us:.2f}x")
-        print(f"  speedup v4 / deepgemm        : {deepgemm_us / moreh_v4_us:.2f}x")
-        print(f"  speedup v4 / v2              : {moreh_v2_us / moreh_v4_us:.2f}x")
+        print(f"  speedup v7 / deepgemm        : {deepgemm_us / moreh_v7_us:.2f}x")
+        print(f"  speedup v7 / v2              : {moreh_v2_us / moreh_v7_us:.2f}x")
         moreh_out, moreh_us = moreh_v2_out, moreh_v2_us  # keep rows compatible
 
         rows.append({
@@ -730,10 +750,10 @@ def run_benchmark(args: argparse.Namespace):
             "deepgemm_us"        : round(deepgemm_us, 1),
             "deepgemm_stage1_us" : round(deepgemm_stage1_us, 1),
             "moreh_v2_us"        : round(moreh_v2_us, 1),
-            "moreh_v4_us"        : round(moreh_v4_us, 1),
+            "moreh_v7_us"        : round(moreh_v7_us, 1),
             "speedup_v2_deepgemm": f"{deepgemm_us / moreh_v2_us:.2f}x",
-            "speedup_v4_deepgemm": f"{deepgemm_us / moreh_v4_us:.2f}x",
-            "speedup_v4_vs_v2"   : f"{moreh_v2_us / moreh_v4_us:.2f}x",
+            "speedup_v7_deepgemm": f"{deepgemm_us / moreh_v7_us:.2f}x",
+            "speedup_v7_vs_v2"   : f"{moreh_v2_us / moreh_v7_us:.2f}x",
         })
 
     df = pd.DataFrame(rows)
@@ -776,7 +796,7 @@ if __name__ == "__main__":
     parser.add_argument("--resume_csv", type=str, default=None,
                         help="CSV to read done_keys from for resume (multi-GPU: pass the shared "
                              "final merged CSV so all workers skip already-tuned configs).")
-    parser.add_argument("--version", type=int, default=2, choices=[2, 3, 4, 5],
+    parser.add_argument("--version", type=int, default=2, choices=[2, 3, 4, 5, 6, 7],
                         help="Kernel version for --tune: 2=PAD(v2), 3=PAD+bt-prefetch(v3), "
                              "4=swizzle(v4), 5=v3+direct-QW(v5). "
                              "run_benchmark always compares both v2 and v4.")
