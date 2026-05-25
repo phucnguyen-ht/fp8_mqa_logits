@@ -1,0 +1,1209 @@
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/binding.cpp -> /home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/binding.cpp [skipped, no changes]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/utils/utils.h -> /home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/utils/utils.h [skipped, no changes]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits.cpp -> /home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp [skipped, already hipified]
+[92mSuccessfully preprocessed all matching files.[0m
+Total number of unsupported CUDA function calls: 0
+
+
+Total number of replaced kernel launches: 7
+running develop
+/usr/local/lib/python3.12/dist-packages/setuptools/command/develop.py:41: EasyInstallDeprecationWarning: easy_install command is deprecated.
+!!
+
+        ********************************************************************************
+        Please avoid running ``setup.py`` and ``easy_install``.
+        Instead, use pypa/build, pypa/installer or other
+        standards-based tools.
+
+        See https://github.com/pypa/setuptools/issues/917 for details.
+        ********************************************************************************
+
+!!
+  easy_install.initialize_options(self)
+/usr/local/lib/python3.12/dist-packages/setuptools/_distutils/cmd.py:90: SetuptoolsDeprecationWarning: setup.py install is deprecated.
+!!
+
+        ********************************************************************************
+        Please avoid running ``setup.py`` directly.
+        Instead, use pypa/build, pypa/installer or other
+        standards-based tools.
+
+        See https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html for details.
+        ********************************************************************************
+
+!!
+  self.initialize_options()
+running egg_info
+writing custom_fp8_mqa_logits.egg-info/PKG-INFO
+writing dependency_links to custom_fp8_mqa_logits.egg-info/dependency_links.txt
+writing top-level names to custom_fp8_mqa_logits.egg-info/top_level.txt
+/usr/local/lib/python3.12/dist-packages/vcs_versioning/overrides.py:609: UserWarning: No GlobalOverrides context is active. Auto-creating one with SETUPTOOLS_SCM prefix for backwards compatibility. Consider using 'with GlobalOverrides.from_env("YOUR_TOOL"):' explicitly.
+  return get_active_overrides().subprocess_timeout
+writing manifest file 'custom_fp8_mqa_logits.egg-info/SOURCES.txt'
+running build_ext
+building 'moreh_fp8_paged_mqa_logits' extension
+creating /home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/build/temp.linux-x86_64-cpython-312/csrc
+[1/2] /opt/rocm/bin/hipcc -MMD -MF /home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/build/temp.linux-x86_64-cpython-312/csrc/binding.o.d -fno-strict-overflow -Wsign-compare -DNDEBUG -g -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -fPIC -I/usr/local/lib/python3.12/dist-packages/torch/include -I/usr/local/lib/python3.12/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/lib/python3.12/dist-packages/torch/include/THH -I/opt/rocm/include -I/usr/include/python3.12 -c -c /home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/binding.cpp -o /home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/build/temp.linux-x86_64-cpython-312/csrc/binding.o -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM=1 -DHIPBLAS_V2 -fPIC -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM=1 -DHIPBLAS_V2 -fPIC -O3 -DNDEBUG -std=c++17 --offload-arch=gfx942 -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM -Rpass-analysis=kernel-resource-usage -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=moreh_fp8_paged_mqa_logits
+[2/2] /opt/rocm/bin/hipcc -MMD -MF /home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/build/temp.linux-x86_64-cpython-312/csrc/fp8_paged_mqa_logits_hip.o.d -fno-strict-overflow -Wsign-compare -DNDEBUG -g -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -fPIC -I/usr/local/lib/python3.12/dist-packages/torch/include -I/usr/local/lib/python3.12/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/lib/python3.12/dist-packages/torch/include/THH -I/opt/rocm/include -I/usr/include/python3.12 -c -c /home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp -o /home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/build/temp.linux-x86_64-cpython-312/csrc/fp8_paged_mqa_logits_hip.o -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM=1 -DHIPBLAS_V2 -fPIC -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM=1 -DHIPBLAS_V2 -fPIC -O3 -DNDEBUG -std=c++17 --offload-arch=gfx942 -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM -Rpass-analysis=kernel-resource-usage -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=moreh_fp8_paged_mqa_logits
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:3:9: warning: #pragma once in main file [-Wpragma-once-outside-header]
+    3 | #pragma once
+      |         ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:55:23: warning: unused variable 'NUM_MFMA_ACC' [-Wunused-variable]
+   55 |         constexpr int NUM_MFMA_ACC  = HEAD_SIZE / MFMA_K;              // 4
+      |                       ^~~~~~~~~~~~
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark: Function Name: _ZN2v327fp8_paged_mqa_logits_kernelILi2ELi64EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  506 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     TotalSGPRs: 42 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     VGPRs: 85 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     Occupancy [waves/SIMD]: 2 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     LDS Size [bytes/block]: 13440 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark: Function Name: _ZN2v427fp8_paged_mqa_logits_kernelILi2ELi64EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  836 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     TotalSGPRs: 38 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     VGPRs: 84 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     Occupancy [waves/SIMD]: 3 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     LDS Size [bytes/block]: 12672 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark: Function Name: _ZN2v527fp8_paged_mqa_logits_kernelILi2ELi64EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1089 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     TotalSGPRs: 42 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     VGPRs: 85 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     Occupancy [waves/SIMD]: 4 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     LDS Size [bytes/block]: 9216 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark: Function Name: _ZN2v627fp8_paged_mqa_logits_kernelILi2ELi64EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1353 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     VGPRs: 78 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     Occupancy [waves/SIMD]: 2 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     LDS Size [bytes/block]: 13184 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark: Function Name: _ZN2v727fp8_paged_mqa_logits_kernelILi2ELi64EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1590 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     TotalSGPRs: 42 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     VGPRs: 85 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     Occupancy [waves/SIMD]: 2 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     LDS Size [bytes/block]: 13440 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark: Function Name: _ZN2v827fp8_paged_mqa_logits_kernelILi2ELi64EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1860 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     TotalSGPRs: 42 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     VGPRs: 85 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     Occupancy [waves/SIMD]: 2 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     LDS Size [bytes/block]: 13440 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark: Function Name: _ZN2v227fp8_paged_mqa_logits_kernelILi2ELi64EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  215 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     VGPRs: 78 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     Occupancy [waves/SIMD]: 2 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     LDS Size [bytes/block]: 13184 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark: Function Name: _ZN2v327fp8_paged_mqa_logits_kernelILi2ELi128EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  506 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     TotalSGPRs: 42 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     VGPRs: 113 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     Occupancy [waves/SIMD]: 1 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     LDS Size [bytes/block]: 22656 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark: Function Name: _ZN2v427fp8_paged_mqa_logits_kernelILi2ELi128EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  836 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     TotalSGPRs: 42 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     VGPRs: 106 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     Occupancy [waves/SIMD]: 2 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     LDS Size [bytes/block]: 21120 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark: Function Name: _ZN2v527fp8_paged_mqa_logits_kernelILi2ELi128EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1089 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     TotalSGPRs: 42 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     VGPRs: 113 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     Occupancy [waves/SIMD]: 2 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     LDS Size [bytes/block]: 18432 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark: Function Name: _ZN2v627fp8_paged_mqa_logits_kernelILi2ELi128EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1353 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     TotalSGPRs: 38 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     VGPRs: 103 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     Occupancy [waves/SIMD]: 1 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     LDS Size [bytes/block]: 22144 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark: Function Name: _ZN2v727fp8_paged_mqa_logits_kernelILi2ELi128EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1590 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     TotalSGPRs: 42 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     VGPRs: 113 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     Occupancy [waves/SIMD]: 1 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     LDS Size [bytes/block]: 22656 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark: Function Name: _ZN2v827fp8_paged_mqa_logits_kernelILi2ELi128EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1860 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     TotalSGPRs: 42 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     VGPRs: 113 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     Occupancy [waves/SIMD]: 1 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     LDS Size [bytes/block]: 22656 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark: Function Name: _ZN2v227fp8_paged_mqa_logits_kernelILi2ELi128EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  215 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     TotalSGPRs: 38 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     VGPRs: 103 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     Occupancy [waves/SIMD]: 1 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     LDS Size [bytes/block]: 22144 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark: Function Name: _ZN2v327fp8_paged_mqa_logits_kernelILi2ELi256EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  506 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     VGPRs: 167 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     Occupancy [waves/SIMD]: 1 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     LDS Size [bytes/block]: 41088 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark: Function Name: _ZN2v427fp8_paged_mqa_logits_kernelILi2ELi256EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  836 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     TotalSGPRs: 42 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     VGPRs: 160 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     Occupancy [waves/SIMD]: 1 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     LDS Size [bytes/block]: 38016 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark: Function Name: _ZN2v527fp8_paged_mqa_logits_kernelILi2ELi256EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1089 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     VGPRs: 167 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     Occupancy [waves/SIMD]: 1 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     LDS Size [bytes/block]: 36864 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark: Function Name: _ZN2v627fp8_paged_mqa_logits_kernelILi2ELi256EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1353 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     TotalSGPRs: 38 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     VGPRs: 158 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     Occupancy [waves/SIMD]: 1 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     LDS Size [bytes/block]: 40064 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark: Function Name: _ZN2v727fp8_paged_mqa_logits_kernelILi2ELi256EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1590 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     VGPRs: 167 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     Occupancy [waves/SIMD]: 1 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     LDS Size [bytes/block]: 41088 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark: Function Name: _ZN2v827fp8_paged_mqa_logits_kernelILi2ELi256EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1860 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     VGPRs: 167 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     Occupancy [waves/SIMD]: 1 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     LDS Size [bytes/block]: 41088 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark: Function Name: _ZN2v227fp8_paged_mqa_logits_kernelILi2ELi256EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  215 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     TotalSGPRs: 38 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     VGPRs: 158 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     Occupancy [waves/SIMD]: 1 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     LDS Size [bytes/block]: 40064 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark: Function Name: _ZN2v327fp8_paged_mqa_logits_kernelILi4ELi64EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  506 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     VGPRs: 62 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     Occupancy [waves/SIMD]: 4 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     LDS Size [bytes/block]: 13440 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark: Function Name: _ZN2v427fp8_paged_mqa_logits_kernelILi4ELi64EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  836 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     TotalSGPRs: 34 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     VGPRs: 61 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     Occupancy [waves/SIMD]: 5 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     LDS Size [bytes/block]: 12672 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark: Function Name: _ZN2v527fp8_paged_mqa_logits_kernelILi4ELi64EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1089 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     TotalSGPRs: 35 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     VGPRs: 62 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     Occupancy [waves/SIMD]: 7 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     LDS Size [bytes/block]: 9216 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark: Function Name: _ZN2v627fp8_paged_mqa_logits_kernelILi4ELi64EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1353 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     VGPRs: 59 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     Occupancy [waves/SIMD]: 4 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     LDS Size [bytes/block]: 13184 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark: Function Name: _ZN2v727fp8_paged_mqa_logits_kernelILi4ELi64EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1590 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     VGPRs: 63 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     Occupancy [waves/SIMD]: 4 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     LDS Size [bytes/block]: 13440 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark: Function Name: _ZN2v827fp8_paged_mqa_logits_kernelILi4ELi64EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1860 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     VGPRs: 63 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     Occupancy [waves/SIMD]: 4 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     LDS Size [bytes/block]: 13440 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark: Function Name: _ZN2v227fp8_paged_mqa_logits_kernelILi4ELi64EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  215 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     VGPRs: 58 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     Occupancy [waves/SIMD]: 4 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     LDS Size [bytes/block]: 13184 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark: Function Name: _ZN2v327fp8_paged_mqa_logits_kernelILi4ELi128EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  506 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     TotalSGPRs: 42 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     VGPRs: 85 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     Occupancy [waves/SIMD]: 2 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     LDS Size [bytes/block]: 22656 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark: Function Name: _ZN2v427fp8_paged_mqa_logits_kernelILi4ELi128EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  836 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     TotalSGPRs: 42 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     VGPRs: 78 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     Occupancy [waves/SIMD]: 3 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     LDS Size [bytes/block]: 21120 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark: Function Name: _ZN2v527fp8_paged_mqa_logits_kernelILi4ELi128EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1089 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     TotalSGPRs: 42 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     VGPRs: 85 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     Occupancy [waves/SIMD]: 3 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     LDS Size [bytes/block]: 18432 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark: Function Name: _ZN2v627fp8_paged_mqa_logits_kernelILi4ELi128EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1353 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     TotalSGPRs: 38 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     VGPRs: 79 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     Occupancy [waves/SIMD]: 2 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     LDS Size [bytes/block]: 22144 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark: Function Name: _ZN2v727fp8_paged_mqa_logits_kernelILi4ELi128EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1590 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     TotalSGPRs: 42 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     VGPRs: 85 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     Occupancy [waves/SIMD]: 2 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     LDS Size [bytes/block]: 22656 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark: Function Name: _ZN2v827fp8_paged_mqa_logits_kernelILi4ELi128EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1860 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     TotalSGPRs: 42 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     VGPRs: 85 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     Occupancy [waves/SIMD]: 2 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     LDS Size [bytes/block]: 22656 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark: Function Name: _ZN2v227fp8_paged_mqa_logits_kernelILi4ELi128EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  215 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     TotalSGPRs: 38 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     VGPRs: 79 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     Occupancy [waves/SIMD]: 2 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     LDS Size [bytes/block]: 22144 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark: Function Name: _ZN2v327fp8_paged_mqa_logits_kernelILi4ELi256EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  506 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     VGPRs: 110 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     Occupancy [waves/SIMD]: 1 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     LDS Size [bytes/block]: 41088 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark: Function Name: _ZN2v427fp8_paged_mqa_logits_kernelILi4ELi256EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  836 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     TotalSGPRs: 38 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     VGPRs: 106 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     Occupancy [waves/SIMD]: 1 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     LDS Size [bytes/block]: 38016 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark: Function Name: _ZN2v527fp8_paged_mqa_logits_kernelILi4ELi256EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1089 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     VGPRs: 110 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     Occupancy [waves/SIMD]: 1 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     LDS Size [bytes/block]: 36864 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark: Function Name: _ZN2v627fp8_paged_mqa_logits_kernelILi4ELi256EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1353 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     VGPRs: 105 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     Occupancy [waves/SIMD]: 1 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     LDS Size [bytes/block]: 40064 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark: Function Name: _ZN2v727fp8_paged_mqa_logits_kernelILi4ELi256EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1590 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     VGPRs: 110 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     Occupancy [waves/SIMD]: 1 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     LDS Size [bytes/block]: 41088 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark: Function Name: _ZN2v827fp8_paged_mqa_logits_kernelILi4ELi256EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1860 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     VGPRs: 110 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     Occupancy [waves/SIMD]: 1 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     LDS Size [bytes/block]: 41088 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark: Function Name: _ZN2v227fp8_paged_mqa_logits_kernelILi4ELi256EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  215 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     VGPRs: 105 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     AGPRs: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     Occupancy [waves/SIMD]: 1 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     LDS Size [bytes/block]: 40064 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark: Function Name: _ZN2v327fp8_paged_mqa_logits_kernelILi8ELi64EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  506 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     VGPRs: 62 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     AGPRs: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     Occupancy [waves/SIMD]: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     LDS Size [bytes/block]: 13440 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark: Function Name: _ZN2v427fp8_paged_mqa_logits_kernelILi8ELi64EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  836 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     TotalSGPRs: 34 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     VGPRs: 60 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     AGPRs: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     Occupancy [waves/SIMD]: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     LDS Size [bytes/block]: 12672 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark: Function Name: _ZN2v527fp8_paged_mqa_logits_kernelILi8ELi64EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1089 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     TotalSGPRs: 35 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     VGPRs: 62 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     AGPRs: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     Occupancy [waves/SIMD]: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     LDS Size [bytes/block]: 9216 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark: Function Name: _ZN2v627fp8_paged_mqa_logits_kernelILi8ELi64EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1353 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     TotalSGPRs: 34 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     VGPRs: 60 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     AGPRs: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     Occupancy [waves/SIMD]: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     LDS Size [bytes/block]: 13184 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark: Function Name: _ZN2v727fp8_paged_mqa_logits_kernelILi8ELi64EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1590 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     VGPRs: 62 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     AGPRs: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     Occupancy [waves/SIMD]: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     LDS Size [bytes/block]: 13440 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark: Function Name: _ZN2v827fp8_paged_mqa_logits_kernelILi8ELi64EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1860 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     VGPRs: 62 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     AGPRs: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     Occupancy [waves/SIMD]: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     LDS Size [bytes/block]: 13440 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark: Function Name: _ZN2v227fp8_paged_mqa_logits_kernelILi8ELi64EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  215 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     TotalSGPRs: 34 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     VGPRs: 60 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     AGPRs: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     Occupancy [waves/SIMD]: 8 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     LDS Size [bytes/block]: 13184 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark: Function Name: _ZN2v327fp8_paged_mqa_logits_kernelILi8ELi128EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  506 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     TotalSGPRs: 35 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     VGPRs: 70 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     AGPRs: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     Occupancy [waves/SIMD]: 4 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     LDS Size [bytes/block]: 22656 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark: Function Name: _ZN2v427fp8_paged_mqa_logits_kernelILi8ELi128EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  836 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     VGPRs: 68 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     AGPRs: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     Occupancy [waves/SIMD]: 6 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     LDS Size [bytes/block]: 21120 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark: Function Name: _ZN2v527fp8_paged_mqa_logits_kernelILi8ELi128EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1089 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     TotalSGPRs: 35 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     VGPRs: 70 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     AGPRs: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     Occupancy [waves/SIMD]: 6 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     LDS Size [bytes/block]: 18432 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark: Function Name: _ZN2v627fp8_paged_mqa_logits_kernelILi8ELi128EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1353 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     VGPRs: 68 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     AGPRs: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     Occupancy [waves/SIMD]: 4 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     LDS Size [bytes/block]: 22144 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark: Function Name: _ZN2v727fp8_paged_mqa_logits_kernelILi8ELi128EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1590 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     TotalSGPRs: 35 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     VGPRs: 70 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     AGPRs: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     Occupancy [waves/SIMD]: 4 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     LDS Size [bytes/block]: 22656 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark: Function Name: _ZN2v827fp8_paged_mqa_logits_kernelILi8ELi128EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1860 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     TotalSGPRs: 35 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     VGPRs: 70 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     AGPRs: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     Occupancy [waves/SIMD]: 4 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     LDS Size [bytes/block]: 22656 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark: Function Name: _ZN2v227fp8_paged_mqa_logits_kernelILi8ELi128EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  215 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     VGPRs: 68 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     AGPRs: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     Occupancy [waves/SIMD]: 4 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     LDS Size [bytes/block]: 22144 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark: Function Name: _ZN2v327fp8_paged_mqa_logits_kernelILi8ELi256EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  506 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     VGPRs: 88 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     AGPRs: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     Occupancy [waves/SIMD]: 2 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:506:1: remark:     LDS Size [bytes/block]: 41088 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark: Function Name: _ZN2v427fp8_paged_mqa_logits_kernelILi8ELi256EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  836 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     VGPRs: 84 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     AGPRs: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     Occupancy [waves/SIMD]: 2 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:836:1: remark:     LDS Size [bytes/block]: 38016 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark: Function Name: _ZN2v527fp8_paged_mqa_logits_kernelILi8ELi256EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1089 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     VGPRs: 88 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     AGPRs: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     Occupancy [waves/SIMD]: 2 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1089:1: remark:     LDS Size [bytes/block]: 36864 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark: Function Name: _ZN2v627fp8_paged_mqa_logits_kernelILi8ELi256EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1353 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     VGPRs: 86 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     AGPRs: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     Occupancy [waves/SIMD]: 2 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1353:1: remark:     LDS Size [bytes/block]: 40064 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark: Function Name: _ZN2v727fp8_paged_mqa_logits_kernelILi8ELi256EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1590 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     VGPRs: 88 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     AGPRs: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     Occupancy [waves/SIMD]: 2 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1590:1: remark:     LDS Size [bytes/block]: 41088 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark: Function Name: _ZN2v827fp8_paged_mqa_logits_kernelILi8ELi256EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+ 1860 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     VGPRs: 88 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     AGPRs: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     Occupancy [waves/SIMD]: 2 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:1860:1: remark:     LDS Size [bytes/block]: 41088 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark: Function Name: _ZN2v227fp8_paged_mqa_logits_kernelILi8ELi256EEEvPKhS2_PKfPKiS6_Pfiiiiii [-Rpass-analysis=kernel-resource-usage]
+  215 |     ){
+      | ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     TotalSGPRs: 36 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     VGPRs: 86 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     AGPRs: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     ScratchSize [bytes/lane]: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     Dynamic Stack: False [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     Occupancy [waves/SIMD]: 2 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     SGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     VGPRs Spill: 0 [-Rpass-analysis=kernel-resource-usage]
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:215:1: remark:     LDS Size [bytes/block]: 40064 [-Rpass-analysis=kernel-resource-usage]
+2 warnings generated when compiling for gfx942.
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:3:9: warning: #pragma once in main file [-Wpragma-once-outside-header]
+    3 | #pragma once
+      |         ^
+/home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/csrc/fp8_paged_mqa_logits_hip.cpp:55:23: warning: unused variable 'NUM_MFMA_ACC' [-Wunused-variable]
+   55 |         constexpr int NUM_MFMA_ACC  = HEAD_SIZE / MFMA_K;              // 4
+      |                       ^~~~~~~~~~~~
+2 warnings generated when compiling for host.
+creating build/lib.linux-x86_64-cpython-312
+/opt/rocm/bin/hipcc -fno-strict-overflow -Wsign-compare -DNDEBUG -g -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-Bsymbolic-functions -g -fwrapv -O2 /home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/build/temp.linux-x86_64-cpython-312/csrc/binding.o /home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits/build/temp.linux-x86_64-cpython-312/csrc/fp8_paged_mqa_logits_hip.o -L/opt/rocm/lib -L/usr/local/lib/python3.12/dist-packages/torch/lib -L/usr/local/lib/python3.12/dist-packages/torch/lib -L/opt/rocm/lib -L/opt/rocm/hip/lib -L/usr/lib/x86_64-linux-gnu -Wl,--enable-new-dtags,-rpath,/opt/rocm/lib -Wl,--enable-new-dtags,-rpath,/usr/local/lib/python3.12/dist-packages/torch/lib -lc10 -ltorch -ltorch_cpu -ltorch_python -lamdhip64 -lc10_hip -ltorch_hip -o build/lib.linux-x86_64-cpython-312/moreh_fp8_paged_mqa_logits.cpython-312-x86_64-linux-gnu.so
+copying build/lib.linux-x86_64-cpython-312/moreh_fp8_paged_mqa_logits.cpython-312-x86_64-linux-gnu.so -> 
+Creating /usr/local/lib/python3.12/dist-packages/custom-fp8-mqa-logits.egg-link (link to .)
+custom-fp8-mqa-logits 0.0.0 is already the active version in easy-install.pth
+
+Installed /home/phuc-nguyen/workspace/mv-4261/fp8_mqa_logits
+Processing dependencies for custom-fp8-mqa-logits==0.0.0
+Finished processing dependencies for custom-fp8-mqa-logits==0.0.0
+Run test
+[run_benchmark] Loaded 201 tuned configs from tune_results_ver7/logs2/tune_results_top1.csv
+
+[B=8 next_n=1 var_ratio=0.1111111111111111 kv_length=1152]
+
+num_warps=2 ChunkK=64 SplitKV=-1
+  deepgemm        vs ref      cosine_diff = 0.000667 
+  deepgemm_stage1 vs ref   cosine_diff = 0.000667 
+  moreh_v2        vs ref      cosine_diff = 0.000667 
+  moreh_v7        vs ref      cosine_diff = 0.000667 
+  moreh_v7        vs deepgemm cosine_diff = 0.000000 
+  moreh_v7        vs moreh_v2 cosine_diff = 0.000000 
+  deepgemm        : 10.40 us
+  deepgemm_stage1 : 70.56 us
+  moreh_v2 (PAD)  : 4.62 us
+  moreh_v7 (swiz) : 4.48 us
+  speedup v2 / deepgemm        : 2.25x
+  speedup v7 / deepgemm        : 2.32x
+  speedup v7 / v2              : 1.03x
+
+[B=8 next_n=1 var_ratio=0.058823529411764705 kv_length=2176]
+
+num_warps=2 ChunkK=64 SplitKV=-1
+  deepgemm        vs ref      cosine_diff = 0.000667 
+  deepgemm_stage1 vs ref   cosine_diff = 0.000667 
+  moreh_v2        vs ref      cosine_diff = 0.000667 
+  moreh_v7        vs ref      cosine_diff = 0.000667 
+  moreh_v7        vs deepgemm cosine_diff = 0.000000 
+  moreh_v7        vs moreh_v2 cosine_diff = 0.000000 
+  deepgemm        : 10.17 us
+  deepgemm_stage1 : 65.56 us
+  moreh_v2 (PAD)  : 4.70 us
+  moreh_v7 (swiz) : 4.47 us
+  speedup v2 / deepgemm        : 2.17x
+  speedup v7 / deepgemm        : 2.27x
+  speedup v7 / v2              : 1.05x
+
+[B=8 next_n=1 var_ratio=0.030303030303030304 kv_length=4224]
+
+num_warps=2 ChunkK=64 SplitKV=-1
+  deepgemm        vs ref      cosine_diff = 0.000655 
+  deepgemm_stage1 vs ref   cosine_diff = 0.000655 
+  moreh_v2        vs ref      cosine_diff = 0.000655 
+  moreh_v7        vs ref      cosine_diff = 0.000655 
+  moreh_v7        vs deepgemm cosine_diff = 0.000000 
+  moreh_v7        vs moreh_v2 cosine_diff = 0.000000 
+  deepgemm        : 10.34 us
+  deepgemm_stage1 : 67.09 us
+  moreh_v2 (PAD)  : 5.29 us
+  moreh_v7 (swiz) : 5.24 us
+  speedup v2 / deepgemm        : 1.96x
+  speedup v7 / deepgemm        : 1.97x
+  speedup v7 / v2              : 1.01x
+
+[B=8 next_n=1 var_ratio=0.015384615384615385 kv_length=8320]
+
+num_warps=2 ChunkK=64 SplitKV=-1
+  deepgemm        vs ref      cosine_diff = 0.000647 
+  deepgemm_stage1 vs ref   cosine_diff = 0.000647 
+  moreh_v2        vs ref      cosine_diff = 0.000647 
+  moreh_v7        vs ref      cosine_diff = 0.000647 
+  moreh_v7        vs deepgemm cosine_diff = 0.000000 
+  moreh_v7        vs moreh_v2 cosine_diff = 0.000000 
+  deepgemm        : 10.63 us
+  deepgemm_stage1 : 69.16 us
+  moreh_v2 (PAD)  : 7.00 us
+  moreh_v7 (swiz) : 6.83 us
+  speedup v2 / deepgemm        : 1.52x
+  speedup v7 / deepgemm        : 1.56x
+  speedup v7 / v2              : 1.03x
+
+[B=8 next_n=1 var_ratio=0.007751937984496124 kv_length=16512]
+
+num_warps=2 ChunkK=64 SplitKV=-1
+  deepgemm        vs ref      cosine_diff = 0.000650 
+  deepgemm_stage1 vs ref   cosine_diff = 0.000650 
+  moreh_v2        vs ref      cosine_diff = 0.000650 
+  moreh_v7        vs ref      cosine_diff = 0.000650 
+  moreh_v7        vs deepgemm cosine_diff = 0.000000 
+  moreh_v7        vs moreh_v2 cosine_diff = 0.000000 
+  deepgemm        : 13.73 us
+  deepgemm_stage1 : 75.37 us
+  moreh_v2 (PAD)  : 13.91 us
+  moreh_v7 (swiz) : 13.69 us
+  speedup v2 / deepgemm        : 0.99x
+  speedup v7 / deepgemm        : 1.00x
+  speedup v7 / v2              : 1.02x
+
+[B=8 next_n=1 var_ratio=0.0038910505836575876 kv_length=32896]
+
+num_warps=2 ChunkK=64 SplitKV=-1
+  deepgemm        vs ref      cosine_diff = 0.000645 
+  deepgemm_stage1 vs ref   cosine_diff = 0.000645 
+  moreh_v2        vs ref      cosine_diff = 0.000645 
+  moreh_v7        vs ref      cosine_diff = 0.000645 
+  moreh_v7        vs deepgemm cosine_diff = 0.000000 
+  moreh_v7        vs moreh_v2 cosine_diff = 0.000000 
+  deepgemm        : 27.68 us
+  deepgemm_stage1 : 91.75 us
+  moreh_v2 (PAD)  : 22.58 us
+  moreh_v7 (swiz) : 18.63 us
+  speedup v2 / deepgemm        : 1.23x
+  speedup v7 / deepgemm        : 1.49x
+  speedup v7 / v2              : 1.21x
+
+[B=8 next_n=1 var_ratio=0.001949317738791423 kv_length=65664]
+
+num_warps=2 ChunkK=64 SplitKV=-1
+  deepgemm        vs ref      cosine_diff = 0.000648 
+  deepgemm_stage1 vs ref   cosine_diff = 0.000648 
+  moreh_v2        vs ref      cosine_diff = 0.000648 
+  moreh_v7        vs ref      cosine_diff = 0.000648 
+  moreh_v7        vs deepgemm cosine_diff = 0.000000 
+  moreh_v7        vs moreh_v2 cosine_diff = 0.000000 
+  deepgemm        : 56.21 us
+  deepgemm_stage1 : 119.64 us
+  moreh_v2 (PAD)  : 39.79 us
+  moreh_v7 (swiz) : 32.12 us
+  speedup v2 / deepgemm        : 1.41x
+  speedup v7 / deepgemm        : 1.75x
+  speedup v7 / v2              : 1.24x
+
+[B=16 next_n=1 var_ratio=0.1111111111111111 kv_length=1152]
+
+num_warps=4 ChunkK=64 SplitKV=-1
+  deepgemm        vs ref      cosine_diff = 0.000650 
+  deepgemm_stage1 vs ref   cosine_diff = 0.000650 
+  moreh_v2        vs ref      cosine_diff = 0.000650 
+  moreh_v7        vs ref      cosine_diff = 0.000650 
+  moreh_v7        vs deepgemm cosine_diff = 0.000000 
+  moreh_v7        vs moreh_v2 cosine_diff = 0.000000 
+  deepgemm        : 10.16 us
+  deepgemm_stage1 : 122.22 us
+  moreh_v2 (PAD)  : 4.69 us
+  moreh_v7 (swiz) : 4.63 us
+  speedup v2 / deepgemm        : 2.17x
+  speedup v7 / deepgemm        : 2.19x
+  speedup v7 / v2              : 1.01x
+
+[B=16 next_n=1 var_ratio=0.058823529411764705 kv_length=2176]
+
+num_warps=4 ChunkK=64 SplitKV=-1
+  deepgemm        vs ref      cosine_diff = 0.000640 
+  deepgemm_stage1 vs ref   cosine_diff = 0.000640 
+  moreh_v2        vs ref      cosine_diff = 0.000640 
+  moreh_v7        vs ref      cosine_diff = 0.000640 
+  moreh_v7        vs deepgemm cosine_diff = 0.000000 
+  moreh_v7        vs moreh_v2 cosine_diff = 0.000000 
+  deepgemm        : 10.39 us
+  deepgemm_stage1 : 118.38 us
+  moreh_v2 (PAD)  : 4.89 us
+  moreh_v7 (swiz) : 4.83 us
+  speedup v2 / deepgemm        : 2.12x
+  speedup v7 / deepgemm        : 2.15x
+  speedup v7 / v2              : 1.01x
+
+[B=16 next_n=1 var_ratio=0.030303030303030304 kv_length=4224]
+
+num_warps=4 ChunkK=64 SplitKV=-1
+  deepgemm        vs ref      cosine_diff = 0.000637 
+  deepgemm_stage1 vs ref   cosine_diff = 0.000637 
+  moreh_v2        vs ref      cosine_diff = 0.000637 
+  moreh_v7        vs ref      cosine_diff = 0.000637 
+  moreh_v7        vs deepgemm cosine_diff = 0.000000 
+  moreh_v7        vs moreh_v2 cosine_diff = 0.000000 
+  deepgemm        : 10.67 us
+  deepgemm_stage1 : 119.16 us
+  moreh_v2 (PAD)  : 6.44 us
+  moreh_v7 (swiz) : 6.03 us
+  speedup v2 / deepgemm        : 1.66x
+  speedup v7 / deepgemm        : 1.77x
+  speedup v7 / v2              : 1.07x
+
+[B=16 next_n=1 var_ratio=0.015384615384615385 kv_length=8320]
+
+num_warps=4 ChunkK=64 SplitKV=-1
+  deepgemm        vs ref      cosine_diff = 0.000632 
+  deepgemm_stage1 vs ref   cosine_diff = 0.000632 
+  moreh_v2        vs ref      cosine_diff = 0.000632 
+  moreh_v7        vs ref      cosine_diff = 0.000632 
+  moreh_v7        vs deepgemm cosine_diff = 0.000000 
+  moreh_v7        vs moreh_v2 cosine_diff = 0.000000 
+  deepgemm        : 13.97 us
+  deepgemm_stage1 : 124.90 us
+  moreh_v2 (PAD)  : 10.64 us
+  moreh_v7 (swiz) : 9.44 us
+  speedup v2 / deepgemm        : 1.31x
+  speedup v7 / deepgemm        : 1.48x
+  speedup v7 / v2              : 1.13x
+
+[B=16 next_n=1 var_ratio=0.007751937984496124 kv_length=16512]
+
+num_warps=4 ChunkK=64 SplitKV=-1
+  deepgemm        vs ref      cosine_diff = 0.000636 
+  deepgemm_stage1 vs ref   cosine_diff = 0.000636 
+  moreh_v2        vs ref      cosine_diff = 0.000636 
+  moreh_v7        vs ref      cosine_diff = 0.000636 
+  moreh_v7        vs deepgemm cosine_diff = 0.000000 
+  moreh_v7        vs moreh_v2 cosine_diff = 0.000000 
+  deepgemm        : 28.19 us
+  deepgemm_stage1 : 142.65 us
+  moreh_v2 (PAD)  : 17.59 us
+  moreh_v7 (swiz) : 16.81 us
+  speedup v2 / deepgemm        : 1.60x
+  speedup v7 / deepgemm        : 1.68x
+  speedup v7 / v2              : 1.05x
+
+[B=16 next_n=1 var_ratio=0.0038910505836575876 kv_length=32896]
+
+num_warps=4 ChunkK=64 SplitKV=-1
+  deepgemm        vs ref      cosine_diff = 0.000635 
+  deepgemm_stage1 vs ref   cosine_diff = 0.000635 
+  moreh_v2        vs ref      cosine_diff = 0.000635 
+  moreh_v7        vs ref      cosine_diff = 0.000635 
+  moreh_v7        vs deepgemm cosine_diff = 0.000000 
+  moreh_v7        vs moreh_v2 cosine_diff = 0.000000 
+  deepgemm        : 54.49 us
+  deepgemm_stage1 : 171.26 us
+  moreh_v2 (PAD)  : 30.30 us
+  moreh_v7 (swiz) : 30.33 us
+  speedup v2 / deepgemm        : 1.80x
+  speedup v7 / deepgemm        : 1.80x
+  speedup v7 / v2              : 1.00x
+
+[B=16 next_n=1 var_ratio=0.001949317738791423 kv_length=65664]
+
+num_warps=4 ChunkK=64 SplitKV=-1
+  deepgemm        vs ref      cosine_diff = 0.000635 
+  deepgemm_stage1 vs ref   cosine_diff = 0.000635 
+  moreh_v2        vs ref      cosine_diff = 0.000635 
+  moreh_v7        vs ref      cosine_diff = 0.000635 
+  moreh_v7        vs deepgemm cosine_diff = 0.000000 
+  moreh_v7        vs moreh_v2 cosine_diff = 0.000000 
+  deepgemm        : 101.36 us
+  deepgemm_stage1 : 223.59 us
+  moreh_v2 (PAD)  : 55.71 us
+  moreh_v7 (swiz) : 55.56 us
+  speedup v2 / deepgemm        : 1.82x
+  speedup v7 / deepgemm        : 1.82x
+  speedup v7 / v2              : 1.00x
+
+[B=20 next_n=1 var_ratio=0.1111111111111111 kv_length=1152]
+
+num_warps=4 ChunkK=64 SplitKV=32
+  deepgemm        vs ref      cosine_diff = 0.000540 
+  deepgemm_stage1 vs ref   cosine_diff = 0.000540 
+  moreh_v2        vs ref      cosine_diff = 0.000540 
+  moreh_v7        vs ref      cosine_diff = 0.000540 
+  moreh_v7        vs deepgemm cosine_diff = 0.000000 
+  moreh_v7        vs moreh_v2 cosine_diff = 0.000000 
+  deepgemm        : 10.26 us
+  deepgemm_stage1 : 140.97 us
+  moreh_v2 (PAD)  : 4.88 us
+  moreh_v7 (swiz) : 4.86 us
+  speedup v2 / deepgemm        : 2.10x
+  speedup v7 / deepgemm        : 2.11x
+  speedup v7 / v2              : 1.00x
+
+[B=20 next_n=1 var_ratio=0.058823529411764705 kv_length=2176]
+
+num_warps=4 ChunkK=64 SplitKV=32
+  deepgemm        vs ref      cosine_diff = 0.000533 
+  deepgemm_stage1 vs ref   cosine_diff = 0.000533 
+  moreh_v2        vs ref      cosine_diff = 0.000533 
+  moreh_v7        vs ref      cosine_diff = 0.000533 
+  moreh_v7        vs deepgemm cosine_diff = 0.000000 
+  moreh_v7        vs moreh_v2 cosine_diff = 0.000000 
+  deepgemm        : 10.43 us
+  deepgemm_stage1 : 140.98 us
+  moreh_v2 (PAD)  : 5.97 us
+  moreh_v7 (swiz) : 5.92 us
+  speedup v2 / deepgemm        : 1.75x
+  speedup v7 / deepgemm        : 1.76x
+  speedup v7 / v2              : 1.01x
+
+[B=20 next_n=1 var_ratio=0.030303030303030304 kv_length=4224]
+
+num_warps=4 ChunkK=64 SplitKV=32
+  deepgemm        vs ref      cosine_diff = 0.000529 
+  deepgemm_stage1 vs ref   cosine_diff = 0.000529 
+  moreh_v2        vs ref      cosine_diff = 0.000529 
+  moreh_v7        vs ref      cosine_diff = 0.000529 
+  moreh_v7        vs deepgemm cosine_diff = 0.000000 
+  moreh_v7        vs moreh_v2 cosine_diff = 0.000000 
+  deepgemm        : 13.12 us
+  deepgemm_stage1 : 147.52 us
+  moreh_v2 (PAD)  : 8.13 us
+  moreh_v7 (swiz) : 7.32 us
+  speedup v2 / deepgemm        : 1.61x
+  speedup v7 / deepgemm        : 1.79x
+  speedup v7 / v2              : 1.11x
+
+[B=20 next_n=1 var_ratio=0.015384615384615385 kv_length=8320]
+
+num_warps=4 ChunkK=64 SplitKV=32
+  deepgemm        vs ref      cosine_diff = 0.000527 
+  deepgemm_stage1 vs ref   cosine_diff = 0.000527 
+  moreh_v2        vs ref      cosine_diff = 0.000527 
+  moreh_v7        vs ref      cosine_diff = 0.000527 
+  moreh_v7        vs deepgemm cosine_diff = 0.000000 
+  moreh_v7        vs moreh_v2 cosine_diff = 0.000000 
+  deepgemm        : 24.46 us
+  deepgemm_stage1 : 163.34 us
+  moreh_v2 (PAD)  : 12.91 us
+  moreh_v7 (swiz) : 11.49 us
+  speedup v2 / deepgemm        : 1.89x
+  speedup v7 / deepgemm        : 2.13x
+  speedup v7 / v2              : 1.12x
+
+[B=20 next_n=1 var_ratio=0.007751937984496124 kv_length=16512]
+
+num_warps=4 ChunkK=64 SplitKV=32
+  deepgemm        vs ref      cosine_diff = 0.000530 
+  deepgemm_stage1 vs ref   cosine_diff = 0.000530 
+  moreh_v2        vs ref      cosine_diff = 0.000530 
+  moreh_v7        vs ref      cosine_diff = 0.000530 
+  moreh_v7        vs deepgemm cosine_diff = 0.000000 
+  moreh_v7        vs moreh_v2 cosine_diff = 0.000000 
+  deepgemm        : 37.52 us
+  deepgemm_stage1 : 179.64 us
+  moreh_v2 (PAD)  : 20.33 us
+  moreh_v7 (swiz) : 18.95 us
+  speedup v2 / deepgemm        : 1.85x
+  speedup v7 / deepgemm        : 1.98x
+  speedup v7 / v2              : 1.07x
+
+[B=20 next_n=1 var_ratio=0.0038910505836575876 kv_length=32896]
+
+num_warps=4 ChunkK=64 SplitKV=32
+  deepgemm        vs ref      cosine_diff = 0.000530 
+  deepgemm_stage1 vs ref   cosine_diff = 0.000530 
+  moreh_v2        vs ref      cosine_diff = 0.000530 
+  moreh_v7        vs ref      cosine_diff = 0.000530 
+  moreh_v7        vs deepgemm cosine_diff = 0.000000 
+  moreh_v7        vs moreh_v2 cosine_diff = 0.000000 
+  deepgemm        : 66.94 us
+  deepgemm_stage1 : 211.84 us
+  moreh_v2 (PAD)  : 33.94 us
+  moreh_v7 (swiz) : 30.13 us
+  speedup v2 / deepgemm        : 1.97x
+  speedup v7 / deepgemm        : 2.22x
+  speedup v7 / v2              : 1.13x
+
+[B=20 next_n=1 var_ratio=0.001949317738791423 kv_length=65664]
+
+num_warps=4 ChunkK=64 SplitKV=32
+  deepgemm        vs ref      cosine_diff = 0.000531 
+  deepgemm_stage1 vs ref   cosine_diff = 0.000531 
+  moreh_v2        vs ref      cosine_diff = 0.000531 
+  moreh_v7        vs ref      cosine_diff = 0.000531 
+  moreh_v7        vs deepgemm cosine_diff = 0.000000 
+  moreh_v7        vs moreh_v2 cosine_diff = 0.000000 
+  deepgemm        : 128.43 us
+  deepgemm_stage1 : 270.20 us
+  moreh_v2 (PAD)  : 68.15 us
+  moreh_v7 (swiz) : 64.87 us
+  speedup v2 / deepgemm        : 1.88x
+  speedup v7 / deepgemm        : 1.98x
+  speedup v7 / v2              : 1.05x
+
+ batch_size  next_n  heads  index_dim  avg_kv_length  var_ratio  deepgemm_us  deepgemm_stage1_us  moreh_v2_us  moreh_v7_us speedup_v2_deepgemm speedup_v7_deepgemm speedup_v7_vs_v2
+          8       1     32        128           1152   0.111111         10.4                70.6          4.6          4.5               2.25x               2.32x            1.03x
+          8       1     32        128           2176   0.058824         10.2                65.6          4.7          4.5               2.17x               2.27x            1.05x
+          8       1     32        128           4224   0.030303         10.3                67.1          5.3          5.2               1.96x               1.97x            1.01x
+          8       1     32        128           8320   0.015385         10.6                69.2          7.0          6.8               1.52x               1.56x            1.03x
+          8       1     32        128          16512   0.007752         13.7                75.4         13.9         13.7               0.99x               1.00x            1.02x
+          8       1     32        128          32896   0.003891         27.7                91.8         22.6         18.6               1.23x               1.49x            1.21x
+          8       1     32        128          65664   0.001949         56.2               119.6         39.8         32.1               1.41x               1.75x            1.24x
+         16       1     32        128           1152   0.111111         10.2               122.2          4.7          4.6               2.17x               2.19x            1.01x
+         16       1     32        128           2176   0.058824         10.4               118.4          4.9          4.8               2.12x               2.15x            1.01x
+         16       1     32        128           4224   0.030303         10.7               119.2          6.4          6.0               1.66x               1.77x            1.07x
+         16       1     32        128           8320   0.015385         14.0               124.9         10.6          9.4               1.31x               1.48x            1.13x
+         16       1     32        128          16512   0.007752         28.2               142.6         17.6         16.8               1.60x               1.68x            1.05x
+         16       1     32        128          32896   0.003891         54.5               171.3         30.3         30.3               1.80x               1.80x            1.00x
+         16       1     32        128          65664   0.001949        101.4               223.6         55.7         55.6               1.82x               1.82x            1.00x
+         20       1     32        128           1152   0.111111         10.3               141.0          4.9          4.9               2.10x               2.11x            1.00x
+         20       1     32        128           2176   0.058824         10.4               141.0          6.0          5.9               1.75x               1.76x            1.01x
+         20       1     32        128           4224   0.030303         13.1               147.5          8.1          7.3               1.61x               1.79x            1.11x
+         20       1     32        128           8320   0.015385         24.5               163.3         12.9         11.5               1.89x               2.13x            1.12x
+         20       1     32        128          16512   0.007752         37.5               179.6         20.3         19.0               1.85x               1.98x            1.07x
+         20       1     32        128          32896   0.003891         66.9               211.8         33.9         30.1               1.97x               2.22x            1.13x
+         20       1     32        128          65664   0.001949        128.4               270.2         68.2         64.9               1.88x               1.98x            1.05x
+Saved benchmark CSV to run.csv

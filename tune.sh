@@ -17,16 +17,16 @@ VERSION=7
 
 # BATCHES=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32)
 # BATCHES=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16)
-BATCHES=($(seq 1 128))
+BATCHES=($(seq 129 256))
 # BATCHES=(1 2 3 4 5 6 7 8)
 KV_LENGTHS=(65536)
-MTP_LIST=(0 1)
+MTP_LIST=(0)
 
 OUT_DIR="tune_results_ver$VERSION"
 LOG_DIR="${OUT_DIR}/logs"
 mkdir -p "${OUT_DIR}" "${LOG_DIR}"
 
-TIMEOUT="${TIMEOUT:-288000}"
+TIMEOUT="${TIMEOUT:-2880000}"
 START_TS=$(date +%s)
 
 echo "[budget]    TIMEOUT=${TIMEOUT}s ($((TIMEOUT/3600))h$(( (TIMEOUT%3600)/60 ))m), started at $(date -d @${START_TS} '+%F %T')"
@@ -63,6 +63,27 @@ if [ "${MODE}" = "tune" ]; then
                     for batch in ${batches_str}; do
                         REMAINING=$(( TIMEOUT - ($(date +%s) - START_TS) ))
                         [ "${REMAINING}" -le 0 ] && { echo "[gpu ${gpu_id}] budget exhausted"; exit 0; }
+
+                        # Abort this GPU's tune loop if VRAM usage >= 50% (another workload is running).
+                        # Retry up to 3 times with 10s pause to tolerate transient spikes.
+                        vram_pct=0
+                        for attempt in 1 2 3; do
+                            vram_pct=$(rocm-smi -d "${gpu_id}" --showmeminfo vram 2>/dev/null \
+                                | awk '
+                                    /VRAM Total Memory \(B\)/      { total = $NF }
+                                    /VRAM Total Used Memory \(B\)/ { used  = $NF }
+                                    END { if (total > 0) printf "%.0f", used/total*100; else print 0 }
+                                ')
+                            if [ "${vram_pct:-0}" -lt 50 ]; then
+                                break
+                            fi
+                            echo "[gpu ${gpu_id}] attempt ${attempt}/3: VRAM ${vram_pct}% used (>= 50%); waiting 10s..."
+                            sleep 10
+                        done
+                        if [ "${vram_pct:-0}" -ge 50 ]; then
+                            echo "[gpu ${gpu_id}] VRAM still ${vram_pct}% used after 3 retries; aborting tune on this GPU"
+                            exit 0
+                        fi
 
                         RUN_LOG_DIR="${GPU_LOG_DIR}/mtp_${mtp}/kvlength_${kv_length}"
                         mkdir -p "${RUN_LOG_DIR}"

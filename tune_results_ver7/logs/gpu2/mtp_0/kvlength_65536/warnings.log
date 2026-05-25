@@ -1,32 +1,28 @@
 # Accuracy warnings: configs with cosine_diff > 0.01
-# shared inputs: batch_size=3 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# shared inputs: batch_size=131 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
 # Accuracy warnings: configs with cosine_diff > 0.01
-# shared inputs: batch_size=11 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# shared inputs: batch_size=139 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
 # Accuracy warnings: configs with cosine_diff > 0.01
-# shared inputs: batch_size=19 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# shared inputs: batch_size=147 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
 # Accuracy warnings: configs with cosine_diff > 0.01
-# shared inputs: batch_size=27 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# shared inputs: batch_size=155 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
 # Accuracy warnings: configs with cosine_diff > 0.01
-# shared inputs: batch_size=35 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# shared inputs: batch_size=163 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
 # Accuracy warnings: configs with cosine_diff > 0.01
-# shared inputs: batch_size=43 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# shared inputs: batch_size=171 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
 # Accuracy warnings: configs with cosine_diff > 0.01
-# shared inputs: batch_size=51 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# shared inputs: batch_size=179 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
 # Accuracy warnings: configs with cosine_diff > 0.01
-# shared inputs: batch_size=59 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# shared inputs: batch_size=187 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
 # Accuracy warnings: configs with cosine_diff > 0.01
-# shared inputs: batch_size=67 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# shared inputs: batch_size=195 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
 # Accuracy warnings: configs with cosine_diff > 0.01
-# shared inputs: batch_size=75 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# shared inputs: batch_size=203 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
 # Accuracy warnings: configs with cosine_diff > 0.01
-# shared inputs: batch_size=83 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# shared inputs: batch_size=211 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
 # Accuracy warnings: configs with cosine_diff > 0.01
-# shared inputs: batch_size=91 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# shared inputs: batch_size=219 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
 # Accuracy warnings: configs with cosine_diff > 0.01
-# shared inputs: batch_size=99 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# shared inputs: batch_size=227 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
 # Accuracy warnings: configs with cosine_diff > 0.01
-# shared inputs: batch_size=107 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
-# Accuracy warnings: configs with cosine_diff > 0.01
-# shared inputs: batch_size=115 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
-# Accuracy warnings: configs with cosine_diff > 0.01
-# shared inputs: batch_size=123 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625
+# shared inputs: batch_size=235 next_n=1 heads=32 index_dim=128 avg_kv_length=65536 max_model_len=202752 blocksize=1 var_ratio=0.00390625

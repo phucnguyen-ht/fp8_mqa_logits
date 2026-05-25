@@ -425,17 +425,17 @@ def tune_moreh(args: argparse.Namespace):
                             for split_kv in split_kv_list:
                                 out = None
                                 try:
-                                    moreh_out_logits = torch.full(
-                                        (batch_size * next_n, max_model_len), float("-inf"),
-                                        device="cuda", dtype=torch.float32,
-                                    )
+                                    # moreh_out_logits = torch.full(
+                                    #     (batch_size * next_n, max_model_len), float("-inf"),
+                                    #     device="cuda", dtype=torch.float32,
+                                    # )
                                     out, elapsed_us = run_perftest(
                                         moreh_fp8_paged_mqa_logits,
                                         q_fp8, kv_cache_fp8, weights, context_lens, block_tables, max_model_len,
                                         ChunkK=chunk_k, SplitKV=split_kv, num_warps=num_warps,
                                         TotalCuCount=get_num_compute_units(),
                                         version=args.version,
-                                        out_logits=moreh_out_logits,
+                                        out_logits=None,
                                     )
                                     diff = eval_accuracy(out, ref_logits, mask,
                                                         f"B={batch_size} nw={num_warps} ck={chunk_k:3d} skv={split_kv:3d}(moreh vs ref)     ",
@@ -629,7 +629,6 @@ def run_profile(args: argparse.Namespace):
             TotalCuCount=get_num_compute_units(), version=args.version,
             out_logits=moreh_out_logits,
             num_iters=100, num_warmup=5,
-            version=7
         )
 
         # eval_accuracy(moreh_out,           out_logits, mask, "moreh           vs deepgemm: ", doCheckAllClose=True)
@@ -665,6 +664,8 @@ def run_benchmark(args: argparse.Namespace):
         avg_kv_length += 128
         var_ratio = 128 / avg_kv_length
 
+        print(f"\n[B={batch_size} next_n={next_n} var_ratio={var_ratio} kv_length={avg_kv_length}]", flush=True)
+        
         q_fp8, kv_cache_fp8, weights, context_lens, block_tables, ref_logits, mask = make_inputs(
             batch_size, next_n, heads, index_dim, avg_kv_length, max_model_len,
             blocksize=blocksize, var_ratio=var_ratio, padding=args.padding,
@@ -723,21 +724,20 @@ def run_benchmark(args: argparse.Namespace):
             out_logits=moreh_v7_out_logits,
         )
 
-        print(f"\n[B={batch_size} next_n={next_n} var_ratio={var_ratio} kv_length={avg_kv_length}]"
-              f" num_warps={m_nw} ChunkK={m_ck} SplitKV={m_skv}")
+        print(f"\nnum_warps={m_nw} ChunkK={m_ck} SplitKV={m_skv}", flush=True)
         eval_accuracy(out_logits,     ref_logits,   mask, "deepgemm        vs ref     ", doCheckAllClose=False)
         eval_accuracy(deepgemm_stage1_out, ref_logits, mask, "deepgemm_stage1 vs ref  ", doCheckAllClose=False)
         eval_accuracy(moreh_v2_out,   ref_logits,   mask, "moreh_v2        vs ref     ", doCheckAllClose=False)
         eval_accuracy(moreh_v7_out,   ref_logits,   mask, "moreh_v7        vs ref     ", doCheckAllClose=False)
         eval_accuracy(moreh_v7_out,   out_logits, mask, "moreh_v7        vs deepgemm", doCheckAllClose=True)
         eval_accuracy(moreh_v7_out,   moreh_v2_out, mask, "moreh_v7        vs moreh_v2", doCheckAllClose=True)
-        print(f"  deepgemm        : {deepgemm_us:.2f} us")
-        print(f"  deepgemm_stage1 : {deepgemm_stage1_us:.2f} us")
-        print(f"  moreh_v2 (PAD)  : {moreh_v2_us:.2f} us")
-        print(f"  moreh_v7 (swiz) : {moreh_v7_us:.2f} us")
-        print(f"  speedup v2 / deepgemm        : {deepgemm_us / moreh_v2_us:.2f}x")
-        print(f"  speedup v7 / deepgemm        : {deepgemm_us / moreh_v7_us:.2f}x")
-        print(f"  speedup v7 / v2              : {moreh_v2_us / moreh_v7_us:.2f}x")
+        print(f"  deepgemm        : {deepgemm_us:.2f} us", flush=True)
+        print(f"  deepgemm_stage1 : {deepgemm_stage1_us:.2f} us", flush=True)
+        print(f"  moreh_v2 (PAD)  : {moreh_v2_us:.2f} us", flush=True)
+        print(f"  moreh_v7 (swiz) : {moreh_v7_us:.2f} us", flush=True)
+        print(f"  speedup v2 / deepgemm        : {deepgemm_us / moreh_v2_us:.2f}x", flush=True)
+        print(f"  speedup v7 / deepgemm        : {deepgemm_us / moreh_v7_us:.2f}x", flush=True)
+        print(f"  speedup v7 / v2              : {moreh_v2_us / moreh_v7_us:.2f}x", flush=True)
         moreh_out, moreh_us = moreh_v2_out, moreh_v2_us  # keep rows compatible
 
         rows.append({
